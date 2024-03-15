@@ -4,9 +4,9 @@ import Row from "react-bootstrap/Row";
 
 export default function CardComponent() {
   return (
-    <div className="mt-5">
-      <Row xs={1} md={3} className="g-4">
-        {Array.from({ length: 4 }).map((_, idx) => (
+    <div className="mt-5 ">
+      <Row xs={1} md={4} className="w-100">
+        {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
             <Card>
               <Card.Img

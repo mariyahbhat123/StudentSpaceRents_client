@@ -7,11 +7,11 @@ export default function navBar() {
   return (
     <div style={{ position: "sticky" }}>
       <Navbar collapseOnSelect expand="lg" className="">
-        <Container>
+        <Container className="">
           <Navbar.Brand href="#home">StudentSpaceRents</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="m-auto">
               <Nav.Link href="#features">Home</Nav.Link>
               <Nav.Link href="#pricing">About us</Nav.Link>
               <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">

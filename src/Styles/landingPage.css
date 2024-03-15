@@ -4,3 +4,6 @@
   z-index: 10;
   transition: color 0.25s linear;
 }
+.carouselCom {
+  overflow: hidden;
+}

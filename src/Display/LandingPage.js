@@ -3,6 +3,7 @@ import NavBar from "../Components/navBar";
 import CarouselComponent from "../Components/CarouselComponent";
 import CardComponent from "../Components/CardComponent";
 import "../Styles/landingPage.css";
+import CardCarouselCom from "../Components/CardCarouselCom";
 
 export default function LandingPage() {
   const TOP_OFFSET = 600;
@@ -23,9 +24,9 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <div style={{ position: "relative" }}>
+    <div className="w-100">
+      <div className="w-100">
+        <div className="carouselCom" style={{ position: "relative" }}>
           <CarouselComponent />
         </div>
         <div
@@ -40,7 +41,12 @@ export default function LandingPage() {
           <NavBar />{" "}
         </div>
       </div>
+
       <div>
+        <CardCarouselCom />
+      </div>
+
+      <div className="w-100">
         <CardComponent />
       </div>
     </div>
