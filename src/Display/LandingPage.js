@@ -4,6 +4,7 @@ import CarouselComponent from "../Components/CarouselComponent";
 import CardComponent from "../Components/CardComponent";
 import "../Styles/landingPage.css";
 import CardCarouselCom from "../Components/CardCarouselCom";
+import ModalCom from "../Components/ModalCom";
 
 export default function LandingPage() {
   const TOP_OFFSET = 600;
@@ -46,7 +47,7 @@ export default function LandingPage() {
         <CardCarouselCom />
       </div>
 
-      <div className="w-100">
+      <div className=" ">
         <CardComponent />
       </div>
     </div>

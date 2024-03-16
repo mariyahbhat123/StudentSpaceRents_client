@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-export default function navBar() {
+import ModalCom from "./ModalCom";
+import Button from "react-bootstrap/esm/Button";
+import { Link } from "react-router-dom";
+export default function NavBar() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div style={{ position: "sticky" }}>
       <Navbar collapseOnSelect expand="lg" className="">
@@ -31,7 +39,14 @@ export default function navBar() {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">Sign up|Log in</Nav.Link>
+              <Button variant="none" onClick={handleShow}>
+                Sign up/Login
+              </Button>
+              {show === true ? (
+                <ModalCom show={show} close={handleClose} />
+              ) : (
+                ""
+              )}
               <Nav.Link eventKey={2} href="#memes">
                 I am a tenant
               </Nav.Link>
