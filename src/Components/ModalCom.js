@@ -1,13 +1,28 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+
 import Modal from "react-bootstrap/Modal";
+import TenantLogin from "./TenantLogin";
+import LandlordLogin from "./LandlordLogin";
+import TenantRegistration from "./TenantRegistration";
+import { Link } from "react-router-dom";
+import LandlordRegistration from "./LandlordRegistration";
+import "../Styles/modalCom.css";
 
 function ModalCom(props) {
   const [toggle, setToggle] = useState(false);
+  const [tenantRegistration, setTenantRegisteration] = useState(false);
+  const [landlordRegistration, setLandlordRegistration] = useState(false);
+
   return (
-    <>
-      <Modal show={props.show} onHide={props.close} animation={true}>
+    <div className="">
+      <Modal
+        className="modal mt-5 "
+        show={props.show}
+        onHide={props.close}
+        animation
+        autoFocus
+      >
         <Modal.Header closeButton className="">
           <div
             className="w-100 ms-5 me-5  d-flex justify-content-center"
@@ -32,43 +47,54 @@ function ModalCom(props) {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <h2 style={{ textAlign: "center" }}>
-              {toggle === true ? "Sign Up" : "Login"}
-            </h2>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Control
-                type="password"
-                placeholder="Password'
-              "
-              />
-            </Form.Group>
-
-            <Form.Group
-              className="mb-3 d-flex justify-content-center"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Button>Sign In</Button>
-            </Form.Group>
-          </Form>
+          {toggle === true ? (
+            landlordRegistration === false ? (
+              <LandlordLogin />
+            ) : (
+              <LandlordRegistration />
+            )
+          ) : tenantRegistration === false ? (
+            <TenantLogin />
+          ) : (
+            <TenantRegistration />
+          )}
         </Modal.Body>
         <Modal.Footer>
+          {toggle === false ? (
+            tenantRegistration === false ? (
+              <div>
+                <p>Dont have a account?</p>{" "}
+                <Link onClick={() => setTenantRegisteration(true)}>
+                  Sign up
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <p>Already have a account?</p>{" "}
+                <Link onClick={() => setTenantRegisteration(false)}>
+                  Sign In
+                </Link>
+              </div>
+            )
+          ) : landlordRegistration === false ? (
+            <div>
+              <p>Dont have a Account?</p>
+              <Link onClick={() => setLandlordRegistration(true)}>Sign up</Link>
+            </div>
+          ) : (
+            <div>
+              <p>Already have a Account?</p>
+              <Link onClick={() => setLandlordRegistration(false)}>
+                Sign in
+              </Link>
+            </div>
+          )}
           <Button variant="secondary" onClick={props.close}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 

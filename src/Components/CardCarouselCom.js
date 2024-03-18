@@ -1,11 +1,15 @@
 import React from "react";
-import Carousel from "react-bootstrap/Carousel";
+
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
-export default function CardCarouselCom(props) {
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+export default function CardCarouselCom() {
   const images = [
     {
       img: "https://hips.hearstapps.com/hmg-prod/images/ghk070123homeminifeature-005-655b983d8bf5f.jpg?crop=1xw:0.9989583333333334xh;center,top&resize=980:*",
@@ -36,36 +40,61 @@ export default function CardCarouselCom(props) {
     },
   ];
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 3,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   return (
-    <div className="mt-5">
+    <div className="container mt-5">
       {" "}
       <h2>Recently Included</h2>
-      <Carousel interval={null}>
-        {Array.from({ length: 8 }).map(() => (
-          <Carousel.Item>
-            <Row xs={1} md={4} className="w-100">
-              {images.slice({ length: 8 }, 6).map((item, idx) => (
-                <Col>
-                  {" "}
-                  <Card className="">
-                    {" "}
-                    <Card.Img variant="top" src={item.img} />
-                    <Card.Body>
-                      <Card.Title>Card title</Card.Title>
+      <Slider {...settings}>
+        {images.map((item, idx) => (
+          <Card className="">
+            {" "}
+            <Card.Img variant="top" src={item.img} />
+            <Card.Body>
+              <Card.Title>Card title</Card.Title>
 
-                      <Card.Text>
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </Card.Text>
-                    </Card.Body>{" "}
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Carousel.Item>
+              <Card.Text>
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </Card.Text>
+            </Card.Body>{" "}
+          </Card>
         ))}
-      </Carousel>
+      </Slider>
     </div>
   );
 }
