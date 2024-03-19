@@ -5,6 +5,8 @@ import CardComponent from "../Components/CardComponent";
 import "../Styles/landingPage.css";
 import CardCarouselCom from "../Components/CardCarouselCom";
 import ModalCom from "../Components/ModalCom";
+import SearchBar from "../Components/SearchBar";
+import FooterCom from "../Components/FooterCom";
 
 export default function LandingPage() {
   const TOP_OFFSET = 600;
@@ -41,14 +43,21 @@ export default function LandingPage() {
           {" "}
           <NavBar />{" "}
         </div>
+        <div className="searchB w-100">
+          <SearchBar />
+        </div>
       </div>
 
-      <div>
+      <div className="w-100">
         <CardCarouselCom />
       </div>
 
       <div className=" ">
         <CardComponent />
+      </div>
+      <div></div>
+      <div>
+        <FooterCom />
       </div>
     </div>
   );

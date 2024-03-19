@@ -7,3 +7,8 @@
 .carouselCom {
   overflow: hidden;
 }
+.searchB {
+  position: absolute;
+  top: 40%;
+  z-index: 10;
+}

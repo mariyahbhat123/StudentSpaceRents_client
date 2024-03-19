@@ -1,9 +1,6 @@
 import React from "react";
 
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/esm/Button";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -42,57 +39,82 @@ export default function CardCarouselCom() {
 
   const settings = {
     dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 3,
+    className: "center",
     initialSlide: 0,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 5,
+    speed: 400,
+    slidesToScroll: 4,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          className: "center",
+          centerPadding: "60px",
+          initialSlide: 0,
+          slidesToShow: 4,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
+          swipeToSlide: true,
         },
       },
       {
         breakpoint: 600,
         settings: {
+          className: "center",
+          centerPadding: "60px",
+          initialSlide: 0,
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          swipeToSlide: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
+          centerPadding: "60px",
           slidesToShow: 1,
           slidesToScroll: 1,
+          swipeToSlide: true,
         },
       },
     ],
+    afterChange: function (index) {
+      console.log(
+        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
+    },
   };
+
   return (
-    <div className="container mt-5">
+    <div className="slider-container mt-5 ">
       {" "}
       <h2>Recently Included</h2>
-      <Slider {...settings}>
+      <Slider {...settings} className="">
         {images.map((item, idx) => (
-          <Card className="">
-            {" "}
-            <Card.Img variant="top" src={item.img} />
-            <Card.Body>
-              <Card.Title>Card title</Card.Title>
+          <div className="">
+            <Card className="ms-2 me-2">
+              {" "}
+              <Card.Img
+                variant="top"
+                src={item.img}
+                style={{ height: "200px" }}
+              />
+              <Card.Body>
+                <Card.Title>Card title</Card.Title>
 
-              <Card.Text>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-            </Card.Body>{" "}
-          </Card>
+                <Card.Text>
+                  This is a longer card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </Card.Text>
+              </Card.Body>{" "}
+            </Card>
+          </div>
         ))}
       </Slider>
     </div>
