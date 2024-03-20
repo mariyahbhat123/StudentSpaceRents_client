@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "../Styles/slideArrow.css";
 
 export default function CardCarouselCom() {
   const images = [
@@ -47,6 +48,8 @@ export default function CardCarouselCom() {
     speed: 400,
     slidesToScroll: 4,
     swipeToSlide: true,
+    arrows: true,
+    className: "slides",
     responsive: [
       {
         breakpoint: 1024,
