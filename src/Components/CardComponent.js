@@ -8,7 +8,7 @@ export default function CardComponent() {
       <Row xs={1} md={4} className="w-100">
         {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
-            <Card>
+            <Card className="mt-5">
               <Card.Img
                 variant="top"
                 src="https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6698948"

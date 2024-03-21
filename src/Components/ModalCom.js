@@ -26,12 +26,16 @@ function ModalCom(props) {
         <Modal.Header closeButton className="">
           <div
             className="w-100 ms-5 me-5  d-flex justify-content-center"
-            style={{ backgroundColor: "aqua" }}
+            style={{ backgroundColor: "#ff385c" }}
           >
             <Button
               variant="none"
               className="w-50 "
-              style={{ borderColor: "black" }}
+              style={{
+                borderColor: "",
+                color: "white",
+                fontWeight: "bold",
+              }}
               onClick={() => setToggle(false)}
             >
               Tenant
@@ -39,7 +43,11 @@ function ModalCom(props) {
             <Button
               variant="none"
               className="w-50"
-              style={{ borderColor: "black" }}
+              style={{
+                borderColor: "",
+                color: "white",
+                fontWeight: "bold",
+              }}
               onClick={() => setToggle(true)}
             >
               LandLord

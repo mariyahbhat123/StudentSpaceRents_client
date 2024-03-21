@@ -14,15 +14,36 @@ export default function NavBar() {
 
   return (
     <div style={{ position: "sticky" }}>
-      <Navbar collapseOnSelect expand="lg" className="">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        className="navbar"
+        style={{ fontWeight: "bold", boxShadow: "none" }}
+      >
         <Container className="">
           <Navbar.Brand href="#home">StudentSpaceRents</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="m-auto">
-              <Link to="/">Home</Link>
-              <Link to="/aboutus">About us</Link>
-              <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
+            <Nav className="m-2 " style={{}}>
+              <Link
+                to="/"
+                className="mt-2 "
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Home
+              </Link>
+              <Link
+                to="/aboutus"
+                className="mt-2 ml-3"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                About us
+              </Link>
+              <NavDropdown
+                title="Dropdown"
+                id="collapsible-nav-dropdown"
+                className="ml-2"
+              >
                 <NavDropdown.Item href="#action/3.1">
                   Terms & conditions
                 </NavDropdown.Item>
@@ -38,8 +59,12 @@ export default function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Nav>
-              <Button variant="none" onClick={handleShow}>
+            <Nav className="ms-auto">
+              <Button
+                variant="none"
+                onClick={handleShow}
+                style={{ boxShadow: "none", fontWeight: "bold" }}
+              >
                 Sign up/Login
               </Button>
               {show === true ? (
@@ -47,9 +72,6 @@ export default function NavBar() {
               ) : (
                 ""
               )}
-              <Nav.Link eventKey={2} href="#memes">
-                I am a tenant
-              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

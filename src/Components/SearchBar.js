@@ -9,7 +9,7 @@ export default function SearchBar() {
     <div className=" d-flex" style={{ justifyContent: "center" }}>
       <div className="w-100 d-flex " style={{ justifyContent: "center" }}>
         <div
-          className=""
+          className="d-flex"
           style={{
             backgroundColor: "white",
             width: "50%",
@@ -17,28 +17,38 @@ export default function SearchBar() {
             borderRadius: "20px",
           }}
         >
-          <select
+          <div
             className=""
             style={{
               width: "20%",
-              padding: "7px",
-              textAlign: "center",
-              borderRadius: "20px",
+              border: "2px solid black",
+              borderRadius: "55px",
+              padding: "3px",
             }}
           >
-            <option value="" selected disabled>
-              District
-            </option>
-            <option value="">A</option>
-            <option value="">B</option>
-            <option value="">C</option>
-          </select>
+            <select
+              className=""
+              style={{
+                padding: "4px",
+                textAlign: "center",
+                border: "0",
+              }}
+            >
+              <option value="" selected disabled>
+                District
+              </option>
+              <option value="">Srinagar</option>
+              <option value="">Baramulla</option>
+              <option value="">Kupwara</option>
+            </select>
+          </div>
           <input
             type="text"
             placeholder="Search Locality or Landmark"
             style={{
-              width: "60%",
+              width: "80%",
               padding: "5px",
+              paddingLeft: "15px",
               borderRadius: "20px",
               marginLeft: "4px",
             }}
