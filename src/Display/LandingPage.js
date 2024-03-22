@@ -86,7 +86,7 @@ export default function LandingPage() {
       </div>
 
       <div className=" ">
-        <CardComponent />
+        <CardComponent md={4} />
       </div>
       <div className="w-100 mt-5" style={{ backgroundColor: "#f7f7f7" }}>
         <WebsiteReviews />

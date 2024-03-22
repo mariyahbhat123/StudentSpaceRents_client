@@ -1,11 +1,14 @@
+import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { Link } from "react-router-dom";
 
-export default function CardComponent() {
+export default function CardComponent(props) {
+  let md = props.md;
   return (
     <div className="ms-4 mt-5">
-      <Row xs={1} md={4} className="w-100">
+      <Row xs={1} md={md} className="w-100">
         {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
             <Card className="mt-5">
@@ -26,6 +29,9 @@ export default function CardComponent() {
           </Col>
         ))}
       </Row>
+      <div>
+        <Link to="/ListAd">See All</Link>
+      </div>
     </div>
   );
 }
