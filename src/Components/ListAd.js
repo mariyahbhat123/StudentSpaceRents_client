@@ -15,9 +15,10 @@ export default function ListAd() {
           style={{
             width: "35%",
             border: "2px solid black",
+            backgroundColor: "gray",
           }}
         >
-          <div className="mt-5 d-flex" style={{ justifyContent: "center" }}>
+          <div className="mt-4 d-flex" style={{ justifyContent: "center" }}>
             <div className="d-flex w-100 ms-5">
               <div className="d-flex" style={{ border: "1px solid black" }}>
                 <p>District</p>
@@ -34,9 +35,9 @@ export default function ListAd() {
               </button>
             </div>
           </div>
-          <div className="d-flex mt-5" style={{ justifyContent: "center" }}>
+          <div className="d-flex mt-4" style={{ justifyContent: "center" }}>
             <div
-              className=""
+              className="p-4"
               style={{ width: "80%", border: "1px solid black" }}
             >
               <div>
@@ -48,49 +49,49 @@ export default function ListAd() {
                 <div className="">
                   <input type="radio" />
                   PG
-                  <input type="radio" />
+                  <input type="radio" className="ms-3" />
                   House
-                  <input type="radio" />
+                  <input type="radio" className="ms-3" />
                   Flat
-                  <input type="radio" />
+                  <input type="radio" className="ms-3" />
                   Room
                 </div>
-                <div>
-                  <p>For</p>
+                <div className="mt-4">
+                  <h4>For</h4>
                   <input type="radio" />
                   Male
-                  <input type="radio" />
+                  <input type="radio" className="ms-3" />
                   Female
                 </div>
 
-                <div>
-                  <p>Room Type</p>
+                <div className="mt-4">
+                  <h4>Room Type</h4>
                   <input type="checkbox" />
                   PG
-                  <input type="checkbox" />
+                  <input type="checkbox" className="ms-3" />
                   House
-                  <input type="checkbox" />
+                  <input type="checkbox" className="ms-3" />
                   Flat
-                  <input type="checkbox" />
+                  <input type="checkbox" className="ms-3" />
                   Room
                 </div>
-                <div>
-                  <p>Rent Range:</p>
+                <div className="mt-4">
+                  <h4>Rent Range:</h4>
                 </div>
-                <div>
-                  <p>Preferred For</p>
+                <div className="mt-4">
+                  <h4>Preferred For</h4>
                   <input type="checkbox" />
                   Student
-                  <input type="checkbox" />
+                  <input type="checkbox" className="ms-3" />
                   Professional
                 </div>
-                <div>
-                  <p>Food Included</p>
+                <div className="mt-4">
+                  <h4>Food Included</h4>
                   <input type="checkbox" />
                   BreakFast
-                  <input type="checkbox" />
+                  <input type="checkbox" className="ms-3" />
                   Lunch
-                  <input type="checkbox" /> Dinner
+                  <input type="checkbox" className="ms-3" /> Dinner
                 </div>
               </div>
             </div>
