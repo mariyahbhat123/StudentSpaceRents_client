@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import TenantLogin from "./TenantLogin";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleOff } from "../Redux/Slices/toggleSlice";
+import { isLogged } from "../Redux/Slices/isLoggedIn";
 
 export default function TenantRegistration() {
   const [credentials, setCredentials] = useState({
@@ -11,9 +14,12 @@ export default function TenantRegistration() {
     email: "",
     password: "",
     gender: "",
+    confirmPassword: "",
   });
 
-  const navigate = useNavigate();
+  const closeReg = useSelector((state) => state.toggle.active);
+  console.log(closeReg);
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,6 +33,7 @@ export default function TenantRegistration() {
           email: credentials.email,
           gender: credentials.gender,
           password: credentials.password,
+          confirmPassword: credentials.confirmPassword,
         }),
       });
 
@@ -35,7 +42,8 @@ export default function TenantRegistration() {
         alert("Enter valid credentials");
       }
       if (json.success) {
-        navigate("/");
+        dispatch(toggleOff());
+        dispatch(isLogged());
       }
     } catch (error) {
       console.log(error);
@@ -93,8 +101,10 @@ export default function TenantRegistration() {
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Control
             type="password"
-            placeholder="Comfirm Password'
-              "
+            name="confirmPassword"
+            placeholder="Comfirm Password"
+            value={credentials.confirmPassword}
+            onChange={onChange}
           />
         </Form.Group>
 

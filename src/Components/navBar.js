@@ -6,12 +6,30 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import ModalCom from "./ModalCom";
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleOff, toggleOn } from "../Redux/Slices/toggleSlice";
+import { Avatar } from "@mui/material";
+import { isNotLogged } from "../Redux/Slices/isLoggedIn";
 export default function NavBar() {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
+  const toggleValue = useSelector((state) => state.toggle.active);
 
+  const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  console.log(isLogged);
+  const handleClose = () => {
+    if (toggleValue === true) {
+      dispatch(toggleOff());
+    }
+  };
+  const handleShow = () => {
+    if (toggleValue === false) {
+      dispatch(toggleOn());
+    }
+  };
+
+  console.log(toggleValue);
   return (
     <div style={{ position: "sticky" }}>
       <Navbar
@@ -60,15 +78,32 @@ export default function NavBar() {
               </NavDropdown>
             </Nav>
             <Nav className="ms-auto">
-              <Button
-                variant="none"
-                onClick={handleShow}
-                style={{ boxShadow: "none", fontWeight: "bold" }}
-              >
-                Sign up/Login
-              </Button>
-              {show === true ? (
-                <ModalCom show={show} close={handleClose} />
+              {isLogged === true ? (
+                <button onClick={() => setShow(true)}>
+                  <Avatar></Avatar>
+                </button>
+              ) : (
+                <Button
+                  variant="none"
+                  onClick={handleShow}
+                  style={{ boxShadow: "none", fontWeight: "bold" }}
+                >
+                  Sign up/Login
+                </Button>
+              )}
+              {toggleValue === true ? (
+                <ModalCom show={toggleValue} close={handleClose} />
+              ) : (
+                ""
+              )}
+
+              {isLogged === true && show === true ? (
+                <div>
+                  <p>Profile</p>
+                  <button onClick={() => dispatch(isNotLogged())}>
+                    Logout
+                  </button>
+                </div>
               ) : (
                 ""
               )}

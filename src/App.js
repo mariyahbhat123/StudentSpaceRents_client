@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import LandingPage from "./Display/LandingPage";
 import "./App.css";
 import ModalCom from "./Components/ModalCom";
@@ -10,8 +15,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />}></Route>
           <Route path="/aboutus" element={<AboutUs />} />
+
           <Route path="/ListAd" element={<ListAd />} />
         </Routes>
       </Router>

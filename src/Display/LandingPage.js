@@ -8,8 +8,10 @@ import ModalCom from "../Components/ModalCom";
 import SearchBar from "../Components/SearchBar";
 import FooterCom from "../Components/FooterCom";
 import WebsiteReviews from "../Components/WebsiteReviews";
+import { useLocation, Outlet, Link } from "react-router-dom";
 
 export default function LandingPage() {
+  const location = useLocation();
   const TOP_OFFSET = 600;
   const [navBackground, setNavBackground] = useState(false);
 
