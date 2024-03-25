@@ -1,15 +1,15 @@
 import React from "react";
-import NavBar from "./navBar";
-import FooterCom from "./FooterCom";
+import NavBar from "../Components/navBar";
+import FooterCom from "../Components/FooterCom";
 
-export default function AboutUs() {
+export default function TermsAndCond() {
   return (
     <>
       <div>
         <NavBar />
       </div>
       <div>
-        <h2>About Us</h2>
+        <h2>Terms and conditions</h2>
       </div>
       <div>
         <FooterCom />
