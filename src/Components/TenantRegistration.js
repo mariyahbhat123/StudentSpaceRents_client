@@ -72,7 +72,6 @@ export default function TenantRegistration() {
             type="email"
             name="email"
             placeholder="example@ghg.com"
-            autoFocus
             onChange={onChange}
           />
         </Form.Group>
@@ -94,8 +93,7 @@ export default function TenantRegistration() {
             name="password"
             value={credentials.password}
             onChange={onChange}
-            placeholder="Password'
-              "
+            placeholder="Password"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
