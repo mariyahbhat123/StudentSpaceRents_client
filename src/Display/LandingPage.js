@@ -9,12 +9,16 @@ import SearchBar from "../Components/SearchBar";
 import FooterCom from "../Components/FooterCom";
 import WebsiteReviews from "../Components/WebsiteReviews";
 import { useLocation, Outlet, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { isNotLogged } from "../Redux/Slices/isLoggedIn";
 
 export default function LandingPage() {
   const location = useLocation();
   const TOP_OFFSET = 600;
   const [navBackground, setNavBackground] = useState(false);
 
+  const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= TOP_OFFSET) {
@@ -78,6 +82,23 @@ export default function LandingPage() {
           {" "}
           <NavBar />{" "}
         </div>
+        {isLogged === true ? (
+          <div
+            style={{
+              position: "fixed",
+              zIndex: "10",
+              top: "9%",
+              left: "90%",
+              backgroundColor: "white",
+            }}
+          >
+            <p>Profile</p>
+            <button onClick={() => dispatch(isNotLogged())}>Logout</button>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className="searchB w-100">
           <SearchBar />
         </div>

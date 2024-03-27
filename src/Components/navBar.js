@@ -79,8 +79,16 @@ export default function NavBar() {
             </Nav>
             <Nav className="ms-auto">
               {isLogged === true ? (
-                <button onClick={() => setShow(true)}>
-                  <Avatar></Avatar>
+                <button
+                  onClick={() => setShow(true)}
+                  style={{
+                    overflow: "hidden",
+                    width: "60px",
+                    background: "transparent",
+                    border: "0px",
+                  }}
+                >
+                  <Avatar style={{ width: "" }}></Avatar>
                 </button>
               ) : (
                 <Button
@@ -96,21 +104,18 @@ export default function NavBar() {
               ) : (
                 ""
               )}
-
-              {isLogged === true && show === true ? (
-                <div>
-                  <p>Profile</p>
-                  <button onClick={() => dispatch(isNotLogged())}>
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                ""
-              )}
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse>{" "}
         </Container>
-      </Navbar>
+      </Navbar>{" "}
+      {/* {isLogged === true && show === true ? (
+        <div style={{ zIndex: "10", top: "100%" }}>
+          <p>Profile</p>
+          <button onClick={() => dispatch(isNotLogged())}>Logout</button>
+        </div>
+      ) : (
+        ""
+      )}*/}
     </div>
   );
 }
