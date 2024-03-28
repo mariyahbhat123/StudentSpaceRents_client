@@ -9,7 +9,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleOff, toggleOn } from "../Redux/Slices/toggleSlice";
 import { Avatar } from "@mui/material";
-import { isNotLogged } from "../Redux/Slices/isLoggedIn";
+import { dontShowProfile, shwProfile } from "../Redux/Slices/isLoggedIn";
+import {
+  showProfile,
+  dontShowUserProfile,
+} from "../Redux/Slices/showProfileSlice";
 export default function NavBar() {
   const [show, setShow] = useState(false);
 
@@ -17,6 +21,11 @@ export default function NavBar() {
   const toggleValue = useSelector((state) => state.toggle.active);
 
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  const showUserProfile = useSelector(
+    (state) => state.showUsersProfile.showUserProfile
+  );
+  console.log(showUserProfile);
+
   console.log(isLogged);
   const handleClose = () => {
     if (toggleValue === true) {
@@ -26,6 +35,17 @@ export default function NavBar() {
   const handleShow = () => {
     if (toggleValue === false) {
       dispatch(toggleOn());
+    }
+  };
+
+  const onClickShowProfile = (e) => {
+    if (showUserProfile === false) {
+      dispatch(showProfile());
+    }
+  };
+  const onClickDontShowProfile = () => {
+    if (showUserProfile === true) {
+      dispatch(dontShowUserProfile());
     }
   };
 
@@ -79,17 +99,24 @@ export default function NavBar() {
             </Nav>
             <Nav className="ms-auto">
               {isLogged === true ? (
-                <button
-                  onClick={() => setShow(true)}
+                <Button
+                  onClick={() =>
+                    showUserProfile == true
+                      ? dispatch(dontShowUserProfile())
+                      : dispatch(showProfile())
+                  }
+                  variant="none"
                   style={{
                     overflow: "hidden",
                     width: "60px",
                     background: "transparent",
                     border: "0px",
+                    boxShadow: "none",
                   }}
                 >
+                  {" "}
                   <Avatar style={{ width: "" }}></Avatar>
-                </button>
+                </Button>
               ) : (
                 <Button
                   variant="none"

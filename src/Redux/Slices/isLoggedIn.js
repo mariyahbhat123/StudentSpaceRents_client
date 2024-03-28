@@ -14,12 +14,6 @@ const isLoggedIn = createSlice({
     isNotLogged: (state = LoggedIn) => {
       state.isLogIn = false;
     },
-    showProfile: (state = LoggedIn) => {
-      state.isLogIn = true;
-    },
-    dontShowProfile: (state = LoggedIn) => {
-      state.isLogIn = false;
-    },
   },
 });
 

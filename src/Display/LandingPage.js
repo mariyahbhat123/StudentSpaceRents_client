@@ -11,13 +11,19 @@ import WebsiteReviews from "../Components/WebsiteReviews";
 import { useLocation, Outlet, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { isNotLogged } from "../Redux/Slices/isLoggedIn";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export default function LandingPage() {
-  const location = useLocation();
   const TOP_OFFSET = 600;
   const [navBackground, setNavBackground] = useState(false);
 
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  const showProfile = useSelector(
+    (state) => state.showUsersProfile.showUserProfile
+  );
+  console.log(showProfile);
   const dispatch = useDispatch();
   useEffect(() => {
     const handleScroll = () => {
@@ -82,18 +88,38 @@ export default function LandingPage() {
           {" "}
           <NavBar />{" "}
         </div>
-        {isLogged === true ? (
+        {showProfile === true ? (
           <div
             style={{
               position: "fixed",
               zIndex: "10",
-              top: "9%",
-              left: "90%",
+              top: "10%",
+              left: "86%",
               backgroundColor: "white",
+              width: "200px",
+              padding: "10px",
             }}
           >
-            <p>Profile</p>
-            <button onClick={() => dispatch(isNotLogged())}>Logout</button>
+            <div>
+              <PersonPinIcon className="" />
+              <h6 className="mt-2">Profile</h6>
+            </div>
+            <hr />
+            <div>
+              <FavoriteBorderIcon />
+              <h6 className="mt-2">WishList</h6>
+            </div>
+            <hr />
+            <div>
+              <LogoutIcon />
+            </div>
+            <button
+              className="mt-2"
+              onClick={() => dispatch(isNotLogged())}
+              style={{ backgroundColor: "transparent", border: "none" }}
+            >
+              Logout
+            </button>
           </div>
         ) : (
           ""
