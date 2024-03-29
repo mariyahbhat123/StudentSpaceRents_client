@@ -4,27 +4,40 @@ import CarouselComponent from "../Components/CarouselComponent";
 import CardComponent from "../Components/CardComponent";
 import "../Styles/landingPage.css";
 import CardCarouselCom from "../Components/CardCarouselCom";
-import ModalCom from "../Components/ModalCom";
+
 import SearchBar from "../Components/SearchBar";
 import FooterCom from "../Components/FooterCom";
 import WebsiteReviews from "../Components/WebsiteReviews";
-import { useLocation, Outlet, Link } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { isNotLogged } from "../Redux/Slices/isLoggedIn";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Button from "react-bootstrap/esm/Button";
+import {
+  dontShowProfileUser,
+  showProfileUser,
+} from "../Redux/Slices/showProfileModalSlice";
+import ProfileModal from "../Components/ProfileModal";
+import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
 
 export default function LandingPage() {
   const TOP_OFFSET = 600;
   const [navBackground, setNavBackground] = useState(false);
 
-  const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  //SHOW PROFILE DROPDOWN
   const showProfile = useSelector(
     (state) => state.showUsersProfile.showUserProfile
   );
   console.log(showProfile);
+
+  //SHOW PROFILE DATA MODAL
+  const showProfileModal = useSelector(
+    (state) => state.showProfileModal.showProMod
+  );
   const dispatch = useDispatch();
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= TOP_OFFSET) {
@@ -69,12 +82,18 @@ export default function LandingPage() {
     },
   ];
 
+  const handleCloseModalUser = () => {
+    dispatch(dontShowProfileUser());
+  };
   return (
     <div className="w-100">
+      {/**CAROUSEL */}
       <div className="w-100">
         <div className="carouselCom" style={{ position: "relative" }}>
           <CarouselComponent />
         </div>
+
+        {/**NAVBAR*/}
         <div
           className="navB w-100"
           style={
@@ -102,7 +121,13 @@ export default function LandingPage() {
           >
             <div>
               <PersonPinIcon className="" />
-              <h6 className="mt-2">Profile</h6>
+              <Button
+                className="mt-2"
+                variant="none"
+                onClick={() => dispatch(showProfileUser())}
+              >
+                Profile
+              </Button>
             </div>
             <hr />
             <div>
@@ -115,7 +140,9 @@ export default function LandingPage() {
             </div>
             <button
               className="mt-2"
-              onClick={() => dispatch(isNotLogged())}
+              onClick={() =>
+                dispatch(isNotLogged(), dispatch(dontShowUserProfile()))
+              }
               style={{ backgroundColor: "transparent", border: "none" }}
             >
               Logout
@@ -125,6 +152,13 @@ export default function LandingPage() {
           ""
         )}
 
+        {showProfileModal === true ? (
+          <ProfileModal show={showProfileModal} close={handleCloseModalUser} />
+        ) : (
+          ""
+        )}
+
+        {/**SEARCHBAR */}
         <div className="searchB w-100">
           <SearchBar />
         </div>
