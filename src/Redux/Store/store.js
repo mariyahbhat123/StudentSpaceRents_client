@@ -3,6 +3,7 @@ import toggleSlice from "../Slices/toggleSlice";
 import isLoggedIn from "../Slices/isLoggedIn";
 import showProfileSlice from "../Slices/showProfileSlice";
 import showProfileModalSlice from "../Slices/showProfileModalSlice";
+import userDataSlice from "../Slices/userDataSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     isLoggedIn: isLoggedIn,
     showUsersProfile: showProfileSlice,
     showProfileModal: showProfileModalSlice,
+    tenantDataSlice: userDataSlice,
   },
 });

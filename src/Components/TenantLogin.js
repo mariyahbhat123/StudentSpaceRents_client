@@ -3,9 +3,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import TenantRegistration from "./TenantRegistration";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import isLoggedIn, { isLogged } from "../Redux/Slices/isLoggedIn";
+import { useDispatch, useSelector } from "react-redux";
+import isLoggedIn, { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
+import { jwtDecode } from "jwt-decode";
+import { tenantUserData } from "../Redux/Slices/userDataSlice";
 export default function TenantLogin() {
   const [checkCredentials, setCheckCredentials] = useState({
     email: "",
@@ -31,10 +33,19 @@ export default function TenantLogin() {
       if (!json) {
         alert("Enter valid credentials");
         console.log("not valid");
-      }
-      if (json.success) {
-        dispatch(toggleOff());
-        dispatch(isLogged());
+      } else if (json.success) {
+        localStorage.setItem("authToken", json.authToken);
+        console.log("success");
+        if (authToken !== null) {
+          dispatch(toggleOff());
+
+          dispatch(isLogged());
+          console.log("YPPPPP");
+          const userData = json.userData;
+          dispatch(tenantUserData(userData));
+        } else {
+          dispatch(isNotLogged());
+        }
       }
     } catch (err) {
       console.log(err);
@@ -47,6 +58,15 @@ export default function TenantLogin() {
       [e.target.name]: e.target.value,
     });
   };
+
+  const authToken = localStorage.getItem("authToken");
+  console.log(authToken);
+  const decodedToken = jwtDecode(authToken);
+  console.log(decodedToken);
+
+  const user = useSelector((state) => state.tenantDataSlice);
+  console.log(user);
+
   return (
     <div>
       <Form>

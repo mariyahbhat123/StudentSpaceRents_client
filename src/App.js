@@ -9,8 +9,13 @@ import "./App.css";
 import ModalCom from "./Components/ModalCom";
 import AboutUs from "./Components/AboutUs";
 import ListAd from "./Components/ListAd";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [secretData, setSecretData] = useState("");
+  const token = localStorage.getItem("authToken");
+
+  console.log(secretData);
   return (
     <div className="App">
       <Router>
