@@ -21,6 +21,7 @@ export default function NavBar() {
   const toggleValue = useSelector((state) => state.toggle.active);
 
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  console.log(isLogged);
   const showUserProfile = useSelector(
     (state) => state.showUsersProfile.showUserProfile
   );

@@ -85,6 +85,14 @@ export default function LandingPage() {
   const handleCloseModalUser = () => {
     dispatch(dontShowProfileUser());
   };
+
+  const removeToken = () => {
+    localStorage.removeItem("authToken");
+
+    dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
+  };
+
+  console.log(showProfile);
   return (
     <div className="w-100">
       {/**CAROUSEL */}
@@ -140,9 +148,7 @@ export default function LandingPage() {
             </div>
             <button
               className="mt-2"
-              onClick={() =>
-                dispatch(isNotLogged(), dispatch(dontShowUserProfile()))
-              }
+              onClick={() => removeToken()}
               style={{ backgroundColor: "transparent", border: "none" }}
             >
               Logout

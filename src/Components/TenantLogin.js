@@ -35,17 +35,16 @@ export default function TenantLogin() {
         console.log("not valid");
       } else if (json.success) {
         localStorage.setItem("authToken", json.authToken);
-        console.log("success");
-        if (authToken !== null) {
-          dispatch(toggleOff());
 
-          dispatch(isLogged());
-          console.log("YPPPPP");
-          const userData = json.userData;
-          dispatch(tenantUserData(userData));
-        } else {
-          dispatch(isNotLogged());
-        }
+        console.log("success");
+        dispatch(toggleOff());
+
+        dispatch(isLogged());
+        console.log("YPPPPP");
+        const userData = json.userData;
+        dispatch(tenantUserData(userData));
+      } else {
+        dispatch(isNotLogged());
       }
     } catch (err) {
       console.log(err);
@@ -58,11 +57,6 @@ export default function TenantLogin() {
       [e.target.name]: e.target.value,
     });
   };
-
-  const authToken = localStorage.getItem("authToken");
-  console.log(authToken);
-  const decodedToken = jwtDecode(authToken);
-  console.log(decodedToken);
 
   const user = useSelector((state) => state.tenantDataSlice);
   console.log(user);

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const authToken = localStorage.getItem("authToken");
 const LoggedIn = {
   isLogIn: false,
 };
