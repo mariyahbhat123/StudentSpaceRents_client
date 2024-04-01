@@ -22,6 +22,9 @@ export default function NavBar() {
 
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
   console.log(isLogged);
+
+  const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
+
   const showUserProfile = useSelector(
     (state) => state.showUsersProfile.showUserProfile
   );
@@ -99,7 +102,7 @@ export default function NavBar() {
               </NavDropdown>
             </Nav>
             <Nav className="ms-auto">
-              {isLogged === true ? (
+              {isLogged === true || ownerIsLogged === true ? (
                 <Button
                   onClick={() =>
                     showUserProfile == true

@@ -10,7 +10,7 @@ import FooterCom from "../Components/FooterCom";
 import WebsiteReviews from "../Components/WebsiteReviews";
 
 import { useSelector, useDispatch } from "react-redux";
-import { isNotLogged } from "../Redux/Slices/isLoggedIn";
+import { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -21,6 +21,7 @@ import {
 } from "../Redux/Slices/showProfileModalSlice";
 import ProfileModal from "../Components/ProfileModal";
 import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
+import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
 
 export default function LandingPage() {
   const TOP_OFFSET = 600;
@@ -36,6 +37,13 @@ export default function LandingPage() {
   const showProfileModal = useSelector(
     (state) => state.showProfileModal.showProMod
   );
+
+  //User Logged Slice
+  const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  console.log(isLogged);
+
+  //OWNER LOGGED SLICE
+  const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLoge);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -88,8 +96,10 @@ export default function LandingPage() {
 
   const removeToken = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("ownerAuthToken");
 
     dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
+    dispatch(ownerNotLogged());
   };
 
   console.log(showProfile);
@@ -138,11 +148,15 @@ export default function LandingPage() {
               </Button>
             </div>
             <hr />
-            <div>
-              <FavoriteBorderIcon />
-              <h6 className="mt-2">WishList</h6>
-            </div>
-            <hr />
+            {isLogged === true || ownerIsLogged === false ? (
+              <div>
+                <FavoriteBorderIcon />
+                <h6 className="mt-2">WishList</h6>
+                <hr />
+              </div>
+            ) : (
+              ""
+            )}
             <div>
               <LogoutIcon />
             </div>

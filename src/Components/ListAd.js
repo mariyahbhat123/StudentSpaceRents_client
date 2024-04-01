@@ -4,6 +4,7 @@ import NavBar from "./navBar";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import ReplayIcon from "@mui/icons-material/Replay";
+import RangeSlider from "./RangeSlider";
 
 export default function ListAd() {
   return (
@@ -15,7 +16,7 @@ export default function ListAd() {
         <div
           className=" "
           style={{
-            width: "35%",
+            width: "30%",
             border: "2px solid black",
             backgroundColor: "#f5f5f5",
           }}
@@ -25,14 +26,14 @@ export default function ListAd() {
               <div
                 className="d-flex p-1 "
                 style={{
-                  width: "120px",
+                  width: "100px",
                   border: "1px solid black",
                   backgroundColor: "white",
                   justifyContent: "center",
-                  borderRadius: "100px",
+                  borderRadius: "50px",
                 }}
               >
-                <h6 className="" style={{ marginTop: "10px" }}>
+                <h6 className="ms-2" style={{ marginTop: "10px" }}>
                   District
                 </h6>
                 <div className="ms-2">
@@ -42,7 +43,7 @@ export default function ListAd() {
                       border: "0",
 
                       backgroundColor: "white",
-                      height: "25px",
+                      height: "22px",
                     }}
                   >
                     <ClearIcon fontSize="20px" className="mb-3" />
@@ -52,7 +53,7 @@ export default function ListAd() {
               <input
                 className="ms-2"
                 type="search"
-                style={{ width: "65%", padding: "8px" }}
+                style={{ width: "65%", padding: "8px", borderRadius: "50px" }}
                 placeholder="Search"
               />
               <button
@@ -77,6 +78,7 @@ export default function ListAd() {
                 width: "80%",
                 border: "1px solid black",
                 backgroundColor: "white",
+                borderRadius: "50px",
               }}
             >
               <div
@@ -92,7 +94,7 @@ export default function ListAd() {
                     className=""
                     style={{ border: "0", backgroundColor: "white" }}
                   >
-                    <ReplayIcon className="  mb-2 " />
+                    <ReplayIcon className="  mb-1 " />
                   </button>
                   <h5>Reset</h5>
                 </div>
@@ -101,6 +103,7 @@ export default function ListAd() {
               <hr />
               <div className="w-100">
                 <div className="">
+                  <h5 className="mb-3">Accomodation Type</h5>
                   <input type="radio" />
                   PG
                   <input type="radio" className="ms-3" />
@@ -110,16 +113,16 @@ export default function ListAd() {
                   <input type="radio" className="ms-3" />
                   Room
                 </div>
-                <div className="mt-4">
-                  <h4>For</h4>
+                <div className="mt-3">
+                  <h5 className="mb-3">For</h5>
                   <input type="radio" />
                   Male
                   <input type="radio" className="ms-3" />
                   Female
                 </div>
 
-                <div className="mt-4">
-                  <h4>Room Type</h4>
+                <div className="mt-3">
+                  <h5 className="mb-3">Room Type</h5>
                   <input type="checkbox" />
                   PG
                   <input type="checkbox" className="ms-3" />
@@ -129,18 +132,20 @@ export default function ListAd() {
                   <input type="checkbox" className="ms-3" />
                   Room
                 </div>
-                <div className="mt-4">
-                  <h4>Rent Range:</h4>
+                <div className="mt-3">
+                  <h5 className="mb-3">Rent Range:</h5>
+
+                  <RangeSlider />
                 </div>
-                <div className="mt-4">
-                  <h4>Preferred For</h4>
+                <div className="mt-3">
+                  <h5 className="mb-3">Preferred For</h5>
                   <input type="checkbox" />
                   Student
                   <input type="checkbox" className="ms-3" />
                   Professional
                 </div>
-                <div className="mt-4">
-                  <h4>Food Included</h4>
+                <div className="mt-3">
+                  <h5 className="mb-3">Food Included</h5>
                   <input type="checkbox" />
                   BreakFast
                   <input type="checkbox" className="ms-3" />
