@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isLogged } from "../Redux/Slices/isLoggedIn";
 import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
+import AddProperty from "./AddProperty";
 
 export default function StudentSpaceRoutes() {
   const [secretData, setSecretData] = useState("");

@@ -5,6 +5,8 @@ import SidebarProfile from "./SidebarProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { dontShowProfileUser } from "../Redux/Slices/showProfileModalSlice";
 import UserProfile from "./UserProfile";
+import AddProperty from "./AddProperty";
+import { dontShowProfile } from "../Redux/Slices/profileSlice";
 
 export default function ProfileModal() {
   const showProfileModal = useSelector(
@@ -12,6 +14,15 @@ export default function ProfileModal() {
   );
 
   const dispatch = useDispatch();
+
+  const showProfOrNot = useSelector(
+    (state) => state.showProfOrNot.showOrNoProf
+  );
+  console.log(showProfOrNot);
+
+  const showOrNotAddPro = useSelector(
+    (state) => state.showOrNotAddPro.showOrNoOwnerAddPro
+  );
   return (
     <div>
       {" "}
@@ -24,7 +35,12 @@ export default function ProfileModal() {
         <Modal.Body>
           <div className="d-flex">
             <SidebarProfile />
-            <UserProfile />
+            {showProfOrNot === true ? <UserProfile /> : ""}
+            {showOrNotAddPro === true && showProfOrNot === false ? (
+              <AddProperty />
+            ) : (
+              ""
+            )}
           </div>
         </Modal.Body>
       </Modal>

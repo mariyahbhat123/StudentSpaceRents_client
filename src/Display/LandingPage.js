@@ -43,7 +43,7 @@ export default function LandingPage() {
   console.log(isLogged);
 
   //OWNER LOGGED SLICE
-  const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLoge);
+  const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
   const dispatch = useDispatch();
 
   useEffect(() => {
