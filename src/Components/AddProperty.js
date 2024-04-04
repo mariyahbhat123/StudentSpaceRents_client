@@ -33,11 +33,16 @@ export default function AddProperty() {
     propertyType: "",
     monthlyRent: null,
   });
+
+  const onClick = (e) => {
+    setPropertyDetails({ ...propertyDetails, [e.target.name]: e.target.value });
+  };
   return (
     <div className="w-100 ms-3">
       <Form
         className="d-flex justify-content-center"
         style={{ boxShadow: "10px", border: "1px solid black" }}
+        onSubmit={onClick}
       >
         <div className="">
           <div className="d-flex justify-content-center">
@@ -256,7 +261,11 @@ export default function AddProperty() {
               >
                 <h6 style={{ textAlign: "center" }}>Food Included</h6>
                 <div className="ms-1">
-                  <CheckboxAddProperty />
+                  <CheckboxAddProperty
+                    one="Breakfast"
+                    two="Lunch"
+                    three="dinner"
+                  />
                 </div>
               </div>
             </Form.Group>
@@ -274,7 +283,11 @@ export default function AddProperty() {
               >
                 <h6 style={{ textAlign: "center" }}>Amenities Included</h6>
                 <div className="ms-1">
-                  <CheckboxAddProperty />
+                  <CheckboxAddProperty
+                    one="HeatingAndCooling"
+                    two="Storage Space"
+                    three="Internet"
+                  />
                 </div>
               </div>
             </Form.Group>
