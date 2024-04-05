@@ -1,6 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function UserProfile() {
+  const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
+  const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  const ownerData = useSelector((state) => state.ownerData.ownerD);
+  const tenantData = useSelector((state) => state.tenantDataSlice.tenantD);
+  console.log(tenantData);
+
+  console.log(ownerData.name);
+  console.log(ownerIsLogged);
+
   return (
     <div className="d-flex  w-100">
       <div className="container mt-0 m-0 p-0">
@@ -9,7 +19,10 @@ export default function UserProfile() {
             <div className="card p-3 py-4 pt-3 mt-0 ">
               <div
                 className="rounded-top d-flex justify-content-center text-white  "
-                style={{ backgroundColor: "#000", height: "180px" }}
+                style={{
+                  height: "180px",
+                  border: "2px solid #ff385c",
+                }}
               >
                 <div
                   className="text-center "
@@ -22,7 +35,13 @@ export default function UserProfile() {
                   }}
                 >
                   <img
-                    src="https://i.imgur.com/bDLhJiP.jpg"
+                    src={
+                      ownerIsLogged === true
+                        ? ownerData.img
+                        : isLogged === true
+                        ? tenantData.img
+                        : ""
+                    }
                     width="90"
                     class="rounded-circle  "
                   />
@@ -33,19 +52,28 @@ export default function UserProfile() {
                   Profile
                 </span>*/}
                 <h4>Name</h4>
-                <h5 class="mt-3 mb-0">Name</h5>
+                <h5 class="mt-3 mb-0">
+                  {ownerIsLogged === true
+                    ? ownerData.name
+                    : isLogged === true
+                    ? tenantData.name
+                    : ""}
+                </h5>
                 <span></span>
                 <hr />
                 <div class="px-4 mt-1">
                   <p class="fonts mt-3">
                     <h4>Email</h4>
-                    <h5>Email</h5>
+                    <h5>
+                      {" "}
+                      {ownerIsLogged === true
+                        ? ownerData.email
+                        : isLogged === true
+                        ? tenantData.email
+                        : ""}
+                    </h5>
                   </p>
                   <hr />
-                  <p class="fonts mt-3">
-                    <h4>About</h4>
-                    about
-                  </p>
                 </div>
                 <hr />
                 <div
@@ -82,7 +110,10 @@ export default function UserProfile() {
 
                 <div class="buttons">
                   {" "}
-                  <button class="btn btn-primary px-4 ms-3 text-white mt-5">
+                  <button
+                    class="btn  px-4 ms-3 text-white mt-5"
+                    style={{ backgroundColor: "#ff385c" }}
+                  >
                     Edit Profile
                   </button>
                 </div>

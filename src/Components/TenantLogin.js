@@ -36,13 +36,27 @@ export default function TenantLogin() {
       } else if (json.success) {
         localStorage.setItem("authToken", json.authToken);
 
+        const tenantDetail = json.userDetail;
+        console.log(tenantDetail.name);
+        const name = tenantDetail.name;
+        const email = tenantDetail.email;
+        const gender = tenantDetail.gender;
+        const img = tenantDetail.img;
+
+        dispatch(
+          tenantUserData({
+            name: name,
+            email: email,
+            gender: gender,
+            img: img,
+          })
+        );
+
         console.log("success");
         dispatch(toggleOff());
 
         dispatch(isLogged());
         console.log("YPPPPP");
-        const userData = json.userData;
-        dispatch(tenantUserData(userData));
       } else {
         dispatch(isNotLogged());
       }

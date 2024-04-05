@@ -11,21 +11,23 @@ export default function CardComponent(props) {
       <Row xs={1} md={md} className="w-100">
         {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
-            <Card className="mt-5">
-              <Card.Img
-                variant="top"
-                src="https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6698948"
-              />
-              <Card.Body>
-                <Card.Title>Card title</Card.Title>
+            <Link to="/PropertyDetail">
+              <Card className="mt-5">
+                <Card.Img
+                  variant="top"
+                  src="https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6698948"
+                />
+                <Card.Body>
+                  <Card.Title>Card title</Card.Title>
 
-                <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </Card.Text>
-              </Card.Body>
-            </Card>
+                  <Card.Text>
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
           </Col>
         ))}
       </Row>

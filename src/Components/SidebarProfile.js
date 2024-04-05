@@ -49,6 +49,7 @@ export default function SidebarProfile() {
   //TENANT LOGGED IN OR NOT
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
 
+  const tenantData = useSelector((state) => state.tenantDataSlice.tenantD);
   //Profile
   const showProfOrNot = useSelector(
     (state) => state.showProfOrNot.showOrNoProf
@@ -84,7 +85,7 @@ export default function SidebarProfile() {
     }
   };
   return (
-    <div>
+    <div className="me-3">
       <Sidebar collapsed={!show}>
         <Menu>
           <MenuItem
@@ -126,7 +127,7 @@ export default function SidebarProfile() {
           justifyContent={"center"}
           marginTop={40}
         >
-          <Tooltip title="Open settings">
+          <Tooltip title="Logout" placement="top">
             <IconButton
               onClick={
                 anchorElUser == null ? handleOpenUserMenu : handleCloseUserMenu
@@ -135,7 +136,14 @@ export default function SidebarProfile() {
             >
               <Avatar
                 alt="Remy Sharp"
-                src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                src={
+                  ownerIsLogged === true
+                    ? ""
+                    : isLogged === true
+                    ? tenantData.img
+                    : ""
+                }
+                sx={{ height: "58px", width: "58px" }}
               ></Avatar>
             </IconButton>{" "}
           </Tooltip>

@@ -7,6 +7,7 @@ import userDataSlice from "../Slices/userDataSlice";
 import ownerIsLogged from "../Slices/ownerIsLogged";
 import profileSlice from "../Slices/profileSlice";
 import ownerAddPropertySlice from "../Slices/ownerAddPropertySlice";
+import ownerDataSlice from "../Slices/ownerDataSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     ownerLogOrNot: ownerIsLogged,
     showProfOrNot: profileSlice,
     showOrNotAddPro: ownerAddPropertySlice,
+    ownerData: ownerDataSlice,
   },
 });

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
 import { ownerLoggedIn, ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
+import { ownerData } from "../Redux/Slices/ownerDataSlice";
 
 export default function LandlordLogin() {
   const [ownerLoginCredentials, setOwnerLoginCredentials] = useState({
@@ -38,6 +39,12 @@ export default function LandlordLogin() {
         return;
       } else if (json.success) {
         localStorage.setItem("ownerAuthToken", json.ownerAuthToken);
+        const ownerDetail = json.ownerDetail;
+        const name = ownerDetail.name;
+        const email = ownerDetail.email;
+        const img = ownerDetail.img;
+        dispatch(ownerData({ name: name, email: email, img: img }));
+
         dispatch(ownerLoggedIn());
         dispatch(toggleOff());
       } else {

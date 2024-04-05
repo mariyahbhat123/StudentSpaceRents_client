@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { isLogged } from "../Redux/Slices/isLoggedIn";
 import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
 import AddProperty from "./AddProperty";
+import GoogleMaps from "./GoogleMaps";
+import PropertyDetail from "./PropertyDetail";
 
 export default function StudentSpaceRoutes() {
   const [secretData, setSecretData] = useState("");
@@ -85,6 +87,8 @@ export default function StudentSpaceRoutes() {
           <Route path="/aboutus" element={<AboutUs />} />
 
           <Route path="/ListAd" element={<ListAd />} />
+          <Route path="/googleMaps" element={<GoogleMaps />} />
+          <Route path="/PropertyDetail" element={<PropertyDetail />} />
         </Routes>
       </Router>
     </div>
