@@ -4,6 +4,9 @@ import FooterCom from "./FooterCom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CarouselGrid from "./CarouselGrid";
+import PropDtailesCom from "./PropDtailesCom";
+import PropDetailsBook from "./PropDetailsBook";
 
 export default function PropertyDetail() {
   return (
@@ -61,7 +64,17 @@ export default function PropertyDetail() {
           <h6>Available for girls</h6>
         </div>
       </div>
-
+      <div>
+        <CarouselGrid />
+      </div>
+      <div className="d-flex">
+        <div>
+          <PropDtailesCom />
+        </div>
+        <div>
+          <PropDetailsBook />
+        </div>
+      </div>
       <div>
         <FooterCom />
       </div>
