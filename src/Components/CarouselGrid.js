@@ -2,39 +2,38 @@ import React from "react";
 import Slider from "react-slick";
 
 function CarouselGrid() {
-  const settings = {
-    className: "slider variable-width",
-    dots: true,
-    infinite: false,
-    centerMode: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    variableWidth: true,
-  };
   return (
-    <div>
-      <div className="slider-container">
-        <Slider {...settings}>
-          <div className="d-flex" style={{ width: "100%" }}>
-            <div style={{ width: "50%", border: "2px solid black" }}>
-              <p>100</p>
-            </div>
-            <div style={{ width: "50%" }}>
-              <div style={{ width: "100%", border: "1px solid black" }}>
-                <p>200</p>
-              </div>
-              <div style={{ width: "100%" }}>
-                <p>75</p>
-              </div>
-            </div>
-          </div>{" "}
-          <div
-            className="d-flex"
-            style={{ width: "100%", justifyContent: "flex-end" }}
-          >
-            <p>4</p>
-          </div>
-        </Slider>
+    <div
+      className="d-grid mt-5"
+      style={{
+        justifyItems: "center",
+        alignItems: "center",
+        gridTemplateColumns: "1fr 1fr 1fr 1fr",
+        gridTemplateRows: "80px 80px 80px 80px",
+      }}
+    >
+      <div style={{}}>
+        <img
+          src="https://hips.hearstapps.com/hmg-prod/images/ghk070123homeminifeature-005-655b983d8bf5f.jpg?crop=1xw:0.9989583333333334xh;center,top&resize=980:*"
+          alt=""
+        />
+      </div>
+
+      <div style={{}}>
+        <img
+          src="https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/sites/2/2022/06/10183457/small-bedroom-ideas.jpg"
+          alt=""
+        />
+      </div>
+      <div style={{}}>
+        <img
+          src="https://foyr.com/learn/wp-content/uploads/2021/09/master-bedroom-essentials.png"
+          alt=""
+        />
+      </div>
+
+      <div>
+        <p>4</p>
       </div>
     </div>
   );
