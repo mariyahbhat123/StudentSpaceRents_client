@@ -64,14 +64,16 @@ export default function PropertyDetail() {
           <h6>Available for girls</h6>
         </div>
       </div>
-      <div>
+
+      <div className="">
         <CarouselGrid />
       </div>
+
       <div className="d-flex">
-        <div>
+        <div className="" style={{ width: "65%" }}>
           <PropDtailesCom />
-        </div>
-        <div>
+        </div>{" "}
+        <div className="" style={{ width: "35%" }}>
           <PropDetailsBook />
         </div>
       </div>
