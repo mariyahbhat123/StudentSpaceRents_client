@@ -106,14 +106,14 @@ export default function LandingPage() {
   return (
     <div className="w-100">
       {/**CAROUSEL */}
-      <div className="w-100">
+      <div className="">
         <div className="carouselCom" style={{ position: "relative" }}>
           <CarouselComponent />
         </div>
 
         {/**NAVBAR*/}
         <div
-          className="navB w-100"
+          className="navB"
           style={
             navBackground === false
               ? {

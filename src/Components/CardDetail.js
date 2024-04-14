@@ -5,7 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 export default function CardDetail(props) {
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: props.width, height: props.height }}>
         <Card.Header>{props.title}</Card.Header>
         <ListGroup variant="flush">
           <ListGroup.Item>{props.item0}</ListGroup.Item>

@@ -1,10 +1,12 @@
 .navB {
+  width: 100%;
   position: fixed;
   top: 0px;
   z-index: 10;
   transition: color 0.25s linear;
 }
 .carouselCom {
+  width: 100%;
   overflow: hidden;
 }
 .searchB {

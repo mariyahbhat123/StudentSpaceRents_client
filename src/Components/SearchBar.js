@@ -2,30 +2,15 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
+import "../Styles/SearchBar.css";
 
 export default function SearchBar() {
   const [show, setShow] = useState(false);
   return (
-    <div className=" d-flex" style={{ justifyContent: "center" }}>
+    <div className="d-flex" style={{ justifyContent: "center" }}>
       <div className="w-100 d-flex " style={{ justifyContent: "center" }}>
-        <div
-          className="d-flex"
-          style={{
-            backgroundColor: "white",
-            width: "50%",
-            padding: "20px",
-            borderRadius: "20px",
-          }}
-        >
-          <div
-            className=""
-            style={{
-              width: "20%",
-              border: "2px solid black",
-              borderRadius: "55px",
-              padding: "3px",
-            }}
-          >
+        <div className="mainContainer d-flex">
+          <div className="optionContainer">
             <select
               className=""
               style={{
@@ -40,26 +25,29 @@ export default function SearchBar() {
               <option value="">Srinagar</option>
               <option value="">Baramulla</option>
               <option value="">Kupwara</option>
+              <option>Anantnag</option>
+              <option>Pulwama</option>
+              <option>Shopian</option>
+              <option>Kulgam</option>
+              <option>Budgam</option>
+              <option>Ganderbal</option>
+              <option>Bandipore</option>
             </select>
           </div>
           <input
+            className="searchComponent"
             type="text"
             placeholder="Search Locality or Landmark"
-            style={{
-              width: "80%",
-              padding: "5px",
-              paddingLeft: "15px",
-              borderRadius: "20px",
-              marginLeft: "4px",
-            }}
+            style={{}}
             onChange={() => setShow(true)}
           ></input>{" "}
           {show === true ? (
             <button
+              className="btnClearCom"
               style={{
                 width: "5%",
                 position: "absolute",
-                left: "63%",
+                left: "66%",
                 border: "none",
                 padding: "3px",
                 backgroundColor: "transparent",
@@ -71,17 +59,7 @@ export default function SearchBar() {
           ) : (
             ""
           )}
-          <button
-            variant="none"
-            style={{
-              width: "39px",
-              backgroundColor: "#ff385c",
-              padding: "4px",
-              color: "white",
-              borderRadius: "100%",
-              marginLeft: "4px",
-            }}
-          >
+          <button className="searchBtn" variant="none">
             <SearchIcon />
           </button>{" "}
         </div>

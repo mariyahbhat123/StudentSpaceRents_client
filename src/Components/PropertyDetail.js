@@ -11,7 +11,7 @@ import PropDetailsBook from "./PropDetailsBook";
 export default function PropertyDetail() {
   return (
     <div>
-      <div>
+      <div style={{ position: "sticky" }}>
         <NavBar />
       </div>
       <div className="w-100">
@@ -69,11 +69,18 @@ export default function PropertyDetail() {
         <CarouselGrid />
       </div>
 
-      <div className="d-flex">
+      <div className="d-flex mt-5">
         <div className="" style={{ width: "65%" }}>
           <PropDtailesCom />
         </div>{" "}
-        <div className="" style={{ width: "35%" }}>
+        <div
+          className="ms-5 p-4"
+          style={{
+            width: "30%",
+            boxShadow: "2px 2px 2px 2px grey",
+            height: "500px",
+          }}
+        >
           <PropDetailsBook />
         </div>
       </div>

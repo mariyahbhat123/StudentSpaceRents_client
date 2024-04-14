@@ -5,6 +5,8 @@ import Slider from "react-slick";
 
 import "../Styles/slideArrow.css";
 import CardDetail from "./CardDetail";
+import "../Styles/CardDetailSlider.css";
+import PropDetailsMap from "./PropDetailsMap";
 
 export default function PropDtailesCom() {
   const [showDetail, setShowDetail] = useState(false);
@@ -21,25 +23,29 @@ export default function PropDtailesCom() {
     infinite: false,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 4,
+    slidesToScroll: 3,
+    variableWidth: true,
+
     initialSlide: 0,
 
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
+          variableWidth: true,
           dots: true,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          variableWidth: true,
         },
       },
       {
@@ -47,15 +53,19 @@ export default function PropDtailesCom() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          variableWidth: true,
         },
       },
     ],
   };
   return (
-    <div className="mt-4 ms-5">
+    <div className="ms-5">
       <div
         className="d-flex p-3"
-        style={{ border: "1px solid black", justifyContent: "space-evenly" }}
+        style={{
+          border: "1px solid black",
+          justifyContent: "space-evenly",
+        }}
       >
         <p>Overview</p>
         <p>Amenities</p>
@@ -88,41 +98,63 @@ export default function PropDtailesCom() {
           ""
         )}
       </div>
-      <div className="slider-container  ">
-        <Slider {...settings} className="d-flex ">
+      <div className="slider-container mt-4 mb-4">
+        <div className="mb-4">
+          <h5>Rent includes</h5>
+        </div>
+        <Slider {...settings} className="d-flex slider">
           <div className="">
             <CardDetail
               title="Overview"
               item0="Switch"
               item1="Light"
               item2="Fan"
+              width="15rem"
+              height="12rem"
             />
           </div>
-          <div className="ms-3 ">
+          <div className="ms-3">
             <CardDetail
               title="Living Room"
               item0="Switch"
               item1="Light"
               item2="Fan"
+              width="15rem"
+              height="12rem"
             />
           </div>
-          <div className="ms-4">
+          <div className="ms-3">
             <CardDetail
               title="Kitchen"
               item0="Modular Kitchen"
               item1="Tap"
               item2=""
+              width="15rem"
+              height="12rem"
             />
           </div>
-          <div className="ms-5">
+          <div className="ms-3">
             <CardDetail
               title="Bedroom"
               item0="Switch"
               item1="Light"
               item2="Fan"
+              width="15rem"
+              height="12rem"
             />
           </div>
         </Slider>
+      </div>
+      <div className="mt-4">
+        <PropDetailsMap />
+      </div>
+      <div className="d-flex mt-4" style={{ justifyContent: "space-between" }}>
+        <div>
+          <h4>Terms & Conditions </h4>
+        </div>
+        <div>
+          <h6>More Details</h6>
+        </div>
       </div>
     </div>
   );
