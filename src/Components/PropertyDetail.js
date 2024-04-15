@@ -7,6 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CarouselGrid from "./CarouselGrid";
 import PropDtailesCom from "./PropDtailesCom";
 import PropDetailsBook from "./PropDetailsBook";
+import Button from "react-bootstrap/Button";
 
 export default function PropertyDetail() {
   return (
@@ -67,6 +68,14 @@ export default function PropertyDetail() {
 
       <div className="">
         <CarouselGrid />
+      </div>
+      <div>
+        <div>
+          <Button>Photos</Button>
+        </div>
+        <div>
+          <Button>Map</Button>
+        </div>
       </div>
 
       <div className="d-flex mt-5">
