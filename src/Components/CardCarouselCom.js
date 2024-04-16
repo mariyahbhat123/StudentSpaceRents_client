@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Card from "react-bootstrap/Card";
-
+import Carousel from "react-bootstrap/Carousel";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../Styles/slideArrow.css";
 
 export default function CardCarouselCom(props) {
+  const [favourite, setfavourite] = useState(false);
   const images = props.images;
   console.log(images);
   const settings = {
@@ -65,6 +70,13 @@ export default function CardCarouselCom(props) {
     },
   };
 
+  const fav = () => {
+    if (favourite === true) {
+      setfavourite(false);
+    } else {
+      setfavourite(true);
+    }
+  };
   return (
     <div className="slider-container mt-4 ">
       {" "}
@@ -76,20 +88,61 @@ export default function CardCarouselCom(props) {
               <div className="">
                 <Card className="ms-2 me-2">
                   {" "}
-                  <Card.Img
-                    variant="top"
-                    src={item.img}
-                    style={{ height: "200px" }}
-                  />
-                  <Card.Body>
-                    <Card.Title>Card title</Card.Title>
+                  <Link to="/PropertyDetail" style={{ textDecoration: "none" }}>
+                    <Carousel fade className="w-100 " interval={null}>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={item.img}
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={item.img}
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={item.img}
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                    </Carousel>
+                    <Card.Body>
+                      <h6>
+                        <b>Apartment</b>
+                      </h6>
+                      <Card.Title>Kupwara, kashmir</Card.Title>
 
-                    <Card.Text>
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </Card.Text>
-                  </Card.Body>{" "}
+                      <Card.Text>
+                        <h5>
+                          <b>32,000</b>/month
+                        </h5>
+                      </Card.Text>
+                    </Card.Body>{" "}
+                  </Link>
+                  <Button
+                    variant="none"
+                    style={{
+                      position: "absolute",
+                      zIndex: "10",
+                      left: "200px",
+                      boxShadow: "none",
+                    }}
+                    onClick={fav}
+                  >
+                    <FavoriteIcon
+                      style={
+                        favourite === true
+                          ? { color: "red" }
+                          : { color: "white" }
+                      }
+                    />
+                  </Button>
                 </Card>
               </div>
             </>

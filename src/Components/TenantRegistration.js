@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
 import { isLogged } from "../Redux/Slices/isLoggedIn";
+import "../Styles/LogReg.css";
 
 export default function TenantRegistration() {
   const [credentials, setCredentials] = useState({
@@ -56,7 +57,9 @@ export default function TenantRegistration() {
   return (
     <div>
       <Form>
-        <h2 style={{ textAlign: "center" }}>Tenant Signup</h2>
+        <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
+          Tenant Signup
+        </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
@@ -65,6 +68,7 @@ export default function TenantRegistration() {
             value={credentials.name}
             autoFocus
             onChange={onChange}
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -73,6 +77,7 @@ export default function TenantRegistration() {
             name="email"
             placeholder="example@ghg.com"
             onChange={onChange}
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -81,6 +86,7 @@ export default function TenantRegistration() {
             name="gender"
             value={credentials.gender}
             onChange={onChange}
+            className="userInput"
           >
             <option hidden>Select Gender</option>
             <option value="female">Female</option>
@@ -94,6 +100,7 @@ export default function TenantRegistration() {
             value={credentials.password}
             onChange={onChange}
             placeholder="Password"
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -103,6 +110,7 @@ export default function TenantRegistration() {
             placeholder="Comfirm Password"
             value={credentials.confirmPassword}
             onChange={onChange}
+            className="userInput"
           />
         </Form.Group>
 
@@ -110,7 +118,9 @@ export default function TenantRegistration() {
           className="mb-3 d-flex justify-content-center"
           controlId="exampleForm.ControlTextarea1"
         >
-          <Button onClick={handleSubmit}>Sign Up</Button>
+          <Button variant="none" onClick={handleSubmit} className="submitBtn">
+            Sign Up
+          </Button>
         </Form.Group>
       </Form>
     </div>

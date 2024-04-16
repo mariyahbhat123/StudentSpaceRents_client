@@ -6,6 +6,7 @@ import { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
 import { ownerLoggedIn, ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
 import { ownerData } from "../Redux/Slices/ownerDataSlice";
+import "../Styles/LogReg.css";
 
 export default function LandlordLogin() {
   const [ownerLoginCredentials, setOwnerLoginCredentials] = useState({
@@ -57,7 +58,9 @@ export default function LandlordLogin() {
   return (
     <div>
       <Form>
-        <h2 style={{ textAlign: "center" }}>Landlord Login</h2>
+        <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
+          Landlord Login
+        </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="email"
@@ -66,6 +69,7 @@ export default function LandlordLogin() {
             placeholder="example@hdh.com"
             onChange={onChange}
             autoFocus
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -75,6 +79,7 @@ export default function LandlordLogin() {
             placeholder="Password"
             value={ownerLoginCredentials.password}
             onChange={onChange}
+            className="userInput"
           />
         </Form.Group>
 
@@ -82,7 +87,13 @@ export default function LandlordLogin() {
           className="mb-3 d-flex justify-content-center"
           controlId="exampleForm.ControlTextarea1"
         >
-          <Button onClick={handleLoginSubmit}>Sign In</Button>
+          <Button
+            variant="none"
+            onClick={handleLoginSubmit}
+            className="submitBtn"
+          >
+            Sign In
+          </Button>
         </Form.Group>
       </Form>
     </div>

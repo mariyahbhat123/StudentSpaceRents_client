@@ -8,6 +8,7 @@ import isLoggedIn, { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
 import { jwtDecode } from "jwt-decode";
 import { tenantUserData } from "../Redux/Slices/userDataSlice";
+import "../Styles/LogReg.css";
 export default function TenantLogin() {
   const [checkCredentials, setCheckCredentials] = useState({
     email: "",
@@ -78,7 +79,9 @@ export default function TenantLogin() {
   return (
     <div>
       <Form>
-        <h2 style={{ textAlign: "center" }}>Tenant Login</h2>
+        <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
+          Tenant Login
+        </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="email"
@@ -87,6 +90,7 @@ export default function TenantLogin() {
             placeholder="name@gmail.com"
             onChange={onChange}
             autoFocus
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -96,6 +100,7 @@ export default function TenantLogin() {
             value={checkCredentials.password}
             placeholder="Password"
             onChange={onChange}
+            className="userInput"
           />
         </Form.Group>
 
@@ -103,7 +108,12 @@ export default function TenantLogin() {
           className="mb-3 d-flex justify-content-center"
           controlId="exampleForm.ControlTextarea1"
         >
-          <Button name="submit" onClick={handleLoginSubmit}>
+          <Button
+            name="submit"
+            variant="none"
+            onClick={handleLoginSubmit}
+            className="submitBtn"
+          >
             Sign In
           </Button>
         </Form.Group>

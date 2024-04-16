@@ -4,6 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import { useDispatch } from "react-redux";
 import { isLogged } from "../Redux/Slices/isLoggedIn";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
+import "../Styles/LogReg.css";
 
 export default function LandlordRegistration() {
   const [ownerCredentials, setOwnerCredentials] = useState({
@@ -54,7 +55,9 @@ export default function LandlordRegistration() {
     <div>
       {" "}
       <Form>
-        <h2 style={{ textAlign: "center" }}>LandLord Signup</h2>
+        <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
+          LandLord Signup
+        </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
@@ -62,6 +65,7 @@ export default function LandlordRegistration() {
             placeholder="Username"
             onChange={onChange}
             autoFocus
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -70,7 +74,7 @@ export default function LandlordRegistration() {
             name="email"
             placeholder="example@ghg.com"
             onChange={onChange}
-            autoFocus
+            className="userInput"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -78,7 +82,7 @@ export default function LandlordRegistration() {
             type="number"
             name="number"
             placeholder="Mobile Number"
-            autoFocus
+            className="userInput"
             minLength={10}
             maxLength={10}
             onChange={onChange}
@@ -88,6 +92,7 @@ export default function LandlordRegistration() {
           <Form.Control
             type="password"
             name="password"
+            className="userInput"
             placeholder="Password"
             onChange={onChange}
           />
@@ -96,6 +101,7 @@ export default function LandlordRegistration() {
           <Form.Control
             type="password"
             name="confirmPassword"
+            className="userInput"
             placeholder="Confirm Password"
             onChange={onChange}
           />
@@ -105,7 +111,9 @@ export default function LandlordRegistration() {
           className="mb-3 d-flex justify-content-center"
           controlId="exampleForm.ControlTextarea1"
         >
-          <Button onClick={handleSubmit}>Sign Up</Button>
+          <Button variant="none" onClick={handleSubmit} className="submitBtn">
+            Sign Up
+          </Button>
         </Form.Group>
       </Form>
     </div>

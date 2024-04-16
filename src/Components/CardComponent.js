@@ -5,17 +5,27 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Button from "react-bootstrap/esm/Button";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function CardComponent(props) {
+  const [favourite, setfavourite] = useState(false);
   let md = props.md;
 
+  const fav = () => {
+    if (favourite === true) {
+      setfavourite(false);
+    } else {
+      setfavourite(true);
+    }
+  };
   return (
     <div className="ms-4 mt-5">
       <Row xs={1} md={md} className="w-100">
         {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
-            <Link to="/PropertyDetail" style={{ textDecoration: "none" }}>
-              <Card className="mt-5">
+            <Card className="mt-5">
+              <Link to="/PropertyDetail" style={{ textDecoration: "none" }}>
                 <Carousel fade className="w-100 " interval={null}>
                   <Carousel.Item className="carousel-item">
                     <Card.Img
@@ -51,8 +61,25 @@ export default function CardComponent(props) {
                     </h6>
                   </Card.Text>
                 </Card.Body>
-              </Card>
-            </Link>
+              </Link>
+
+              <Button
+                variant="none"
+                style={{
+                  position: "absolute",
+                  zIndex: "10",
+                  left: "250px",
+                  boxShadow: "none",
+                }}
+                onClick={fav}
+              >
+                <FavoriteIcon
+                  style={
+                    favourite === true ? { color: "red" } : { color: "white" }
+                  }
+                />
+              </Button>
+            </Card>
           </Col>
         ))}
       </Row>

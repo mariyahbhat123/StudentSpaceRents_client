@@ -1,0 +1,26 @@
+.userLog-Reg {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.userInput {
+  border: 1px solid #ff385c;
+}
+
+.submitBtn {
+  box-shadow: none;
+  background-color: #ff385c;
+  width: 250px;
+  color: white;
+  /* border-radius: 50px; */
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.submitBtn:hover {
+  border: 2px solid #ff385c;
+  padding: 8.5px;
+}

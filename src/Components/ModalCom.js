@@ -22,17 +22,17 @@ function ModalCom(props) {
         onHide={props.close}
         animation
         autoFocus
+        contentClassName="custom-modal"
       >
         <Modal.Header closeButton className="">
           <div
-            className="w-100 ms-5 me-5  d-flex justify-content-center"
+            className="btnsTntOwn w-100 ms-5 me-5  d-flex justify-content-center"
             style={{ backgroundColor: "#ff385c" }}
           >
             <Button
               variant="none"
-              className="w-50 "
+              className="btnTnt w-50 "
               style={{
-                borderColor: "",
                 color: "white",
                 fontWeight: "bold",
               }}
@@ -42,7 +42,7 @@ function ModalCom(props) {
             </Button>
             <Button
               variant="none"
-              className="w-50"
+              className="btnOwn w-50"
               style={{
                 borderColor: "",
                 color: "white",
@@ -50,7 +50,7 @@ function ModalCom(props) {
               }}
               onClick={() => setToggle(true)}
             >
-              LandLord
+              Owner
             </Button>
           </div>
         </Modal.Header>

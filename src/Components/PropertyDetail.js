@@ -69,12 +69,19 @@ export default function PropertyDetail() {
       <div className="">
         <CarouselGrid />
       </div>
-      <div>
-        <div>
-          <Button>Photos</Button>
-        </div>
-        <div>
-          <Button>Map</Button>
+      <div className="w-100">
+        <div className="d-flex " style={{ marginLeft: "15%" }}>
+          <Button variant="none" style={{ width: "15%", borderRadius: "50px" }}>
+            Photos
+          </Button>
+
+          <Button
+            className="ms-5"
+            variant="none"
+            style={{ width: "15%", borderRadius: "50px" }}
+          >
+            Map
+          </Button>
         </div>
       </div>
 
