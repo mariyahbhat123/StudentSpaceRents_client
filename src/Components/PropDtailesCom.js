@@ -65,6 +65,9 @@ export default function PropDtailesCom() {
         style={{
           border: "1px solid black",
           justifyContent: "space-evenly",
+          position: "sticky",
+          top: "0px",
+          zIndex: "1",
         }}
       >
         <p>Overview</p>

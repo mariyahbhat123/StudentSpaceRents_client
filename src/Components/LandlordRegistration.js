@@ -56,7 +56,7 @@ export default function LandlordRegistration() {
       {" "}
       <Form>
         <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
-          LandLord Signup
+          Owner Signup
         </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
@@ -111,7 +111,7 @@ export default function LandlordRegistration() {
           className="mb-3 d-flex justify-content-center"
           controlId="exampleForm.ControlTextarea1"
         >
-          <Button variant="none" onClick={handleSubmit} className="submitBtn">
+          <Button variant="none" onClick={handleSubmit} bsPrefix="submitBtn">
             Sign Up
           </Button>
         </Form.Group>

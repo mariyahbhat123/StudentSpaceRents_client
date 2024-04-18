@@ -112,7 +112,8 @@ export default function TenantLogin() {
             name="submit"
             variant="none"
             onClick={handleLoginSubmit}
-            className="submitBtn"
+            className=""
+            bsPrefix="submitBtn"
           >
             Sign In
           </Button>

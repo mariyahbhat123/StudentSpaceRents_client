@@ -83,8 +83,22 @@ export default function CardComponent(props) {
           </Col>
         ))}
       </Row>
-      <div>
-        <Link to="/ListAd">See All</Link>
+      <div
+        className="mt-4 me-4"
+        style={{
+          textAlign: "end",
+          fontSize: "18px",
+        }}
+      >
+        <Link
+          to="/ListAd"
+          style={{
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >
+          See All
+        </Link>
       </div>
     </div>
   );

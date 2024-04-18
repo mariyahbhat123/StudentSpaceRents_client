@@ -23,3 +23,15 @@
 .btnOwn:hover {
   transform: scale(1.1) !important;
 }
+
+.userSign {
+  text-align: center;
+}
+.userSignIn-Up {
+  font-weight: bold;
+  color: black;
+}
+.userSignIn-Up:hover {
+  color: #ff385c;
+  border-bottom: 1px solid #ff385c;
+}

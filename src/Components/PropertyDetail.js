@@ -6,13 +6,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CarouselGrid from "./CarouselGrid";
 import PropDtailesCom from "./PropDtailesCom";
-import PropDetailsBook from "./PropDetailsBook";
+
 import Button from "react-bootstrap/Button";
+import ScheduleVisit from "./ScheduleVisit";
 
 export default function PropertyDetail() {
   return (
     <div>
-      <div style={{ position: "sticky" }}>
+      <div className="w-100" style={{ backgroundColor: "#ff385c" }}>
         <NavBar />
       </div>
       <div className="w-100">
@@ -85,7 +86,7 @@ export default function PropertyDetail() {
         </div>
       </div>
 
-      <div className="d-flex mt-5">
+      <div className="d-flex mt-5" style={{ backgroundColor: "#f5f5f5" }}>
         <div className="" style={{ width: "65%" }}>
           <PropDtailesCom />
         </div>{" "}
@@ -95,9 +96,11 @@ export default function PropertyDetail() {
             width: "30%",
             boxShadow: "2px 2px 2px 2px grey",
             height: "500px",
+            position: "sticky",
+            top: "0px",
           }}
         >
-          <PropDetailsBook />
+          <ScheduleVisit />
         </div>
       </div>
       <div>

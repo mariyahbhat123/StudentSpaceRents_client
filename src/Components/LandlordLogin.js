@@ -59,7 +59,7 @@ export default function LandlordLogin() {
     <div>
       <Form>
         <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
-          Landlord Login
+          Owner Login
         </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
@@ -90,7 +90,7 @@ export default function LandlordLogin() {
           <Button
             variant="none"
             onClick={handleLoginSubmit}
-            className="submitBtn"
+            bsPrefix="submitBtn"
           >
             Sign In
           </Button>

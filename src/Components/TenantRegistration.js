@@ -118,7 +118,7 @@ export default function TenantRegistration() {
           className="mb-3 d-flex justify-content-center"
           controlId="exampleForm.ControlTextarea1"
         >
-          <Button variant="none" onClick={handleSubmit} className="submitBtn">
+          <Button variant="none" onClick={handleSubmit} bsPrefix="submitBtn">
             Sign Up
           </Button>
         </Form.Group>

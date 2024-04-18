@@ -62,25 +62,67 @@ export default function ScheduleVisit() {
         <div className=" slider-container ">
           <Slider {...settings} className="d-flex ">
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Mon"
+                item1="1"
+              />
             </div>
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Tues"
+                item1="2"
+              />
             </div>
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Wed"
+                item1="3"
+              />
             </div>
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Thur"
+                item1="4"
+              />
             </div>
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Fri"
+                item1="5"
+              />
             </div>
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Sat"
+                item1="6"
+              />
             </div>
             <div className="me-2">
-              <CardDetail width="5rem" height="6rem" />
+              <CardDetail
+                width="5rem"
+                height="6rem"
+                title={false}
+                item0="Sun"
+                item1="7"
+              />
             </div>
           </Slider>
         </div>
@@ -115,7 +157,16 @@ export default function ScheduleVisit() {
           </div>
         </div>
         <div className="mt-4">
-          <Button variant="none" style={{ borderRadius: "50px", width: "80%" }}>
+          <Button
+            variant="none"
+            style={{
+              borderRadius: "50px",
+              width: "80%",
+              backgroundColor: "#ff385c",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
             Schedule Visit
           </Button>
         </div>

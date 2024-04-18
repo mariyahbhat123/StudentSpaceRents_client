@@ -6,7 +6,7 @@
 }
 
 .userInput {
-  border: 1px solid #ff385c;
+  border: 1px solid #ff385c !important;
 }
 
 .submitBtn {
@@ -15,12 +15,14 @@
   width: 250px;
   color: white;
   /* border-radius: 50px; */
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 9px;
+  font-family: Arial, Helvetica, sans-serif !important;
   font-weight: bold;
+  border: 2px solid white;
 }
 
 .submitBtn:hover {
   border: 2px solid #ff385c;
-  padding: 8.5px;
+  background-color: white;
+  color: black;
 }

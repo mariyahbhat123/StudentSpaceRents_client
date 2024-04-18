@@ -6,12 +6,24 @@ export default function CardDetail(props) {
   return (
     <div>
       <Card style={{ width: props.width, height: props.height }}>
-        <Card.Header>{props.title}</Card.Header>
-        <ListGroup variant="flush">
-          <ListGroup.Item>{props.item0}</ListGroup.Item>
-          <ListGroup.Item>{props.item1}</ListGroup.Item>
-          <ListGroup.Item>{props.item2}</ListGroup.Item>
-        </ListGroup>
+        {props.title === false ? (
+          <Card.Body variant="flush" className="mt-2">
+            <h6 style={{ fontSize: "18px", fontWeight: "bold" }}>
+              {props.item0}
+            </h6>
+            <h6>{props.item1}</h6>
+          </Card.Body>
+        ) : (
+          <>
+            {" "}
+            <Card.Header>{props.title}</Card.Header>
+            <Card.Body variant="flush">
+              <h6>{props.item0}</h6>
+              <h6>{props.item1}</h6>
+              <h6>{props.item2}</h6>
+            </Card.Body>
+          </>
+        )}
       </Card>
     </div>
   );

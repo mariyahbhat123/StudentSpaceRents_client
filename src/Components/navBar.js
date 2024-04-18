@@ -14,31 +14,55 @@ import {
   showProfile,
   dontShowUserProfile,
 } from "../Redux/Slices/showProfileSlice";
+import AdminLogin from "./AdminLogin";
 export default function NavBar() {
   const [show, setShow] = useState(false);
+  const [adminLog, setAdminLog] = useState(false);
 
   const dispatch = useDispatch();
   const toggleValue = useSelector((state) => state.toggle.active);
 
+  //CHECKING TENANT IS LOGGED STATE
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
   console.log(isLogged);
 
+  //CHECKING OWNER IS LOGGED STATE
   const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
 
+  //SHOWUSERPROFILE STATE
   const showUserProfile = useSelector(
     (state) => state.showUsersProfile.showUserProfile
   );
   console.log(showUserProfile);
 
   console.log(isLogged);
+
+  //CLOSING MODEL FUNCTION
   const handleClose = () => {
     if (toggleValue === true) {
       dispatch(toggleOff());
+      setAdminLog(false);
     }
   };
+
+  //SHOW MODAL FOR TENANT AND OWNER LOGIN/REGISTER
   const handleShow = () => {
     if (toggleValue === false) {
       dispatch(toggleOn());
+      setAdminLog(false);
+    } else {
+      dispatch(toggleOff());
+    }
+  };
+
+  //SHOW MODAL FOR ADMIN MODAL LOGIN
+  const handleShowAdmin = () => {
+    if (toggleValue === false && adminLog === false) {
+      dispatch(toggleOn());
+      setAdminLog(true);
+    } else {
+      dispatch(toggleOff());
+      setAdminLog(false);
     }
   };
 
@@ -130,8 +154,21 @@ export default function NavBar() {
                   Sign up/Login
                 </Button>
               )}
-              {toggleValue === true ? (
-                <ModalCom show={toggleValue} close={handleClose} />
+              <Button
+                variant="none"
+                onClick={handleShowAdmin}
+                style={{ boxShadow: "none", fontWeight: "bold" }}
+              >
+                Admin
+              </Button>
+              {toggleValue === true && adminLog === true ? (
+                <ModalCom show={toggleValue} close={handleClose} admin={true} />
+              ) : toggleValue === true && adminLog === false ? (
+                <ModalCom
+                  show={toggleValue}
+                  close={handleClose}
+                  admin={false}
+                />
               ) : (
                 ""
               )}
