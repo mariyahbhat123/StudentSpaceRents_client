@@ -6,6 +6,7 @@ import {
   MDBCol,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import HouseHeartFill from "react-bootstrap-icons/dist/icons/house-heart-fill";
 export default function FooterCom() {
   return (
     <div>
@@ -44,9 +45,11 @@ export default function FooterCom() {
           <MDBContainer className="text-center text-md-start mt-5">
             <MDBRow className="mt-3">
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">
-                  <MDBIcon color="secondary" icon="gem" className="me-3" />
-                  Company name
+                <h6 className="text-uppercase fw-bold mb-4 d-flex">
+                  <div className="me-1 d-flex ">
+                    <HouseHeartFill />
+                  </div>
+                  <div>Student Space Rents</div>
                 </h6>
                 <p>
                   Here you can use rows and columns to organize your footer
@@ -56,58 +59,80 @@ export default function FooterCom() {
               </MDBCol>
 
               <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Products</h6>
+                <h6 className="text-uppercase fw-bold mb-4">LEGAL</h6>
                 <p>
                   <a href="#!" className="text-reset">
-                    Angular
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    React
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Vue
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Laravel
+                    Terms and conditions
                   </a>
                 </p>
               </MDBCol>
 
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Pricing
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Settings
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Orders
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Help
-                  </a>
-                </p>
+                <h6 className="text-uppercase fw-bold mb-4">Districts</h6>
+                <div className="d-flex ">
+                  <div className="me-2">
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Srinagar
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Bandipore
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Budgam
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Baramulla
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Kupwara
+                      </a>
+                    </p>
+                  </div>
+                  <div className="ms-3">
+                    {" "}
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Shopian
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Anantnag
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Pulwama
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Ganderbal
+                      </a>
+                    </p>
+                    <p>
+                      <a href="#!" className="text-reset">
+                        Kulgam
+                      </a>
+                    </p>
+                  </div>
+                </div>
               </MDBCol>
 
               <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
                 <p>
                   <MDBIcon color="secondary" icon="home" className="me-2" />
-                  New York, NY 10012, US
+                  Kashmir, Srinagar, JK
                 </p>
                 <p>
                   <MDBIcon color="secondary" icon="envelope" className="me-3" />
@@ -130,9 +155,9 @@ export default function FooterCom() {
           className="text-center p-4"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
         >
-          © 2021 Copyright:
+          © Copyright: &nbsp;
           <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            MDBootstrap.com
+            StudentSpaceRents.com
           </a>
         </div>
       </MDBFooter>

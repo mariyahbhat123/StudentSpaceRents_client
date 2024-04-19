@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleOff, toggleOn } from "../Redux/Slices/toggleSlice";
 import { Avatar } from "@mui/material";
 import { dontShowProfile, shwProfile } from "../Redux/Slices/isLoggedIn";
+import HouseHeartFill from "react-bootstrap-icons/dist/icons/house-heart-fill";
 import {
   showProfile,
   dontShowUserProfile,
@@ -87,7 +88,12 @@ export default function NavBar() {
         style={{ fontWeight: "bold", boxShadow: "none" }}
       >
         <Container className="">
-          <Navbar.Brand href="#home">StudentSpaceRents</Navbar.Brand>
+          <Navbar.Brand href="#home" className="d-flex">
+            <div className="me-1 mb-1 d-flex">
+              <HouseHeartFill />
+            </div>
+            <div>StudentSpaceRents</div>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-2 " style={{}}>
