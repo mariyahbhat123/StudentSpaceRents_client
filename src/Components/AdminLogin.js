@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { adminIsLoggedIn, adminIsNotLogged } from "../Redux/Slices/adminLog";
+import { toggleOff } from "../Redux/Slices/toggleSlice";
 
 export default function AdminLogin() {
   const [adminCredentials, setAdminCredentials] = useState({
@@ -8,8 +11,9 @@ export default function AdminLogin() {
     password: "",
   });
 
-  console.log(adminCredentials);
-
+  const dispatch = useDispatch();
+  const adminIsLogged = useSelector((state) => state.adminLogged.isLogged);
+  console.log(adminIsLogged);
   const handleAdminLogin = async (e) => {
     e.preventDefault();
     try {
@@ -27,10 +31,15 @@ export default function AdminLogin() {
       if (!json) {
         return console.log("error");
       } else if (json.success) {
+        localStorage.setItem("adminAuthToken", json.adminAuthToken);
         const adminDetail = json.adminDetail;
         const name = adminDetail.name;
         const email = adminDetail.email;
+        dispatch(adminIsLoggedIn());
+        dispatch(toggleOff());
         console.log(name);
+      } else {
+        dispatch(adminIsNotLogged());
       }
     } catch (err) {
       console.log(err);

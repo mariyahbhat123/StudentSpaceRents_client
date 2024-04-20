@@ -17,11 +17,13 @@ import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
 import AddProperty from "./AddProperty";
 import GoogleMaps from "./GoogleMaps";
 import PropertyDetail from "./PropertyDetail";
+import { adminIsLoggedIn } from "../Redux/Slices/adminLog";
 
 export default function StudentSpaceRoutes() {
   const [secretData, setSecretData] = useState("");
   const token = localStorage.getItem("authToken");
   const ownerToken = localStorage.getItem("ownerAuthToken");
+  const adminToken = localStorage.getItem("adminAuthToken");
 
   const dispatch = useDispatch();
 
@@ -72,9 +74,31 @@ export default function StudentSpaceRoutes() {
     }
   };
 
+  //ADMIN TOKEN
+  const handleadminAuthToken = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/adminAuthApi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: adminToken }),
+      });
+      const json = await response.json();
+      if (!json) {
+        console.log("not valid");
+      } else if (json.login === true) {
+        dispatch(adminIsLoggedIn());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     handleAuthToken();
     handleOwnerAuthToken();
+    handleadminAuthToken();
   }, []);
 
   console.log(secretData);
