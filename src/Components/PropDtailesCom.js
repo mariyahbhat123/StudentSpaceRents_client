@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
@@ -8,8 +8,12 @@ import CardDetail from "./CardDetail";
 import "../Styles/CardDetailSlider.css";
 import PropDetailsMap from "./PropDetailsMap";
 
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 export default function PropDtailesCom() {
   const [showDetail, setShowDetail] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
   const handleDetail = () => {
     if (showDetail === false) {
       setShowDetail(true);
@@ -18,6 +22,13 @@ export default function PropDtailesCom() {
     }
   };
 
+  const handleTermsDetail = () => {
+    if (showTerms === false) {
+      setShowTerms(true);
+    } else {
+      setShowTerms(false);
+    }
+  };
   var settings = {
     dots: true,
     infinite: false,
@@ -58,6 +69,23 @@ export default function PropDtailesCom() {
       },
     ],
   };
+
+  const overviewRef = useRef(null);
+  const aboutRef = useRef(null);
+  const TermsRef = useRef(null);
+  const mapRef = useRef(null);
+
+  //const handleClick = () => {
+  // ref.current?.scrollIntoView({ behavior: "smooth" });
+  //};
+
+  const handleScroll = (ref) => {
+    window.scrollTo({
+      top: ref.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="ms-5">
       <div
@@ -68,19 +96,31 @@ export default function PropDtailesCom() {
           position: "sticky",
           top: "0px",
           zIndex: "1",
+          backgroundColor: "white",
         }}
       >
-        <p>Overview</p>
-        <p>Amenities</p>
-        <p>Rent details</p>
-        <p>Terms of stay</p>
+        <Link onClick={() => handleScroll(overviewRef.current)}>Overview</Link>
+        <Link onClick={() => handleScroll(aboutRef.current)}>About</Link>
+        <Link onClick={() => handleScroll(mapRef.current)}>Map</Link>
+        <Link onClick={() => handleScroll(TermsRef.current)}>
+          Terms of stay
+        </Link>
       </div>
-      <div className="mt-4 p-5" style={{ border: "1px solid black" }}>
+      <div
+        className="mt-4 p-5"
+        style={{ border: "1px solid black", backgroundColor: "white" }}
+        ref={aboutRef}
+      >
         <div className="d-flex" style={{ justifyContent: "space-between" }}>
           <div className="">
             <h5>About</h5>
           </div>
           <div>
+            {showDetail === false ? (
+              <KeyboardArrowUpIcon />
+            ) : (
+              <KeyboardArrowDownIcon />
+            )}
             <Link onClick={handleDetail} style={{ textDecoration: "none" }}>
               More Details
             </Link>
@@ -101,7 +141,11 @@ export default function PropDtailesCom() {
           ""
         )}
       </div>
-      <div className="slider-container mt-4 mb-4">
+      <div
+        className="slider-container mt-4 p-5 "
+        style={{ backgroundColor: "white" }}
+        ref={overviewRef}
+      >
         <div className="mb-4">
           <h5>Rent includes</h5>
         </div>
@@ -148,16 +192,47 @@ export default function PropDtailesCom() {
           </div>
         </Slider>
       </div>
-      <div className="mt-4">
+      <div className="mt-4" ref={mapRef}>
         <PropDetailsMap />
       </div>
-      <div className="d-flex mt-4" style={{ justifyContent: "space-between" }}>
-        <div>
-          <h4>Terms & Conditions </h4>
+
+      <div
+        className="mt-4 p-5"
+        style={{ border: "1px solid black", backgroundColor: "white" }}
+        ref={TermsRef}
+      >
+        <div className="d-flex" style={{ justifyContent: "space-between" }}>
+          <div className="">
+            <h5>Terms & Conditions</h5>
+          </div>
+          <div>
+            {showTerms === false ? (
+              <KeyboardArrowUpIcon />
+            ) : (
+              <KeyboardArrowDownIcon />
+            )}
+            <Link
+              onClick={handleTermsDetail}
+              style={{ textDecoration: "none" }}
+            >
+              More Details
+            </Link>
+          </div>
         </div>
-        <div>
-          <h6>More Details</h6>
-        </div>
+        {showTerms === true ? (
+          <div>
+            <p>
+              This quiet semi_furnished 1 BHK independent house for boys, girls,
+              and family is located at Vinayaka Nagar, Bengaluru and is close to
+              the major commercial centres of the area. This independent house
+              with a floor space of 450 sq.ft in total. This house features
+              Modular kitchen and more. It has one bathroom with all facilities.
+              It can be rented at ₹13650 for full house. Book it now!
+            </p>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
