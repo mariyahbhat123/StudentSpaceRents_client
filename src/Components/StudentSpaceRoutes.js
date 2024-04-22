@@ -7,6 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import LandingPage from "../Display/LandingPage";
+import TermsConditionMain from "./TermsAndConditionPage/TermsConditionMain";
 import ModalCom from "../Components/ModalCom";
 import AboutUs from "../Components/AboutUs";
 import ListAd from "../Components/ListAd";
@@ -17,7 +18,6 @@ import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
 import AddProperty from "./AddProperty";
 import GoogleMaps from "./GoogleMaps";
 import PropertyDetail from "./PropertyDetail";
-
 export default function StudentSpaceRoutes() {
   const [secretData, setSecretData] = useState("");
   const token = localStorage.getItem("authToken");
@@ -85,6 +85,7 @@ export default function StudentSpaceRoutes() {
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/termsAndCondition" element={<TermsConditionMain/>} />
 
           <Route path="/ListAd" element={<ListAd />} />
           <Route path="/googleMaps" element={<GoogleMaps />} />
