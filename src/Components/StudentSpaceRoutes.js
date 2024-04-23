@@ -7,6 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import LandingPage from "../Display/LandingPage";
+import TermsConditionMain from "./TermsAndConditionPage/TermsConditionMain";
 import ModalCom from "../Components/ModalCom";
 import AboutUs from "../Components/AboutUs";
 import ListAd from "../Components/ListAd";
@@ -17,6 +18,8 @@ import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
 import AddProperty from "./AddProperty";
 import GoogleMaps from "./GoogleMaps";
 import PropertyDetail from "./PropertyDetail";
+
+import HowToUseMain from "./HowUse/HowToUseMain";
 import { adminIsLoggedIn } from "../Redux/Slices/adminLog";
 
 export default function StudentSpaceRoutes() {
@@ -109,6 +112,8 @@ export default function StudentSpaceRoutes() {
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/howToUse" element={<HowToUseMain />} />
+          <Route path="/termsAndCondition" element={<TermsConditionMain/>} />
 
           <Route path="/ListAd" element={<ListAd />} />
           <Route path="/googleMaps" element={<GoogleMaps />} />

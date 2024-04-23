@@ -1,0 +1,7 @@
+.heroContainer{
+ position: relative;
+}
+.header{
+    margin-block: 20vh;
+    letter-spacing: 3px;
+}
