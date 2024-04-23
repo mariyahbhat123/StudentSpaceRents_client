@@ -1,7 +1,88 @@
+
+
 .heroContainer{
  position: relative;
 }
 .header{
     margin-block: 20vh;
     letter-spacing: 3px;
+    z-index: -1;
 }
+.sofaImg{
+    position: absolute;
+    top: 0;
+    left: 7vw;
+    width: 100%;
+    max-width: 400px;
+    z-index: -1;
+}
+
+.slide{
+    margin-inline: auto;
+    max-width: 700px;
+    padding: 20px;
+    padding-top: 80px;
+    text-align: left;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.contentGrid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 40px;
+}
+
+#moveInSlide{
+    background: #f7f5f7;
+    border-radius: 16px;
+}
+
+.guaranteeSlide{
+    margin-inline: auto;
+    max-width: 800px;
+    padding: 20px;
+    padding-top: 80px;
+    text-align: left;
+}
+
+@media only screen and (max-width: 1400px) {
+    .sofaImg {
+        left: 0vw;
+    }
+    .header{
+        margin-block: 10vh;
+        letter-spacing: 3px;
+    }
+
+    .slide{
+        padding-top: 120px;
+    }
+  }
+@media only screen and (max-width: 1200px) {
+    .sofaImg {
+      position: relative;
+    }
+  }
+@media only screen and (max-width: 720px) {
+    .sofaImg {
+      position: relative;
+    }
+
+    .container{
+        flex-direction: column;
+        
+    }
+  }
+@media only screen and (max-width: 520px) {
+    .contentGrid{
+        flex-direction: column;
+        
+    }
+  }
