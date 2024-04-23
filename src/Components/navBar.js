@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleOff, toggleOn } from "../Redux/Slices/toggleSlice";
 import { Avatar } from "@mui/material";
 import { dontShowProfile, shwProfile } from "../Redux/Slices/isLoggedIn";
+import HouseHeartFill from "react-bootstrap-icons/dist/icons/house-heart-fill";
 import {
   showProfile,
   dontShowUserProfile,
@@ -28,6 +29,9 @@ export default function NavBar() {
 
   //CHECKING OWNER IS LOGGED STATE
   const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
+
+  //CHECKING ADMIN IS LOGGED STATE
+  const adminIsLogged = useSelector((state) => state.adminLogged.isLogged);
 
   //SHOWUSERPROFILE STATE
   const showUserProfile = useSelector(
@@ -87,7 +91,12 @@ export default function NavBar() {
         style={{ fontWeight: "bold", boxShadow: "none" }}
       >
         <Container className="">
-          <Navbar.Brand href="#home">StudentSpaceRents</Navbar.Brand>
+          <Navbar.Brand href="#home" className="d-flex">
+            <div className="me-1 mb-1 d-flex">
+              <HouseHeartFill />
+            </div>
+            <div>StudentSpaceRents</div>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-2 " style={{}}>
@@ -126,7 +135,9 @@ export default function NavBar() {
               </NavDropdown>
             </Nav>
             <Nav className="ms-auto">
-              {isLogged === true || ownerIsLogged === true ? (
+              {isLogged === true ||
+              ownerIsLogged === true ||
+              adminIsLogged === true ? (
                 <Button
                   onClick={() =>
                     showUserProfile == true
@@ -154,13 +165,17 @@ export default function NavBar() {
                   Sign up/Login
                 </Button>
               )}
-              <Button
-                variant="none"
-                onClick={handleShowAdmin}
-                style={{ boxShadow: "none", fontWeight: "bold" }}
-              >
-                Admin
-              </Button>
+              {adminIsLogged === false ? (
+                <Button
+                  variant="none"
+                  onClick={handleShowAdmin}
+                  style={{ boxShadow: "none", fontWeight: "bold" }}
+                >
+                  Admin
+                </Button>
+              ) : (
+                ""
+              )}
               {toggleValue === true && adminLog === true ? (
                 <ModalCom show={toggleValue} close={handleClose} admin={true} />
               ) : toggleValue === true && adminLog === false ? (

@@ -22,6 +22,7 @@ import {
 import ProfileModal from "../Components/ProfileModal";
 import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
 import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
+import { adminIsNotLogged } from "../Redux/Slices/adminLog";
 
 export default function LandingPage() {
   const TOP_OFFSET = 600;
@@ -45,7 +46,10 @@ export default function LandingPage() {
   //OWNER LOGGED SLICE
   const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
   const dispatch = useDispatch();
+  //ADMIN LOGGED STATE
+  const adminIsLogged = useSelector((state) => state.adminLogged.isLogged);
 
+  //HANDLING SCROLL
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= TOP_OFFSET) {
@@ -54,6 +58,7 @@ export default function LandingPage() {
         setNavBackground(false);
       }
     };
+    //ON SCROLL CALLING FUNCTION HANDLESCROLL
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -95,11 +100,15 @@ export default function LandingPage() {
   };
 
   const removeToken = () => {
+    //REMOVING USER AUTH TOKEN AND OWNER AUTH TOKEN FROM LOCALSTORAGE ON REMOVETOKEN FUNCTION
     localStorage.removeItem("authToken");
     localStorage.removeItem("ownerAuthToken");
+    localStorage.removeItem("adminAuthToken");
 
+    //DISPATCHING ACTION USER IS NOT LOGGED, OWNER IS NOT LOGGED , DONT SHOW USER PROFILE ON REMOVETOKEN FUNCTION
     dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
     dispatch(ownerNotLogged());
+    dispatch(adminIsNotLogged());
   };
 
   console.log(showProfile);
@@ -131,10 +140,11 @@ export default function LandingPage() {
               position: "fixed",
               zIndex: "10",
               top: "10%",
-              left: "86%",
+              left: "85%",
               backgroundColor: "white",
               width: "200px",
               padding: "10px",
+              boxShadow: "1px 1px 1px 1px grey",
             }}
           >
             <div>
@@ -148,7 +158,9 @@ export default function LandingPage() {
               </Button>
             </div>
             <hr />
-            {isLogged === true || ownerIsLogged === false ? (
+            {isLogged === true &&
+            ownerIsLogged === false &&
+            adminIsLogged === false ? (
               <div>
                 <FavoriteBorderIcon />
                 <h6 className="mt-2">WishList</h6>
