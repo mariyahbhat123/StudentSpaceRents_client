@@ -6,6 +6,7 @@ export default function UserProfile() {
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
   const ownerData = useSelector((state) => state.ownerData.ownerD);
   const tenantData = useSelector((state) => state.tenantDataSlice.tenantD);
+  
   console.log(tenantData);
 
   console.log(ownerData.name);

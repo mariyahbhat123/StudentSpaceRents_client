@@ -70,7 +70,7 @@ export default function PropertyDetail() {
       <div className="">
         <CarouselGrid />
       </div>
-      <div className="w-100">
+      <div className="w-100 mt-2">
         <div className="d-flex " style={{ marginLeft: "15%" }}>
           <Button variant="none" style={{ width: "15%", borderRadius: "50px" }}>
             Photos
@@ -98,6 +98,7 @@ export default function PropertyDetail() {
             height: "500px",
             position: "sticky",
             top: "0px",
+            backgroundColor: "white",
           }}
         >
           <ScheduleVisit />

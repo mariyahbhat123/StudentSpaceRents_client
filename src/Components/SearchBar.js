@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Button from "react-bootstrap/esm/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -6,6 +7,8 @@ import "../Styles/SearchBar.css";
 
 export default function SearchBar() {
   const [show, setShow] = useState(false);
+
+  const [district, setDistrict] = useState("");
   return (
     <div className="d-flex" style={{ justifyContent: "center" }}>
       <div className="w-100 d-flex " style={{ justifyContent: "center" }}>
@@ -18,13 +21,14 @@ export default function SearchBar() {
                 textAlign: "center",
                 border: "0",
               }}
+              onClick={(e) => setDistrict(e.target.value)}
             >
               <option value="" selected disabled>
                 District
               </option>
-              <option value="">Srinagar</option>
-              <option value="">Baramulla</option>
-              <option value="">Kupwara</option>
+              <option value="Srinagar">Srinagar</option>
+              <option value="Baramulla">Baramulla</option>
+              <option value="Kupwara">Kupwara</option>
               <option>Anantnag</option>
               <option>Pulwama</option>
               <option>Shopian</option>
