@@ -18,6 +18,7 @@ import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
 import AddProperty from "./AddProperty";
 import GoogleMaps from "./GoogleMaps";
 import PropertyDetail from "./PropertyDetail";
+import HowToUseMain from "./HowUse/HowToUseMain";
 export default function StudentSpaceRoutes() {
   const [secretData, setSecretData] = useState("");
   const token = localStorage.getItem("authToken");
@@ -85,6 +86,7 @@ export default function StudentSpaceRoutes() {
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/howToUse" element={<HowToUseMain />} />
           <Route path="/termsAndCondition" element={<TermsConditionMain/>} />
 
           <Route path="/ListAd" element={<ListAd />} />
