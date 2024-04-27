@@ -27,7 +27,8 @@ import { adminIsNotLogged } from "../Redux/Slices/adminLog";
 export default function LandingPage() {
   const TOP_OFFSET = 600;
   const [navBackground, setNavBackground] = useState(false);
-
+  const [propertyData, setPropertyData] = useState([]);
+  console.log(propertyData);
   //SHOW PROFILE DROPDOWN
   const showProfile = useSelector(
     (state) => state.showUsersProfile.showUserProfile
@@ -112,6 +113,22 @@ export default function LandingPage() {
   };
 
   console.log(showProfile);
+
+  const loadData = async () => {
+    let response = await fetch("http://localhost:5000/api/propertyData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+
+    setPropertyData(response);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <div className="w-100">
       {/**CAROUSEL */}
@@ -195,11 +212,11 @@ export default function LandingPage() {
           <SearchBar />
         </div>
       </div>
-
-      <div className="w-100">
-        <CardCarouselCom images={images} />
-      </div>
-
+      {propertyData.map((data) => {
+        <div className="w-100">
+          <CardCarouselCom images={data.img0} />
+        </div>;
+      })}
       <div className=" ">
         <CardComponent md={4} />
       </div>

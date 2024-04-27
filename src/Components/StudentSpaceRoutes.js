@@ -113,7 +113,7 @@ export default function StudentSpaceRoutes() {
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/howToUse" element={<HowToUseMain />} />
-          <Route path="/termsAndCondition" element={<TermsConditionMain/>} />
+          <Route path="/termsAndCondition" element={<TermsConditionMain />} />
 
           <Route path="/ListAd" element={<ListAd />} />
           <Route path="/googleMaps" element={<GoogleMaps />} />

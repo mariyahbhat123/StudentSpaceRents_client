@@ -31,18 +31,20 @@ export default function ProfileModal() {
         show={showProfileModal}
         onHide={() => dispatch(dontShowProfileUser())}
         aria-labelledby="example-modal-sizes-title-lg"
+        style={{ overflowY: "initial !important" }}
       >
-        <Modal.Body>
-          <div className="d-flex">
-            <SidebarProfile />
+        {" "}
+        <div className="d-flex">
+          <SidebarProfile />
+          <Modal.Body style={{ height: "80vh", overflowX: "auto" }}>
             {showProfOrNot === true ? <UserProfile /> : ""}
             {showOrNotAddPro === true && showProfOrNot === false ? (
               <AddProperty />
             ) : (
               ""
             )}
-          </div>
-        </Modal.Body>
+          </Modal.Body>
+        </div>
       </Modal>
     </div>
   );

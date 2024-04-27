@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import CheckboxAddProperty from "./CheckboxAddProperty";
+import GoogleMaps from "./GoogleMaps";
+import GooglePlaces from "./GooglePlaces";
 
 export default function AddProperty() {
   const [propertyDetails, setPropertyDetails] = useState({
@@ -9,40 +12,124 @@ export default function AddProperty() {
     img1: "",
     img2: "",
     img3: "",
-    ownerEmail: "",
-    ownerName: "",
+
     landmark: "",
     address: "",
-    coordinates: {
-      lat: null,
-      long: null,
-    },
+
     district: "",
     for: "",
-    amenities: {
-      storageSpace: null,
-      heatingAndCooling: null,
-      furniture: null,
-    },
-    foodIncluded: {
-      breakfast: null,
-      lunch: null,
-      dinner: null,
+
+    coordinates: {
+      lat: 0,
+      lng: 0,
     },
     description: "",
     propertyType: "",
-    monthlyRent: null,
+    monthlyRent: 0,
   });
 
-  const onClick = (e) => {
+  const [checkedProperty, setCheckedProperty] = useState({
+    storageSpace: false,
+    heatingAndCooling: false,
+    furniture: false,
+    internetAndCableServices: false,
+
+    breakfast: false,
+    lunch: false,
+    dinner: false,
+  });
+  const [center, setCenter] = useState({ lat: 0, lng: 0 });
+
+  const onChange = (e) => {
     setPropertyDetails({ ...propertyDetails, [e.target.name]: e.target.value });
   };
+
+  //CHECKBOX
+  const checkedOnChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    console.log(value, checked);
+    if (checked) {
+      setCheckedProperty({
+        ...checkedProperty,
+        [e.target.name]: value,
+      });
+    }
+  };
+
+  console.log(checkedProperty.heatingAndCooling);
+
+  const handlePlaceSelect = (data) => {
+    console.log("Here...", data);
+    console.log("Hello...", data.lng);
+    setCenter({ lat: data.lat, lng: data.lng });
+    console.log(center);
+  };
+  var lat;
+  var lng;
+  const callback = (val) => {
+    lat = val.lat;
+    lng = val.lng;
+    console.log("valueeeeeeee", lat);
+  };
+
+  const handleAddProperty = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/addProperty", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          img0: propertyDetails.img0,
+          img1: propertyDetails.img1,
+          img2: propertyDetails.img2,
+          img3: propertyDetails.img3,
+          propertyType: propertyDetails.propertyType,
+          ownerName: ownerData.name,
+          ownerEmail: ownerData.email,
+          address: propertyDetails.address,
+          landmark: propertyDetails.landmark,
+          district: propertyDetails.district,
+          monthlyRent: propertyDetails.monthlyRent,
+          amenities: {
+            heatingAndCoolingSystem: checkedProperty.heatingAndCooling,
+            storageSpace: checkedProperty.storageSpace,
+            internetAndCableServices: checkedProperty.internetAndCableServices,
+            Furnished: checkedProperty.furniture,
+          },
+          foodIncluded: {
+            breakfast: checkedProperty.breakfast,
+            lunch: checkedProperty.lunch,
+            dinner: checkedProperty.dinner,
+          },
+          coordinates: {
+            lat: lat,
+            lng: lng,
+          },
+          for: propertyDetails.for,
+          description: propertyDetails.description,
+        }),
+      });
+
+      const json = await response.json();
+      if (!json) {
+        alert("Enter valid credentials");
+      }
+      if (json.success) {
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const ownerData = useSelector((state) => state.ownerData.ownerD);
   return (
     <div className="w-100 ms-3">
       <Form
         className="d-flex justify-content-center"
         style={{ boxShadow: "10px", border: "1px solid black" }}
-        onSubmit={onClick}
+        onSubmit={handleAddProperty}
       >
         <div className="">
           <div className="d-flex justify-content-center">
@@ -59,6 +146,7 @@ export default function AddProperty() {
                 name="img0"
                 placeholder="Select Image"
                 autoFocus
+                onChange={onChange}
               />
             </Form.Group>
             <Form.Group
@@ -70,6 +158,7 @@ export default function AddProperty() {
                 type="file"
                 name="img1"
                 placeholder="Password"
+                onChange={onChange}
               />
             </Form.Group>
           </div>
@@ -81,6 +170,7 @@ export default function AddProperty() {
                 name="img2"
                 placeholder="Select Image"
                 autoFocus
+                onChange={onChange}
               />{" "}
             </Form.Group>
             <Form.Group
@@ -93,6 +183,7 @@ export default function AddProperty() {
                 name="img3"
                 placeholder="Select Image"
                 autoFocus
+                onChange={onChange}
               />
             </Form.Group>
           </div>
@@ -106,7 +197,9 @@ export default function AddProperty() {
                 className=""
                 type="text"
                 name="ownerName"
-                placeholder="OWNER NAME"
+                value={ownerData.name}
+                placeholder={ownerData.name}
+                disabled
                 style={{ width: "100%" }}
                 autoFocus
               />
@@ -119,7 +212,7 @@ export default function AddProperty() {
               <Form.Control
                 type="text"
                 name="ownerEmail"
-                placeholder="OWNER EMAIL"
+                placeholder={ownerData.email}
                 autoFocus
                 style={{ width: "100%" }}
               />
@@ -135,11 +228,19 @@ export default function AddProperty() {
                 aria-label="Default select example"
                 style={{ width: "100%" }}
                 name="district"
+                onChange={onChange}
               >
-                <option>SELECT DISTRICT</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option disabled>SELECT DISTRICT</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Baramulla">Baramulla</option>
+                <option value="Kupwara">Kupwara</option>
+                <option value="Anantnag">Anantnag</option>
+                <option value="Pulwama">Pulwama</option>
+                <option value="Shopian">Shopian</option>
+                <option value="Kulgam">Kulgam</option>
+                <option value="Budgam">Budgam</option>
+                <option value="Ganderbal">Ganderbal</option>
+                <option value="Bandipore">Bandipore</option>
               </Form.Select>
             </Form.Group>
             <Form.Group
@@ -151,11 +252,13 @@ export default function AddProperty() {
                 aria-label="Default select example"
                 style={{ width: "100%" }}
                 name="propertyType"
+                onChange={onChange}
               >
-                <option>PROPERTY TYPE</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option disabled> PROPERTY TYPE</option>
+                <option value="Pg">Pg</option>
+                <option value="Apartment" name="propertyType">
+                  Apartment
+                </option>
               </Form.Select>
             </Form.Group>
           </div>
@@ -169,10 +272,11 @@ export default function AddProperty() {
                 aria-label="Default select example"
                 style={{ width: "100%" }}
                 name="for"
+                onChange={onChange}
               >
                 <option disabled>FOR</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </Form.Select>
             </Form.Group>
 
@@ -185,8 +289,11 @@ export default function AddProperty() {
                 type="number"
                 name="monthlyRent"
                 placeholder="Monthly Rent"
+                min={2000}
+                max={30000}
                 autoFocus
                 style={{ width: "100%" }}
+                onChange={onChange}
               />
             </Form.Group>
           </div>
@@ -202,6 +309,7 @@ export default function AddProperty() {
                 placeholder="ADDRESS"
                 autoFocus
                 style={{ width: "100%" }}
+                onChange={onChange}
               />
             </Form.Group>
             <Form.Group
@@ -215,37 +323,33 @@ export default function AddProperty() {
                 placeholder="LANDMARK IF ANY"
                 autoFocus
                 style={{ width: "100%" }}
+                onChange={onChange}
               />
             </Form.Group>
           </div>
-          <div className="d-flex justify-content-center">
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlInput1"
-              style={{ width: "50%" }}
-            >
-              <Form.Control
-                type="text"
-                name="lat"
-                placeholder="LATITUDE"
-                autoFocus
-                style={{ width: "100%" }}
+
+          <div>
+            <div>
+              <GoogleMaps
+                height="40vh"
+                width="100%"
+                center={center}
+                setCenter={setCenter}
+                callback={callback}
               />
-            </Form.Group>
-            <Form.Group
-              className="mb-3 ms-2"
-              controlId="exampleForm.ControlInput1"
-              style={{ width: "50%" }}
+            </div>
+            <div
+              className="w-50"
+              style={{
+                position: "absolute",
+                zIndex: "10",
+                top: "450px",
+              }}
             >
-              <Form.Control
-                type="text"
-                name="long"
-                placeholder="LONGITUDE"
-                autoFocus
-                style={{ width: "100%" }}
-              />
-            </Form.Group>
+              <GooglePlaces handlePlaceSelect={handlePlaceSelect} />
+            </div>
           </div>
+
           <div className="d-flex">
             <Form.Group
               className="mb-3"
@@ -261,11 +365,27 @@ export default function AddProperty() {
               >
                 <h6 style={{ textAlign: "center" }}>Food Included</h6>
                 <div className="ms-1">
-                  <CheckboxAddProperty
-                    one="Breakfast"
-                    two="Lunch"
-                    three="dinner"
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="breakfast"
+                    onChange={checkedOnChange}
                   />
+                  <p>Breakfast</p>
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="lunch"
+                    onChange={checkedOnChange}
+                  />
+                  <p>Lunch</p>
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="dinner"
+                    onChange={checkedOnChange}
+                  />
+                  <p>Dinner</p>
                 </div>
               </div>
             </Form.Group>
@@ -283,21 +403,51 @@ export default function AddProperty() {
               >
                 <h6 style={{ textAlign: "center" }}>Amenities Included</h6>
                 <div className="ms-1">
-                  <CheckboxAddProperty
-                    one="HeatingAndCooling"
-                    two="Storage Space"
-                    three="Internet"
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="heatingAndCooling"
+                    onChange={checkedOnChange}
                   />
+                  <p> Heating/Cooling System</p>
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="furniture"
+                    onChange={checkedOnChange}
+                  />
+                  <p>Furnished</p>
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="internetAndCableServices"
+                    onChange={checkedOnChange}
+                  />
+                  <p>Internet/Cable Services</p>
+                  <input
+                    type="checkbox"
+                    value={true}
+                    name="storageSpace"
+                    onChange={checkedOnChange}
+                  />
+                  <p>Storage Space</p>
                 </div>
               </div>
             </Form.Group>
           </div>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              type="textbox"
+            {/* <Form.Control
+              type="textarea"
               name="description"
               placeholder="DESCRIPTION"
               autoFocus
+              onChange={onChange}
+            /> */}
+            <textarea
+              name="description"
+              placeholder="DESCRIPTION"
+              onChange={onChange}
+              style={{ width: "100%", height: "140px" }}
             />
           </Form.Group>
 
@@ -305,7 +455,9 @@ export default function AddProperty() {
             className="mb-3 d-flex justify-content-center"
             controlId="exampleForm.ControlTextarea1"
           >
-            <Button name="submit">Submit</Button>
+            <Button name="submit" onClick={handleAddProperty}>
+              Submit
+            </Button>
           </Form.Group>
         </div>
       </Form>

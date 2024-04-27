@@ -119,12 +119,17 @@ export default function NavBar() {
                 id="collapsible-nav-dropdown"
                 className="ml-2"
               >
-                <NavDropdown.Item href="#action/3.1">
-                  Terms & conditions
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
+                <Link to="/termsAndCondition">
+                  <NavDropdown.Item href="#action/3.1">
+                    Terms & Conditions
+                  </NavDropdown.Item>
+                </Link>
+                <Link to="/howToUse">
+                  {" "}
+                  <NavDropdown.Item href="#action/3.2">
+                    How To Use
+                  </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Item href="#action/3.3">
                   Something
                 </NavDropdown.Item>
@@ -165,7 +170,9 @@ export default function NavBar() {
                   Sign up/Login
                 </Button>
               )}
-              {adminIsLogged === false ? (
+              {adminIsLogged === false &&
+              isLogged === false &&
+              ownerIsLogged === false ? (
                 <Button
                   variant="none"
                   onClick={handleShowAdmin}
