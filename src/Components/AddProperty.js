@@ -8,11 +8,6 @@ import GooglePlaces from "./GooglePlaces";
 
 export default function AddProperty() {
   const [propertyDetails, setPropertyDetails] = useState({
-    img0: "",
-    img1: "",
-    img2: "",
-    img3: "",
-
     landmark: "",
     address: "",
 
@@ -27,6 +22,15 @@ export default function AddProperty() {
     propertyType: "",
     monthlyRent: 0,
   });
+
+  const [propertyImage, setPropertyImage] = useState({
+    img0: "",
+    img1: "",
+    img2: "",
+    img3: "",
+  });
+
+  console.log(propertyImage);
 
   const [checkedProperty, setCheckedProperty] = useState({
     storageSpace: false,
@@ -57,6 +61,11 @@ export default function AddProperty() {
     }
   };
 
+  const [files, setFiles] = useState([]);
+  const onImage = (e) => {
+    setFiles(e.target.files);
+  };
+
   console.log(checkedProperty.heatingAndCooling);
 
   const handlePlaceSelect = (data) => {
@@ -73,44 +82,86 @@ export default function AddProperty() {
     console.log("valueeeeeeee", lat);
   };
 
-  const handleAddProperty = async () => {
+  const img0 = propertyImage.img0;
+  console.log(img0);
+
+  const handleAddProperty = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("img0", propertyImage.img0);
+    formData.append("img1", propertyImage.img1);
+    formData.append("img2", propertyImage.img2);
+    formData.append("img3", propertyImage.img3);
+    // const propertyData = JSON.stringify(propertyDetails);
+    // const ownerDetails = JSON.stringify(ownerData);
+    // console.log(propertyData);
+    formData.append("propertyType", propertyDetails.propertyType);
+    formData.append("landmark", propertyDetails.landmark);
+    formData.append("address", propertyDetails.address);
+    formData.append("district", propertyDetails.district);
+    formData.append("forGender", propertyDetails.for);
+    formData.append("monthlyRent", propertyDetails.monthlyRent);
+    formData.append(
+      " heatingAndCoolingSystem ",
+      checkedProperty.heatingAndCooling
+    );
+    formData.append("storageSpace", checkedProperty.storageSpace);
+    formData.append(
+      "internetAndCableServices",
+      checkedProperty.internetAndCableServices
+    );
+    formData.append(" Furnished", checkedProperty.furniture);
+    formData.append(" breakfast", checkedProperty.breakfast);
+    formData.append(" lunch", checkedProperty.lunch);
+    formData.append("dinner", checkedProperty.dinner);
+    formData.append("lat", lat);
+    formData.append("lng", lng);
+    formData.append("description", propertyDetails.description);
+    formData.append("ownerName", ownerData.name);
+    formData.append("ownerEmail", ownerData.email);
+
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
     try {
-      const response = await fetch("http://localhost:5000/api/addProperty", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          img0: propertyDetails.img0,
-          img1: propertyDetails.img1,
-          img2: propertyDetails.img2,
-          img3: propertyDetails.img3,
-          propertyType: propertyDetails.propertyType,
-          ownerName: ownerData.name,
-          ownerEmail: ownerData.email,
-          address: propertyDetails.address,
-          landmark: propertyDetails.landmark,
-          district: propertyDetails.district,
-          monthlyRent: propertyDetails.monthlyRent,
-          amenities: {
-            heatingAndCoolingSystem: checkedProperty.heatingAndCooling,
-            storageSpace: checkedProperty.storageSpace,
-            internetAndCableServices: checkedProperty.internetAndCableServices,
-            Furnished: checkedProperty.furniture,
-          },
-          foodIncluded: {
-            breakfast: checkedProperty.breakfast,
-            lunch: checkedProperty.lunch,
-            dinner: checkedProperty.dinner,
-          },
-          coordinates: {
-            lat: lat,
-            lng: lng,
-          },
-          for: propertyDetails.for,
-          description: propertyDetails.description,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/addProperty",
+
+        {
+          method: "POST",
+
+          body: formData,
+
+          //     body: JSON.stringify({
+          //
+          //       propertyType: propertyDetails.propertyType,
+          //       ownerName: ownerData.name,
+          //       ownerEmail: ownerData.email,
+          //       address: propertyDetails.address,
+          //       landmark: propertyDetails.landmark,
+          //       district: propertyDetails.district,
+          //       monthlyRent: propertyDetails.monthlyRent,
+          //       amenities: {
+          //         heatingAndCoolingSystem: checkedProperty.heatingAndCooling,
+          //         storageSpace: checkedProperty.storageSpace,
+          //         internetAndCableServices:
+          //           checkedProperty.internetAndCableServices,
+          //         Furnished: checkedProperty.furniture,
+          //       },
+          //       foodIncluded: {
+          //         breakfast: checkedProperty.breakfast,
+          //         lunch: checkedProperty.lunch,
+          //         dinner: checkedProperty.dinner,
+          //       },
+          //       coordinates: {
+          //         lat: lat,
+          //         lng: lng,
+          //       },
+          //       for: propertyDetails.for,
+          //       description: propertyDetails.description,
+          //     }),
+        }
+      );
 
       const json = await response.json();
       if (!json) {
@@ -124,17 +175,23 @@ export default function AddProperty() {
   };
 
   const ownerData = useSelector((state) => state.ownerData.ownerD);
+
+  const handleImages = (e) => {
+    setPropertyImage({ ...propertyImage, [e.target.name]: e.target.files[0] });
+  };
   return (
     <div className="w-100 ms-3">
       <Form
         className="d-flex justify-content-center"
         style={{ boxShadow: "10px", border: "1px solid black" }}
+        encType="multipart/form-data"
         onSubmit={handleAddProperty}
       >
         <div className="">
           <div className="d-flex justify-content-center">
             <h5>Add Property</h5>
           </div>
+
           <div className="d-flex ">
             <Form.Group
               className="mb-3  "
@@ -144,9 +201,10 @@ export default function AddProperty() {
                 className="w-40 "
                 type="file"
                 name="img0"
+                accept=".png,.jpg,.jpeg,.webp"
                 placeholder="Select Image"
                 autoFocus
-                onChange={onChange}
+                onChange={handleImages}
               />
             </Form.Group>
             <Form.Group
@@ -157,8 +215,9 @@ export default function AddProperty() {
                 className="w-40 "
                 type="file"
                 name="img1"
+                accept=".png,.jpg,.jpeg"
                 placeholder="Password"
-                onChange={onChange}
+                onChange={handleImages}
               />
             </Form.Group>
           </div>
@@ -169,8 +228,8 @@ export default function AddProperty() {
                 type="file"
                 name="img2"
                 placeholder="Select Image"
-                autoFocus
-                onChange={onChange}
+                accept=".png,.jpg,.jpeg"
+                onChange={handleImages}
               />{" "}
             </Form.Group>
             <Form.Group
@@ -182,8 +241,8 @@ export default function AddProperty() {
                 type="file"
                 name="img3"
                 placeholder="Select Image"
-                autoFocus
-                onChange={onChange}
+                accept=".png,.jpg,.jpeg"
+                onChange={handleImages}
               />
             </Form.Group>
           </div>

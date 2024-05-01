@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CardComponent from "./CardComponent";
 import NavBar from "./navBar";
 import SearchIcon from "@mui/icons-material/Search";
@@ -6,7 +6,22 @@ import ClearIcon from "@mui/icons-material/Clear";
 import ReplayIcon from "@mui/icons-material/Replay";
 import RangeSlider from "./RangeSlider";
 
-export default function ListAd() {
+export default function ListAd(props) {
+  const [propertyData, setPropertyData] = useState([]);
+  const loadData = async () => {
+    let response = await fetch("http://localhost:5000/api/propertyData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+    setPropertyData(response);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <div className="w-100">
       <div style={{ backgroundColor: "#ff385c" }}>
@@ -159,7 +174,7 @@ export default function ListAd() {
         </div>
         <div className="" style={{ width: "70%" }}>
           <div style={{ overflowY: "scroll", height: "100%" }}>
-            <CardComponent md={3} />
+            <CardComponent md={3} propertyData={propertyData} />
           </div>
         </div>
       </div>

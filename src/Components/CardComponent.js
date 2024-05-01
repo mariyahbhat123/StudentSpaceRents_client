@@ -7,10 +7,16 @@ import Carousel from "react-bootstrap/Carousel";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Button from "react-bootstrap/esm/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import { CardActions } from "@mui/material";
+import PropertyDetail from "./PropertyDetail";
 export default function CardComponent(props) {
   const [favourite, setfavourite] = useState(false);
+  const [propertyId, setPropertyId] = useState("");
+  const [clickLink, setClickLink] = useState(false);
+  console.log(propertyId);
+  console.log(clickLink);
   let md = props.md;
+  const propertyData = props.propertyData;
 
   const fav = () => {
     if (favourite === true) {
@@ -19,70 +25,107 @@ export default function CardComponent(props) {
       setfavourite(true);
     }
   };
+
+  const handlePropertyId = () => {
+    if (clickLink === true) {
+      <Link to={<PropertyDetail />} />;
+      setClickLink(false);
+    } else {
+      setClickLink(true);
+    }
+  };
+
   return (
     <div className="ms-4 mt-5">
       <Row xs={1} md={md} className="w-100">
-        {Array.from({ length: 8 }).map((_, idx) => (
-          <Col key={idx}>
-            <Card className="mt-5">
-              <Link to="/PropertyDetail" style={{ textDecoration: "none" }}>
-                <Carousel fade className="w-100 " interval={null}>
-                  <Carousel.Item className="carousel-item">
-                    <Card.Img
-                      variant="top"
-                      src="https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6698948"
-                      alt=""
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item className="carousel-item">
-                    <Card.Img
-                      variant="top"
-                      src="https://photos.spotahome.com/fsobscale_1600_900_nonverified_ur_15_50/a9f703c7bb278e60ee755b45fd3bd39c102c00584d8a0092c9b8b8f3.jpg"
-                      alt=""
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item className="carousel-item">
-                    <Card.Img
-                      variant="top"
-                      src="https://png.pngtree.com/background/20230611/original/pngtree-small-dorm-room-with-two-beds-and-a-desk-picture-image_3153331.jpg"
-                      alt=""
-                    />
-                  </Carousel.Item>
-                </Carousel>
-
-                <Card.Body>
-                  <h6>
-                    <b>Apartment</b>
-                  </h6>
-                  <Card.Title>Kupwara, kashmir </Card.Title>
-                  <Card.Text>
-                    <h6>
-                      <b>Rs 32,000</b>/month
-                    </h6>
-                  </Card.Text>
-                </Card.Body>
-              </Link>
-
-              <Button
-                variant="none"
-                style={{
-                  position: "absolute",
-                  zIndex: "10",
-                  left: "250px",
-                  boxShadow: "none",
-                }}
-                onClick={fav}
+        {propertyData.map((item, idx) => {
+          return (
+            <>
+              {" "}
+              <Link
+                style={{ textDecoration: "none" }}
+                to="/PropertyDetail"
+                state={{ id: item._id }}
               >
-                <FavoriteIcon
-                  style={
-                    favourite === true ? { color: "red" } : { color: "white" }
-                  }
-                />
-              </Button>
-            </Card>
-          </Col>
-        ))}
+                {/* {Array.from({ length: 4 }).map((_, idx) => ( */}
+                <Col key={idx}>
+                  <Card
+                    className="mt-5"
+                    onClick={() => setPropertyId(item._id)}
+                  >
+                    <Carousel fade className="w-100 " interval={null}>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:5000/images/${item.img0}`}
+                          alt=""
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:5000/images/${item.img1}`}
+                          alt=""
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:5000/images/${item.img2}`}
+                          alt=""
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:5000/images/${item.img3}`}
+                          alt=""
+                          style={{ height: "200px" }}
+                        />
+                      </Carousel.Item>
+                    </Carousel>
+
+                    <Card.Body>
+                      <h6>
+                        <b>Apartment</b>
+                      </h6>
+                      <Card.Title>Kupwara, kashmir </Card.Title>
+                      <Card.Text>
+                        <h6>
+                          <b>Rs 32,000</b>/month
+                        </h6>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>{" "}
+                  <Button
+                    variant="none"
+                    style={{
+                      position: "absolute",
+                      zIndex: "10",
+                      left: "250px",
+                      boxShadow: "none",
+                    }}
+                    onClick={fav}
+                  >
+                    <FavoriteIcon
+                      style={
+                        favourite === true
+                          ? { color: "red" }
+                          : { color: "white" }
+                      }
+                    />
+                  </Button>
+                </Col>{" "}
+              </Link>
+              {/* ))} */}
+            </>
+          );
+        })}{" "}
       </Row>
+
       <div
         className="mt-4 me-4"
         style={{
@@ -91,7 +134,12 @@ export default function CardComponent(props) {
         }}
       >
         <Link
-          to="/ListAd"
+          to={{
+            pathname: "/ListAd",
+            state: {
+              propertyData: propertyData,
+            },
+          }}
           style={{
             color: "black",
             fontWeight: "bold",

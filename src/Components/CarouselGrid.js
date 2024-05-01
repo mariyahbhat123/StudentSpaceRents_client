@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "../Styles/CarouselGrid.css";
 
-function CarouselGrid() {
+function CarouselGrid(props) {
   return (
     <div
       className="d-flex mt-4 ms-5 me-5"
@@ -25,14 +25,14 @@ function CarouselGrid() {
             <img
               className="imge"
               style={{ width: "100%", objectFit: "cover" }}
-              src="https://hips.hearstapps.com/hmg-prod/images/ghk070123homeminifeature-005-655b983d8bf5f.jpg?crop=1xw:0.9989583333333334xh;center,top&resize=980:*"
+              src={`http://localhost:5000/images/${props.img0}`}
               alt=""
             />
           </div>
           <div className="" style={{ width: "100%" }}>
             <img
               className="imge"
-              src="https://foyr.com/learn/wp-content/uploads/2021/09/master-bedroom-essentials.png"
+              src={`http://localhost:5000/images/${props.img1}`}
               alt=""
               style={{ width: "100%" }}
             />
@@ -43,7 +43,7 @@ function CarouselGrid() {
           <div className="" style={{ width: "100%" }}>
             <img
               className="imge"
-              src="https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/sites/2/2022/06/10183457/small-bedroom-ideas.jpg"
+              src={`http://localhost:5000/images/${props.img2}`}
               alt=""
               style={{ width: "100%" }}
             />
@@ -51,7 +51,7 @@ function CarouselGrid() {
           <div className="" style={{ width: "100%" }}>
             <img
               className="imge"
-              src="https://foyr.com/learn/wp-content/uploads/2021/09/master-bedroom-essentials.png"
+              src={`http://localhost:5000/images/${props.img3}`}
               alt=""
               style={{ width: "100%" }}
             />

@@ -44,6 +44,10 @@ export default function ScheduleVisit() {
       },
     ],
   };
+
+  const weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  const d = new Date();
+  let day = weekday[d.getDay()];
   return (
     <div>
       <div>
@@ -66,7 +70,7 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Mon"
+                item0={day}
                 item1="1"
               />
             </div>
@@ -75,7 +79,7 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Tues"
+                item0={day}
                 item1="2"
               />
             </div>
