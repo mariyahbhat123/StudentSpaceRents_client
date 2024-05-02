@@ -90,12 +90,12 @@ export default function CardComponent(props) {
 
                     <Card.Body>
                       <h6>
-                        <b>Apartment</b>
+                        <b>{item.propertyType}</b>
                       </h6>
-                      <Card.Title>Kupwara, kashmir </Card.Title>
+                      <Card.Title>{item.address} </Card.Title>
                       <Card.Text>
                         <h6>
-                          <b>Rs 32,000</b>/month
+                          <b>{item.monthlyRent}</b>/month
                         </h6>
                       </Card.Text>
                     </Card.Body>

@@ -104,6 +104,9 @@ export default function CardCarouselCom(props) {
   const handlePropertyData = (id) => {
     //   setShowPropertyDetails([...showPropertyDetails, id]);
   };
+
+  const propertyID = localStorage.getItem("propertyID");
+
   return (
     <div className="slider-container mt-4 ">
       {" "}

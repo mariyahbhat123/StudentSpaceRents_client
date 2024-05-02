@@ -11,9 +11,10 @@ import PropDetailsMap from "./PropDetailsMap";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-export default function PropDtailesCom() {
+export default function PropDtailesCom(props) {
   const [showDetail, setShowDetail] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+
   const handleDetail = () => {
     if (showDetail === false) {
       setShowDetail(true);

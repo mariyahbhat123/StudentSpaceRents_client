@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import CardDetail from "./CardDetail";
 import Slider from "react-slick";
 import Button from "react-bootstrap/esm/Button";
 
-export default function ScheduleVisit() {
+import ModalSchedule from "./ModalForScheduleVisit/ModalSchedule";
+
+export default function ScheduleVisit(props) {
+  const [show, setShow] = useState(false);
+  const [dayDate, setDayDate] = useState({ day: "", date: "" });
+  const [time, setTime] = useState("");
+  console.log(time);
+  console.log(dayDate);
+  const monthlyRent = props.monthlyRent;
+  const ownerEmail = props.ownerEmail;
+  const ownerName = props.ownerName;
+  const address = props.address;
   var settings = {
     dots: true,
     infinite: false,
@@ -18,9 +29,9 @@ export default function ScheduleVisit() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: false,
           variableWidth: true,
           dots: true,
         },
@@ -28,8 +39,8 @@ export default function ScheduleVisit() {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 4,
           initialSlide: 1,
           variableWidth: true,
         },
@@ -38,7 +49,7 @@ export default function ScheduleVisit() {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToScroll: 4,
           variableWidth: true,
         },
       },
@@ -47,12 +58,34 @@ export default function ScheduleVisit() {
 
   const weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const d = new Date();
-  let day = weekday[d.getDay()];
+
+  let currentdate = d.getDate();
+  let currentday = weekday[d.getDay()];
+  const tmrwdate = d.getDate() + 1;
+  const tmrwday = weekday[d.getDay() + 1];
+  let date3 = d.getDate() + 2;
+  let day3 = weekday[d.getDay() + 2];
+  let date4 = d.getDate() + 3;
+  let day4 = weekday[d.getDay() - 4];
+  let date5 = d.getDate() + 4;
+  let day5 = weekday[d.getDay() - 3];
+  let date6 = d.getDate() + 5;
+  let day6 = weekday[d.getDay() - 2];
+  let date7 = d.getDate() + 6;
+  let day7 = weekday[d.getDay() - 1];
+
+  const handleShow = () => {
+    if (show === true) {
+      setShow(false);
+    } else {
+      setShow(true);
+    }
+  };
   return (
     <div>
       <div>
         <div>
-          <h4>13,650</h4>
+          <h4>{monthlyRent}</h4>
         </div>
         <div>
           <h6>Rent/month</h6>
@@ -65,13 +98,16 @@ export default function ScheduleVisit() {
         </div>
         <div className=" slider-container ">
           <Slider {...settings} className="d-flex ">
-            <div className="me-2">
+            <div
+              className="me-2"
+              onClick={() => setDayDate({ day: currentday, date: currentdate })}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0={day}
-                item1="1"
+                item0={currentday}
+                item1={currentdate}
               />
             </div>
             <div className="me-2">
@@ -79,8 +115,8 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0={day}
-                item1="2"
+                item0={tmrwday}
+                item1={tmrwdate}
               />
             </div>
             <div className="me-2">
@@ -88,8 +124,8 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Wed"
-                item1="3"
+                item0={day3}
+                item1={date3}
               />
             </div>
             <div className="me-2">
@@ -97,8 +133,8 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Thur"
-                item1="4"
+                item0={day4}
+                item1={date4}
               />
             </div>
             <div className="me-2">
@@ -106,8 +142,8 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Fri"
-                item1="5"
+                item0={day5}
+                item1={date5}
               />
             </div>
             <div className="me-2">
@@ -115,8 +151,8 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Sat"
-                item1="6"
+                item0={day6}
+                item1={date6}
               />
             </div>
             <div className="me-2">
@@ -124,8 +160,8 @@ export default function ScheduleVisit() {
                 width="5rem"
                 height="6rem"
                 title={false}
-                item0="Sun"
-                item1="7"
+                item0={day7}
+                item1={date7}
               />
             </div>
           </Slider>
@@ -143,9 +179,10 @@ export default function ScheduleVisit() {
               width: "180px",
               borderRadius: "50px",
             }}
+            onClick={(e) => setTime("01:00 pm - 03:00 pm")}
           >
             {" "}
-            <p className="m-auto">01:00 pm - 04:00 pm</p>
+            <p className="m-auto">01:00 pm - 03:00 pm</p>
           </div>
           <div
             style={{
@@ -155,6 +192,7 @@ export default function ScheduleVisit() {
               width: "180px",
               borderRadius: "50px",
             }}
+            onClick={(e) => setTime("  04:00 - 07:00 pm")}
           >
             {" "}
             <p className="m-auto">04:00 - 07:00 pm</p>
@@ -170,11 +208,22 @@ export default function ScheduleVisit() {
               color: "white",
               fontWeight: "bold",
             }}
+            onClick={() => setShow(true)}
           >
             Schedule Visit
           </Button>
         </div>
       </div>
+      <ModalSchedule
+        show={show}
+        close={handleShow}
+        ownerEmail={ownerEmail}
+        ownerName={ownerName}
+        address={address}
+        day={dayDate.day}
+        date={dayDate.date}
+        time={time}
+      />
     </div>
   );
 }
