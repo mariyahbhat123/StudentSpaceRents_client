@@ -19,11 +19,11 @@ function ModalSchedule(props) {
   const emailRef = useRef();
   const msgRef = useRef();
 
-  const emailService = process.env.EMAIL_SERVICE;
+  const emailService = process.env.REACT_APP_EMAIL_SERVICE;
   console.log(emailService);
 
-  const emailTemplate = process.env.EMAIL_TEMPLATE;
-  const emailPublicKey = process.env.EMAIL_PUBLIC_KEY;
+  const emailTemplate = process.env.REACT_APP_EMAIL_TEMPLATE;
+  const emailPublicKey = process.env.REACT_APP_EMAIL_PUBLIC_KEY;
 
   const sendEmail = (e) => {
     e.preventDefault();
