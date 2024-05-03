@@ -26,15 +26,6 @@ export default function CardComponent(props) {
     }
   };
 
-  const handlePropertyId = () => {
-    if (clickLink === true) {
-      <Link to={<PropertyDetail />} />;
-      setClickLink(false);
-    } else {
-      setClickLink(true);
-    }
-  };
-
   return (
     <div className="ms-4 mt-5">
       <Row xs={1} md={md} className="w-100">

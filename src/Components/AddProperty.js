@@ -289,7 +289,9 @@ export default function AddProperty() {
                 name="district"
                 onChange={onChange}
               >
-                <option disabled>SELECT DISTRICT</option>
+                <option selected disabled>
+                  SELECT DISTRICT
+                </option>
                 <option value="Srinagar">Srinagar</option>
                 <option value="Baramulla">Baramulla</option>
                 <option value="Kupwara">Kupwara</option>

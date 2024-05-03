@@ -1,0 +1,68 @@
+[
+  {
+    "district": "Srinagar",
+    "localities": [
+      "Hawal",
+      "Badami Bagh",
+      "Bagh e Mehtab",
+      "Barbar Shah",
+      "Bemina",
+      "Buchpora",
+      "Hazratbal",
+      "Jawahar Nagar, Srinagar",
+      "Karan Nagar",
+      "Khanyar",
+      "Lal Bazar",
+      "Lal Chowk",
+      "Nishat",
+      "Nowhatta",
+      "Nowshera, Srinagar",
+      "Rainawari",
+      "Shalimar Bagh, Srinagar",
+      "Singhpora",
+      "Soura, Srinagar",
+      "Zadibal",
+      "Zakura"
+    ]
+  },
+  {
+    "district": "Baramulla",
+    "localities": [
+      "Boniyar",
+      "Gulmarg",
+      "Hajan",
+      "Kunzer",
+      "Sopore",
+      "Tangmarg"
+    ]
+  },
+  {
+    "district": "Kupwara",
+    "localities": [
+      "Dara Pora",
+      "Drug Mulla",
+      "Heri",
+      "Kral Pora",
+      "Kupwara",
+      "Sool Koot",
+      "Trehgam"
+    ]
+  },
+  {
+    "district": "Anantnag",
+    "localities": ["Achabal", "Bijbehara", "Kokernag", "Verinag"]
+  },
+  {
+    "district": "Pulwama",
+    "localities": ["Awantipora", "Khrew", "Pampore", "Tral"]
+  },
+
+  {
+    "district": "Ganderbal",
+    "localities": [
+      "Kangan, Jammu and Kashmir",
+      "Sonamarg",
+      "Lar, Jammu and Kashmir"
+    ]
+  }
+]
