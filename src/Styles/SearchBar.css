@@ -10,10 +10,11 @@
   border: 2px solid black;
   border-radius: 55px;
   padding: 3px;
+  margin-left: 8px;
 }
 
 .searchComponent {
-  width: 80%;
+  width: 70%;
   padding: 5px;
   padding-left: 15px;
   border-radius: 20px;
@@ -28,6 +29,30 @@
   border-radius: 100%;
   margin-left: 4px;
 }
+
+.selectDistrict {
+  padding: 4px;
+  text-align: center;
+  width: 90%;
+  border: none;
+}
+
+@media screen and (width: 1024px) {
+  .mainContainer {
+    width: 65%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: white;
+  }
+
+  .optionContainer {
+    width: 22%;
+    border: 2px solid black;
+    border-radius: 55px;
+    padding: 3px;
+  }
+}
+
 @media screen and (width<=450px) {
   .mainContainer {
     width: 85%;
@@ -74,21 +99,6 @@
 @media screen and (width: 375px) {
   .mainContainer {
     width: 100%;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: white;
-  }
-
-  .optionContainer {
-    width: 22%;
-    border: 2px solid black;
-    border-radius: 55px;
-    padding: 3px;
-  }
-}
-@media screen and (width: 1024px) {
-  .mainContainer {
-    width: 65%;
     padding: 20px;
     border-radius: 20px;
     background-color: white;

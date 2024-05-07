@@ -28,6 +28,10 @@ import {
   dontShowOwnerAddProperty,
   showOwnerAddProperty,
 } from "../Redux/Slices/ownerAddPropertySlice";
+import showOwnerListProperties, {
+  dontShowOwnerProperty,
+  showOwnerProperty,
+} from "../Redux/Slices/showOwnerListProperties";
 export default function SidebarProfile() {
   const [anchorElUser, setAnchorElUser] = useState(false);
   const [show, setShow] = useState(false);
@@ -50,9 +54,18 @@ export default function SidebarProfile() {
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
 
   const tenantData = useSelector((state) => state.tenantDataSlice.tenantD);
+
+  //CHECKING ADMIN IS LOGGED STATE
+  const adminIsLogged = useSelector((state) => state.adminLogged.isLogged);
+
   //Profile
   const showProfOrNot = useSelector(
     (state) => state.showProfOrNot.showOrNoProf
+  );
+
+  //Owner Property List
+  const ownerPropertyList = useSelector(
+    (state) => state.showOwnerProperties.showOwnerProperty
   );
 
   //ADD PROPERTY
@@ -71,6 +84,7 @@ export default function SidebarProfile() {
     if (showProfOrNot === false) {
       dispatch(showProfile());
       dispatch(dontShowOwnerAddProperty());
+      dispatch(dontShowOwnerProperty());
     } else {
       dispatch(dontShowProfile());
     }
@@ -80,8 +94,19 @@ export default function SidebarProfile() {
     if (showOrNotAddPro === false) {
       dispatch(showOwnerAddProperty());
       dispatch(dontShowProfile());
+      dispatch(dontShowOwnerProperty());
     } else {
       dispatch(dontShowOwnerAddProperty());
+    }
+  };
+
+  const handleOwnerPropertyList = () => {
+    if (ownerPropertyList === false) {
+      dispatch(showOwnerProperty());
+      dispatch(dontShowProfile());
+      dispatch(dontShowProfile());
+    } else {
+      dispatch(dontShowOwnerProperty());
     }
   };
   return (
@@ -115,7 +140,20 @@ export default function SidebarProfile() {
               >
                 Add Property
               </MenuItem>
-              <MenuItem icon={<ViewListIcon />}>Advertised Property</MenuItem>
+              <MenuItem
+                icon={<ViewListIcon />}
+                onClick={() => handleOwnerPropertyList()}
+              >
+                Advertised Property
+              </MenuItem>
+            </>
+          ) : (
+            ""
+          )}
+          {adminIsLogged === true ? (
+            <>
+              {" "}
+              <MenuItem icon={<AddHomeIcon />}>Properties</MenuItem>
             </>
           ) : (
             ""
@@ -143,7 +181,7 @@ export default function SidebarProfile() {
                     ? tenantData.img
                     : ""
                 }
-                sx={{ height: "58px", width: "58px" }}
+                sx={{ height: "42px", width: "42px" }}
               ></Avatar>
             </IconButton>{" "}
           </Tooltip>

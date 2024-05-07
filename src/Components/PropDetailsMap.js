@@ -13,12 +13,6 @@ export default function PropDetailsMap(props) {
   return (
     <div>
       <div>
-        <h5>Explore</h5>
-      </div>
-      <div>
-        <h1>Map</h1>
-      </div>
-      <div>
         <GoogleMaps
           height="40vh"
           width="100%"

@@ -1,0 +1,82 @@
+.scrollContainer {
+  border: 1px solid #ff385c;
+}
+
+.btnScroll {
+  border: none;
+  box-shadow: none;
+  font-weight: bold;
+  font-size: 17px;
+  background-color: white;
+}
+
+.btnScroll:hover {
+  box-shadow: none;
+  color: #ff385c;
+  text-decoration: underline #ff385c;
+}
+
+.aboutContainer {
+  border: 1px solid #ff385c;
+}
+.detailsText {
+  font-weight: bold;
+  font-size: 19px;
+  margin-top: 4px;
+}
+.moreDetailsBtn {
+  box-shadow: none;
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  font-size: 17px;
+}
+
+.moreDetailsBtn:hover {
+  box-shadow: none;
+  font-weight: bold;
+  color: #ff385c;
+  text-decoration: underline #ff385c;
+}
+
+.termsContainer {
+  border: 1px solid #ff385c;
+}
+.rentIncludesContainer {
+  border: 1px solid #ff385c;
+}
+.rentText {
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.propertyDetailMapContainer {
+  border: 1px solid #ff385c;
+  padding: 4px;
+  padding-bottom: 12px;
+}
+.moreDetail:hover {
+  color: #ff385c;
+}
+.cardDetailIncludes {
+  border: 1px solid #ff385c;
+}
+.topContainer {
+  padding-left: 55px;
+  padding-right: 55px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+.locationIcon {
+  color: #ff385c;
+}
+.locationContainer {
+  padding-left: 29px;
+  padding-right: 29px;
+}
+.availableManaged {
+  margin-left: 34px;
+}
+.scheduleVisitContainer {
+  border: 1px solid #ff385c;
+}

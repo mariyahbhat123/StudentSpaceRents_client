@@ -1,0 +1,9 @@
+.cardDetailIncludes {
+  border: 1px solid #ff385c;
+}
+.cardDetailHeader {
+  background-color: #ff385c;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}

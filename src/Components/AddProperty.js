@@ -82,6 +82,8 @@ export default function AddProperty() {
     console.log("valueeeeeeee", lat);
   };
 
+  const ownerDetails = useSelector((state) => state.ownerData.ownerD);
+
   const img0 = propertyImage.img0;
   console.log(img0);
 
@@ -256,8 +258,8 @@ export default function AddProperty() {
                 className=""
                 type="text"
                 name="ownerName"
-                value={ownerData.name}
-                placeholder={ownerData.name}
+                value={ownerDetails.name}
+                placeholder={ownerDetails.name}
                 disabled
                 style={{ width: "100%" }}
                 autoFocus
@@ -271,7 +273,8 @@ export default function AddProperty() {
               <Form.Control
                 type="text"
                 name="ownerEmail"
-                placeholder={ownerData.email}
+                placeholder={ownerDetails.email}
+                value={ownerDetails.email}
                 autoFocus
                 style={{ width: "100%" }}
               />

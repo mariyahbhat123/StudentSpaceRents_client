@@ -17,6 +17,7 @@ export default function CardComponent(props) {
   console.log(clickLink);
   let md = props.md;
   const propertyData = props.propertyData;
+  const title = props.title;
 
   const fav = () => {
     if (favourite === true) {
@@ -28,8 +29,12 @@ export default function CardComponent(props) {
 
   return (
     <div className="ms-4 mt-5">
+      <h3>{title}</h3>
+
       <Row xs={1} md={md} className="w-100">
-        {propertyData.map((item, idx) => {
+        {propertyData.slice(0, 8).map((item, idx) => {
+          const rent = item.monthlyRent;
+          const Rent = rent.toLocaleString();
           return (
             <>
               {" "}
@@ -86,12 +91,12 @@ export default function CardComponent(props) {
                       <Card.Title>{item.address} </Card.Title>
                       <Card.Text>
                         <h6>
-                          <b>{item.monthlyRent}</b>/month
+                          <b>{Rent}</b>/month
                         </h6>
                       </Card.Text>
                     </Card.Body>
                   </Card>{" "}
-                  <Button
+                  {/* <Button
                     variant="none"
                     style={{
                       position: "absolute",
@@ -108,7 +113,7 @@ export default function CardComponent(props) {
                           : { color: "white" }
                       }
                     />
-                  </Button>
+                  </Button> */}
                 </Col>{" "}
               </Link>
               {/* ))} */}
@@ -125,11 +130,11 @@ export default function CardComponent(props) {
         }}
       >
         <Link
-          to={{
-            pathname: "/ListAd",
-            state: {
-              propertyData: propertyData,
-            },
+          to="/ListAd"
+          state={{
+            propertyData: propertyData,
+            district: propertyData.district,
+            locality: propertyData.address,
           }}
           style={{
             color: "black",

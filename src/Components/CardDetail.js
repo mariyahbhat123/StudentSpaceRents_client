@@ -1,11 +1,15 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import "../Styles/CardDetailsIncludes.css";
 
 export default function CardDetail(props) {
   return (
     <div>
-      <Card style={{ width: props.width, height: props.height }}>
+      <Card
+        className="cardDetailIncludes"
+        style={{ width: props.width, height: props.height }}
+      >
         {props.title === false ? (
           <Card.Body variant="flush" className="mt-2">
             <h6 style={{ fontSize: "18px", fontWeight: "bold" }}>
@@ -16,7 +20,9 @@ export default function CardDetail(props) {
         ) : (
           <>
             {" "}
-            <Card.Header>{props.title}</Card.Header>
+            <Card.Header className="cardDetailHeader">
+              {props.title}
+            </Card.Header>
             <Card.Body variant="flush">
               <h6>{props.item0}</h6>
               <h6>{props.item1}</h6>

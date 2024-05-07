@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CardDetail from "./CardDetail";
 import Slider from "react-slick";
 import Button from "react-bootstrap/esm/Button";
+import { useSelector } from "react-redux";
 
 import ModalSchedule from "./ModalForScheduleVisit/ModalSchedule";
 
@@ -65,12 +66,13 @@ export default function ScheduleVisit(props) {
   const tmrwday = weekday[d.getDay() + 1];
   let date3 = d.getDate() + 2;
   let day3 = weekday[d.getDay() + 2];
+
   let date4 = d.getDate() + 3;
-  let day4 = weekday[d.getDay() - 4];
+  let day4 = weekday[d.getDay() + 3];
   let date5 = d.getDate() + 4;
-  let day5 = weekday[d.getDay() - 3];
+  let day5 = weekday[d.getDay() + 4];
   let date6 = d.getDate() + 5;
-  let day6 = weekday[d.getDay() - 2];
+  let day6 = weekday[d.getDay() + 5];
   let date7 = d.getDate() + 6;
   let day7 = weekday[d.getDay() - 1];
 
@@ -81,11 +83,13 @@ export default function ScheduleVisit(props) {
       setShow(true);
     }
   };
+
+  const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
   return (
     <div>
       <div>
         <div>
-          <h4>{monthlyRent}</h4>
+          <h4>{monthlyRent.toLocaleString()}</h4>
         </div>
         <div>
           <h6>Rent/month</h6>
@@ -208,7 +212,9 @@ export default function ScheduleVisit(props) {
               color: "white",
               fontWeight: "bold",
             }}
-            onClick={() => setShow(true)}
+            onClick={() =>
+              isLogged === true ? setShow(true) : alert("Please Login First")
+            }
           >
             Schedule Visit
           </Button>

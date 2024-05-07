@@ -19,6 +19,7 @@ import PropDetailsMap from "./PropDetailsMap";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import "../Styles/PropertyDetail.css";
 
 export default function PropertyDetail(props) {
   let { state } = useLocation();
@@ -140,7 +141,7 @@ export default function PropertyDetail(props) {
               <>
                 <div className="w-100">
                   <div
-                    className="d-flex p-4  "
+                    className="topContainer d-flex  "
                     style={{ justifyContent: "space-between" }}
                   >
                     <div>
@@ -151,17 +152,20 @@ export default function PropertyDetail(props) {
                       <ShareIcon />
                     </div>
                   </div>{" "}
-                  <div className="d-flex ms-4">
-                    <LocationOnIcon className="me-2" />
+                  <div
+                    className="locationContainer
+                  d-flex ms-4"
+                  >
+                    <LocationOnIcon className="locationIcon me-2" />
                     <h5>{item.address}</h5>
                   </div>
                 </div>
-                <div className="d-flex p-2 mt-2">
+                <div className="availableManaged d-flex p-2 mt-2">
                   <div
                     className="p-1 ms-3"
                     style={{
                       width: "200px",
-                      border: "1px solid black",
+                      border: "1px solid #ff385c",
                       borderRadius: "50px",
                     }}
                   >
@@ -181,7 +185,7 @@ export default function PropertyDetail(props) {
                     className="p-1 ms-4"
                     style={{
                       width: "200px",
-                      border: "1px solid black",
+                      border: "1px solid #ff385c",
                       borderRadius: "50px",
                     }}
                   >
@@ -197,7 +201,7 @@ export default function PropertyDetail(props) {
                     img3={item.img3}
                   />
                 </div>
-                <div className="w-100 mt-2">
+                {/* <div className="w-100 mt-2">
                   <div className="d-flex " style={{ marginLeft: "15%" }}>
                     <Button
                       variant="none"
@@ -214,19 +218,18 @@ export default function PropertyDetail(props) {
                       Map
                     </Button>
                   </div>
-                </div>
+                </div> */}
 
                 <div
                   className="d-flex mt-5"
                   style={{ backgroundColor: "#f5f5f5" }}
                 >
-                  <div className="" style={{ width: "65%" }}>
+                  <div className="" style={{ width: "64%" }}>
                     {" "}
                     <div className="ms-5">
                       <div
-                        className="d-flex p-3"
+                        className="scrollContainer d-flex p-3"
                         style={{
-                          border: "1px solid black",
                           justifyContent: "space-evenly",
                           position: "sticky",
                           top: "0px",
@@ -235,24 +238,29 @@ export default function PropertyDetail(props) {
                         }}
                       >
                         <Button
+                          bsPrefix="btnScroll"
                           onClick={() => handleScroll(overviewRef.current)}
                           variant="none"
                         >
                           Overview
                         </Button>
                         <Button
+                          // className="btnScroll"
+                          bsPrefix="btnScroll"
                           onClick={() => handleScroll(aboutRef.current)}
                           variant="none"
                         >
                           About
                         </Button>
                         <Button
+                          bsPrefix="btnScroll"
                           onClick={() => handleScroll(mapRef.current)}
                           variant="none"
                         >
                           Map
                         </Button>
                         <Button
+                          bsPrefix="btnScroll"
                           onClick={() => handleScroll(TermsRef.current)}
                           variant="none"
                         >
@@ -260,29 +268,29 @@ export default function PropertyDetail(props) {
                         </Button>
                       </div>
                       <div
-                        className="mt-4 p-5"
+                        className="aboutContainer mt-4 p-5"
                         style={{
-                          border: "1px solid black",
                           backgroundColor: "white",
                         }}
                         ref={aboutRef}
                       >
                         <div
-                          className="d-flex"
+                          className="moreDetailContainer d-flex"
                           style={{ justifyContent: "space-between" }}
                         >
-                          <div className="">
-                            <h5>About</h5>
+                          <div className="detailsText">
+                            <p>ABOUT</p>
                           </div>
-                          <div>
+                          <div className="moreDetail">
                             {showDetail === false ? (
                               <KeyboardArrowUpIcon />
                             ) : (
                               <KeyboardArrowDownIcon />
                             )}
                             <Button
+                              bsPrefix="moreDetailsBtn"
                               onClick={handleDetail}
-                              style={{ textDecoration: "none" }}
+                              variant="none"
                             >
                               More Details
                             </Button>
@@ -297,12 +305,12 @@ export default function PropertyDetail(props) {
                         )}
                       </div>
                       <div
-                        className="slider-container mt-4 p-5 "
+                        className="rentIncludesContainer slider-container mt-4 p-5 "
                         style={{ backgroundColor: "white" }}
                         ref={overviewRef}
                       >
-                        <div className="mb-4">
-                          <h5>Rent includes</h5>
+                        <div className="rentText mb-4">
+                          <h5 className="rentText">Rent includes</h5>
                         </div>
                         <Slider {...settings} className="d-flex slider">
                           <div className="">
@@ -315,7 +323,7 @@ export default function PropertyDetail(props) {
                               height="12rem"
                             />
                           </div>
-                          <div className="ms-3">
+                          <div className=" ms-3">
                             <CardDetail
                               title="Living Room"
                               item0="Switch"
@@ -347,35 +355,43 @@ export default function PropertyDetail(props) {
                           </div>
                         </Slider>
                       </div>
-                      <div className="mt-4" ref={mapRef}>
-                        <PropDetailsMap
-                          lat={item.coordinates.lat}
-                          lng={item.coordinates.lng}
-                        />
+                      <div
+                        className="propertyDetailMapContainer mt-4"
+                        ref={mapRef}
+                      >
+                        <div>
+                          <p className="detailsText">MAP</p>
+                        </div>
+                        <div className="propertyDetailMap">
+                          <PropDetailsMap
+                            lat={item.coordinates.lat}
+                            lng={item.coordinates.lng}
+                          />
+                        </div>
                       </div>
 
                       <div
-                        className="mt-4 p-5"
+                        className="termsContainer mt-4 p-5"
                         style={{
-                          border: "1px solid black",
                           backgroundColor: "white",
                         }}
                         ref={TermsRef}
                       >
                         <div
-                          className="d-flex"
+                          className="moreDetailContainer d-flex"
                           style={{ justifyContent: "space-between" }}
                         >
-                          <div className="">
-                            <h5>Terms & Conditions</h5>
-                          </div>
                           <div>
+                            <p className="detailsText">Terms & Conditions</p>
+                          </div>
+                          <div className="moreDetail">
                             {showTerms === false ? (
                               <KeyboardArrowUpIcon />
                             ) : (
                               <KeyboardArrowDownIcon />
                             )}
                             <Button
+                              bsPrefix="moreDetailsBtn"
                               onClick={handleTermsDetail}
                               style={{ textDecoration: "none" }}
                             >
@@ -385,16 +401,30 @@ export default function PropertyDetail(props) {
                         </div>
                         {showTerms === true ? (
                           <div>
-                            <p>
-                              This quiet semi_furnished 1 BHK independent house
-                              for boys, girls, and family is located at Vinayaka
-                              Nagar, Bengaluru and is close to the major
-                              commercial centres of the area. This independent
-                              house with a floor space of 450 sq.ft in total.
-                              This house features Modular kitchen and more. It
-                              has one bathroom with all facilities. It can be
-                              rented at ₹13650 for full house. Book it now!
-                            </p>
+                            <ul>
+                              <li>
+                                <b>Rent:</b> Monthly rent of{" "}
+                                {item.monthlyRent.toLocaleString()}, due on the
+                                date of each month.
+                              </li>
+                              <li>
+                                <b>Utilities: </b>Tenant responsible for all the
+                                utilities provided, unless otherwise specified.
+                              </li>
+                              <li>
+                                <b> Maintenance:</b> Landlord responsible for
+                                major repairs; tenant for minor repairs and
+                                upkeep.
+                              </li>
+                              <li>
+                                <b> Smoking:</b> No smoking allowed inside the
+                                premises.
+                              </li>
+                              <li>
+                                <b> Alterations:</b> Written consent required
+                                from landlord for any alterations.
+                              </li>
+                            </ul>
                           </div>
                         ) : (
                           ""
@@ -403,7 +433,7 @@ export default function PropertyDetail(props) {
                     </div>
                   </div>{" "}
                   <div
-                    className="ms-5 p-4"
+                    className="scheduleVisitContainer ms-5 p-4"
                     style={{
                       width: "30%",
                       boxShadow: "2px 2px 2px 2px grey",

@@ -10,6 +10,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../Styles/slideArrow.css";
+import "../Styles/CardCarouselCom.css";
 
 export default function CardCarouselCom(props) {
   const [favourite, setfavourite] = useState(false);
@@ -26,7 +27,8 @@ export default function CardCarouselCom(props) {
     centerPadding: "60px",
     slidesToShow: 5,
     speed: 400,
-    slidesToScroll: 4,
+    slidesToScroll: 2,
+
     swipeToSlide: true,
     arrows: true,
     // className: "slides",
@@ -111,15 +113,15 @@ export default function CardCarouselCom(props) {
     <div className="slider-container mt-4 ">
       {" "}
       <h2 className="p-4">Recently Included</h2>{" "}
-      <Slider {...settings} className="">
-        {propertyData.map((item) => {
-          return (
-            <Link
-              to="/PropertyDetail"
-              state={{ id: item._id }}
-              style={{ textDecoration: "none" }}
-            >
-              <div className="">
+      <Slider {...settings}>
+        {propertyData
+          .slice(0, 6)
+          .reverse()
+          .map((item) => {
+            const rent = item.monthlyRent;
+            const Rent = rent.toLocaleString();
+            return (
+              <div className="me-5">
                 <Card className="ms-2 me-2">
                   <Carousel fade className="w-100 " interval={null}>
                     <Carousel.Item className="carousel-item">
@@ -157,20 +159,27 @@ export default function CardCarouselCom(props) {
                         style={{ height: "200px" }}
                       />
                     </Carousel.Item>
-                  </Carousel>
-                  <Card.Body>
-                    <h6>
-                      <b>{item.propertyType}</b>
-                    </h6>
-                    <Card.Title>{item.address}</Card.Title>
-
-                    <Card.Text>
-                      <h5>
-                        <b>{item.monthlyRent}</b>/month
-                      </h5>
-                    </Card.Text>
-                  </Card.Body>{" "}
-                  <Button
+                  </Carousel>{" "}
+                  <Link
+                    to="/PropertyDetail"
+                    state={{ id: item._id }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Card.Body className="cardBodyContainer">
+                      <div className="detailContainer">
+                        <p className="propertyType">{item.propertyType}</p>
+                        <Card.Title className="propertyAddress">
+                          {item.address}
+                        </Card.Title>
+                      </div>
+                      <Card.Text className="mothlyRentContainer">
+                        <p className="monthlyRent">
+                          <b>{Rent}</b>/month
+                        </p>
+                      </Card.Text>
+                    </Card.Body>{" "}
+                  </Link>{" "}
+                  {/* <Button
                     variant="none"
                     style={{
                       position: "absolute",
@@ -187,12 +196,11 @@ export default function CardCarouselCom(props) {
                           : { color: "white" }
                       }
                     />
-                  </Button>
+                  </Button> */}
                 </Card>
               </div>
-            </Link>
-          );
-        })}
+            );
+          })}
       </Slider>
     </div>
   );

@@ -32,109 +32,95 @@ function ModalCom(props) {
             className="btnsTntOwn w-100 ms-5 me-5  d-flex justify-content-center"
             style={{ backgroundColor: "#ff385c" }}
           >
-            {Admin === true ? (
-              <div className="p-2 text-white">
-                <h5>Admin Login</h5>
-              </div>
-            ) : (
-              <div className="d-flex">
-                <Button
-                  variant="none"
-                  className="btnTnt w-50 "
-                  style={{
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                  onClick={() => setToggle(false)}
-                >
-                  Tenant
-                </Button>
-                <Button
-                  variant="none"
-                  className="btnOwn w-50"
-                  style={{
-                    borderColor: "",
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                  onClick={() => setToggle(true)}
-                >
-                  Owner
-                </Button>
-              </div>
-            )}
+            <div className="d-flex">
+              <Button
+                variant="none"
+                className="btnTnt w-50 "
+                style={{
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+                onClick={() => setToggle(false)}
+              >
+                Tenant
+              </Button>
+              <Button
+                variant="none"
+                className="btnOwn w-50"
+                style={{
+                  borderColor: "",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+                onClick={() => setToggle(true)}
+              >
+                Owner
+              </Button>
+            </div>
           </div>
         </Modal.Header>
         <Modal.Body>
-          {Admin === true ? (
-            <AdminLogin />
-          ) : (
-            <div>
-              {toggle === true ? (
-                landlordRegistration === false ? (
-                  <LandlordLogin />
-                ) : (
-                  <LandlordRegistration />
-                )
-              ) : tenantRegistration === false ? (
-                <TenantLogin />
+          <div>
+            {toggle === true ? (
+              landlordRegistration === false ? (
+                <LandlordLogin />
               ) : (
-                <TenantRegistration />
-              )}
-            </div>
-          )}
+                <LandlordRegistration />
+              )
+            ) : tenantRegistration === false ? (
+              <TenantLogin />
+            ) : (
+              <TenantRegistration />
+            )}
+          </div>
         </Modal.Body>
         <Modal.Footer>
-          {Admin === false ? (
-            toggle === false ? (
-              tenantRegistration === false ? (
-                <div className="w-100 userSign">
-                  Dont have a account?
-                  <br />{" "}
-                  <Link
-                    className="userSignIn-Up"
-                    onClick={() => setTenantRegisteration(true)}
-                  >
-                    Sign up
-                  </Link>
-                </div>
-              ) : (
-                <div className="w-100 userSign">
-                  Already have a account?
-                  <br />{" "}
-                  <Link
-                    className="userSignIn-Up"
-                    onClick={() => setTenantRegisteration(false)}
-                  >
-                    Sign In
-                  </Link>
-                </div>
-              )
-            ) : landlordRegistration === false ? (
+          {toggle === false ? (
+            tenantRegistration === false ? (
               <div className="w-100 userSign">
-                Dont have a Account?
-                <br />
+                Dont have a account?
+                <br />{" "}
                 <Link
                   className="userSignIn-Up"
-                  onClick={() => setLandlordRegistration(true)}
+                  onClick={() => setTenantRegisteration(true)}
                 >
                   Sign up
                 </Link>
               </div>
             ) : (
               <div className="w-100 userSign">
-                Already have a Account?
-                <br />
+                Already have a account?
+                <br />{" "}
                 <Link
                   className="userSignIn-Up"
-                  onClick={() => setLandlordRegistration(false)}
+                  onClick={() => setTenantRegisteration(false)}
                 >
-                  Sign in
+                  Sign In
                 </Link>
               </div>
             )
+          ) : landlordRegistration === false ? (
+            <div className="w-100 userSign">
+              Dont have a Account?
+              <br />
+              <Link
+                className="userSignIn-Up"
+                onClick={() => setLandlordRegistration(true)}
+              >
+                Sign up
+              </Link>
+            </div>
           ) : (
-            ""
+            <div className="w-100 userSign">
+              Already have a Account?
+              <br />
+              <Link
+                className="userSignIn-Up"
+                onClick={() => setLandlordRegistration(false)}
+              >
+                Sign in
+              </Link>
+            </div>
           )}
         </Modal.Footer>
       </Modal>

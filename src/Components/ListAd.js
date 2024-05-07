@@ -19,25 +19,28 @@ export default function ListAd(props) {
   const { state } = useLocation();
   const district = state.district;
   const locality = state.locality;
+
+  // PROPERTY DATA
   const [propertyData, setPropertyData] = useState([]);
   console.log(propertyData);
   const [propertyId, setPropertyId] = useState("");
 
-  const [filters, setFilters] = useState([
-    {
-      district: district,
-      address: locality,
-      for: "",
-      propertyType: "",
-      monthlyRent: "",
-      foodIncluded: {
-        lunch: false,
-        breakfast: false,
-        dinner: false,
-      },
-    },
-  ]);
+  const [filters, setFilters] = useState({
+    district: district,
+    address: locality,
+    for: "",
+    propertyType: "",
+    monthlyRent: "",
+  });
+  const [foodIncludedFilter, setFoodIncludedFilter] = useState({
+    breakfast: false,
+    lunch: false,
+    dinner: false,
+  });
 
+  console.log(foodIncludedFilter.dinner);
+
+  // FETCHING PROPERTY DETAILS
   const loadData = async () => {
     let response = await fetch("http://localhost:5000/api/propertyData", {
       method: "POST",
@@ -53,15 +56,70 @@ export default function ListAd(props) {
     loadData();
   }, []);
 
+  // FILTER FUNCTION
+  const handleFilter = (item) => {
+    // if (filters.for) {
+    //   if (item.district === filters.district) {
+    //     return filters.district;
+    //   }
+    //   if (item.for === filters.for) {
+    //     return filters.for;
+    //   }
+
+    //   if (item.foodIncluded === foodIncludedFilter) {
+    //     return foodIncludedFilter;
+    //   } else {
+    //     return propertyData;
+    //   }
+    // }
+    if (district) {
+      if (item.district === district) {
+        return district;
+      }
+    } else if (acomo === true) {
+      if (item.propertyType === filters.propertyType) {
+        return filters.propertyType;
+      }
+    } else if (checkGender === true) {
+      if (item.for !== filters.for) {
+        return filters.for;
+      }
+    } else {
+      return propertyData;
+    }
+  };
+
+  const [acomo, setAcomo] = useState(false);
+  const accomodation = (e) => {
+    if (acomo === true) {
+      setFilters({ propertyType: e.target.value });
+      setAcomo(false);
+    } else {
+      setAcomo(true);
+    }
+  };
+  const [checkGender, setCheckGender] = useState(false);
+  const forCheck = (e) => {
+    if (checkGender === true) {
+      setFilters({ for: e.target.value });
+      setCheckGender(false);
+    } else {
+      setCheckGender(true);
+    }
+  };
   return (
     <div className="w-100">
+      {/* NAVBAR LIST ADVERTISEMENT */}
       <div style={{ backgroundColor: "#ff385c" }}>
         <NavBar />
       </div>
+
+      {/* BODY */}
       <div
         className="d-flex"
         style={{ flexDirection: "row", height: "90.7vh" }}
       >
+        {/* SIDEBAR LIST ADVERTISEMENT */}
         <div
           className=" "
           style={{
@@ -121,6 +179,7 @@ export default function ListAd(props) {
               </button>{" "}
             </div>
           </div>
+          {/* FILTER LISTING ADVERTISEMENT */}
           <div className="d-flex mt-4" style={{ justifyContent: "center" }}>
             <div
               className="p-4"
@@ -154,20 +213,41 @@ export default function ListAd(props) {
               <div className="w-100">
                 <div className="">
                   <h5 className="mb-3">Accomodation Type</h5>
-                  <input type="checkbox" className="me-1" />
+                  <input
+                    type="checkbox"
+                    className="me-1"
+                    value="Pg"
+                    onChange={(e) => accomodation(e)}
+                    // setFilters({ propertyType: e.target.value })
+                  />
                   PG
-                  <input type="checkbox" className="ms-3 me-1" />
-                  House
-                  <input type="checkbox" className="ms-3 me-1" />
-                  Flat
-                  <input type="checkbox" className="ms-3 me-1" />
-                  Room
+                  <input
+                    type="checkbox"
+                    className="ms-3 me-1"
+                    value="Apartment"
+                    onChange={(e) => accomodation(e)}
+                    // setFilters({ propertyType: e.target.value })
+                  />
+                  Apartment
+                  {/* <input type="checkbox" className="ms-3 me-1" />
+                  Room */}
                 </div>
                 <div className="mt-3">
                   <h5 className="mb-3">For</h5>
-                  <input type="checkbox" className="me-1" />
+                  <input
+                    type="checkbox"
+                    className="me-1"
+                    value="Male"
+                    onClick={(e) => forCheck(e)}
+                  />
                   Male
-                  <input type="checkbox" className="ms-3 me-1" />
+                  <input
+                    type="checkbox"
+                    className="ms-3 me-1"
+                    value="Female"
+                    onClick={(e) => forCheck(e)}
+                    // onChange={(e) => setFilters({ for: e.target.value })}
+                  />
                   Female
                 </div>
 
@@ -183,91 +263,153 @@ export default function ListAd(props) {
                 </div> */}
                 <div className="mt-3">
                   <h5 className="mb-3">Food Included</h5>
-                  <input type="checkbox" className="me-1" onClick={() => set} />
+                  <input
+                    type="checkbox"
+                    className="me-1"
+                    name="breakfast"
+                    onClick={
+                      () => setFoodIncludedFilter({ breakfast: true })
+                      // return (
+                      //   <>
+                      //     {filters.foodIncluded.breakfast === false
+                      //       ? setFilters({
+                      //           foodIncluded: {
+                      //             breakfast: true,
+                      //           },
+                      //         })
+                      //       : ""}
+                      //   </>
+                      // );
+                    }
+                  />
                   BreakFast
-                  <input type="checkbox" className="ms-3 me-1" />
+                  <input
+                    type="checkbox"
+                    className="ms-3 me-1"
+                    name="lunch"
+                    onClick={
+                      () => setFoodIncludedFilter({ lunch: true })
+                      // filters.foodIncluded.lunch === false
+                      //   ? setFilters({
+                      //       foodIncluded: {
+                      //         lunch: true,
+                      //       },
+                      //     })
+                      //   : setFilters({ foodIncluded: { lunch: false } })
+                    }
+                  />
                   Lunch
-                  <input type="checkbox" className="ms-3" /> Dinner
+                  <input
+                    type="checkbox"
+                    className="ms-3"
+                    name="dinner"
+                    onClick={
+                      () => setFoodIncludedFilter({ dinner: true })
+                      // return (
+                      //   <>
+                      //     {filters.foodIncluded.dinner === false
+                      //       ? setFilters({
+                      //           foodIncluded: {
+                      //             dinner: true,
+                      //           },
+                      //         })
+                      //       : setFilters({ foodIncluded: { dinner: false } })}
+                      //   </>
+                      // );
+                    }
+                  />{" "}
+                  Dinner
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {/* LIST OF PROPERTIES */}
         <div className="" style={{ width: "70%" }}>
           <div style={{ overflowY: "scroll", height: "100%" }}>
-            <div className="ms-4 mt-5">
-              <Row xs={1} md={3} className="w-100">
-                {propertyData
-                  .filter((item) => item.district.includes(district))
-                  .map((item, idx) => {
-                    return (
-                      <>
-                        {" "}
-                        <Link
-                          style={{ textDecoration: "none" }}
-                          to="/PropertyDetail"
-                          state={{ id: item._id }}
-                        >
-                          {/* {Array.from({ length: 4 }).map((_, idx) => ( */}
-                          <Col key={idx}>
-                            <Card
-                              className="mt-5"
-                              onClick={() => setPropertyId(item._id)}
-                            >
-                              <Carousel fade className="w-100 " interval={null}>
-                                <Carousel.Item className="carousel-item">
-                                  <Card.Img
-                                    variant="top"
-                                    src={`http://localhost:5000/images/${item.img0}`}
-                                    alt=""
-                                    style={{ height: "200px" }}
-                                  />
-                                </Carousel.Item>
-                                <Carousel.Item className="carousel-item">
-                                  <Card.Img
-                                    variant="top"
-                                    src={`http://localhost:5000/images/${item.img1}`}
-                                    alt=""
-                                    style={{ height: "200px" }}
-                                  />
-                                </Carousel.Item>
-                                <Carousel.Item className="carousel-item">
-                                  <Card.Img
-                                    variant="top"
-                                    src={`http://localhost:5000/images/${item.img2}`}
-                                    alt=""
-                                    style={{ height: "200px" }}
-                                  />
-                                </Carousel.Item>
-                                <Carousel.Item className="carousel-item">
-                                  <Card.Img
-                                    variant="top"
-                                    src={`http://localhost:5000/images/${item.img3}`}
-                                    alt=""
-                                    style={{ height: "200px" }}
-                                  />
-                                </Carousel.Item>
-                              </Carousel>
+            <div className="mt-5 mb-5">
+              <h3 className="">Properties</h3>{" "}
+              <div className="ms-4 ">
+                <Row xs={1} md={3} className="w-100">
+                  {propertyData
+                    .filter((item) => {
+                      return handleFilter(item);
+                    })
+                    .map((item, idx) => {
+                      return (
+                        <>
+                          {" "}
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            to="/PropertyDetail"
+                            state={{ id: item._id }}
+                          >
+                            {/* {Array.from({ length: 4 }).map((_, idx) => ( */}
+                            <Col key={idx}>
+                              <Card
+                                className="mt-5"
+                                onClick={() => setPropertyId(item._id)}
+                              >
+                                <Carousel
+                                  fade
+                                  className="w-100 "
+                                  interval={null}
+                                >
+                                  <Carousel.Item className="carousel-item">
+                                    <Card.Img
+                                      variant="top"
+                                      src={`http://localhost:5000/images/${item.img0}`}
+                                      alt=""
+                                      style={{ height: "200px" }}
+                                    />
+                                  </Carousel.Item>
+                                  <Carousel.Item className="carousel-item">
+                                    <Card.Img
+                                      variant="top"
+                                      src={`http://localhost:5000/images/${item.img1}`}
+                                      alt=""
+                                      style={{ height: "200px" }}
+                                    />
+                                  </Carousel.Item>
+                                  <Carousel.Item className="carousel-item">
+                                    <Card.Img
+                                      variant="top"
+                                      src={`http://localhost:5000/images/${item.img2}`}
+                                      alt=""
+                                      style={{ height: "200px" }}
+                                    />
+                                  </Carousel.Item>
+                                  <Carousel.Item className="carousel-item">
+                                    <Card.Img
+                                      variant="top"
+                                      src={`http://localhost:5000/images/${item.img3}`}
+                                      alt=""
+                                      style={{ height: "200px" }}
+                                    />
+                                  </Carousel.Item>
+                                </Carousel>
 
-                              <Card.Body>
-                                <h6>
-                                  <b>{item.propertyType}</b>
-                                </h6>
-                                <Card.Title>{item.address} </Card.Title>
-                                <Card.Text>
+                                <Card.Body>
                                   <h6>
-                                    <b>{item.monthlyRent}</b>/month
+                                    <b>{item.propertyType}</b>
                                   </h6>
-                                </Card.Text>
-                              </Card.Body>
-                            </Card>{" "}
-                          </Col>{" "}
-                        </Link>
-                        {/* ))} */}
-                      </>
-                    );
-                  })}{" "}
-              </Row>
+                                  <Card.Title>{item.address} </Card.Title>
+                                  <Card.Text>
+                                    <h6>
+                                      <b>{item.monthlyRent.toLocaleString()}</b>
+                                      /month
+                                    </h6>
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>{" "}
+                            </Col>{" "}
+                          </Link>
+                          {/* ))} */}
+                        </>
+                      );
+                    })}{" "}
+                </Row>
+              </div>
             </div>
           </div>
         </div>

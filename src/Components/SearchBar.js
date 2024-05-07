@@ -38,73 +38,66 @@ export default function SearchBar() {
     handleSearchOptions();
   }, [district]);
   return (
-    <div>
-      <div className="d-flex" style={{ justifyContent: "center" }}>
-        <div className="w-100 d-flex " style={{ justifyContent: "center" }}>
-          <div className="mainContainer d-flex">
-            <div className="optionContainer">
-              <select
-                className=""
-                style={{
-                  padding: "4px",
-                  textAlign: "center",
-                  border: "0",
-                }}
-                onChange={(e) => setDistrict(e.target.value)}
-              >
-                <option value="" selected disabled>
-                  District
-                </option>
-                <option value="Srinagar">Srinagar</option>
-                <option value="Baramulla">Baramulla</option>
-                <option value="Kupwara">Kupwara</option>
-                <option value="Anantnag">Anantnag</option>
-                <option value="Pulwama">Pulwama</option>
-
-                <option value="Ganderbal">Ganderbal</option>
-              </select>
-            </div>
-            <input
-              className="searchComponent"
-              type="search"
-              placeholder="Search Locality or Landmark"
-              style={{}}
-              value={searchOptions}
-              onChange={(e) => (
-                setShow(true), setSearchOptions(e.target.value)
-              )}
-            ></input>{" "}
-            {show === true ? (
-              <button
-                className="btnClearCom"
-                style={{
-                  width: "5%",
-                  position: "absolute",
-                  left: "66%",
-                  border: "none",
-                  padding: "3px",
-                  backgroundColor: "transparent",
-                }}
-                onClick={() => setShow(false)}
-              >
-                <ClearIcon className="mt-1" />
-              </button>
-            ) : (
-              ""
-            )}
-            <Link
-              className="searchBtn"
-              to="/ListAd"
-              state={{
-                district: district,
-                locality: searchOptions,
-              }}
+    <>
+      {/* <div className="d-flex" style={{ justifyContent: "center" }}> */}
+      <div className="w-100 d-flex " style={{ justifyContent: "center" }}>
+        <div className="mainContainer d-flex">
+          <div className="optionContainer">
+            <select
+              className="selectDistrict"
+              onChange={(e) => setDistrict(e.target.value)}
             >
-              <SearchIcon />
-            </Link>{" "}
+              <option value="" selected disabled>
+                District
+              </option>
+              <option value="Srinagar">Srinagar</option>
+              <option value="Baramulla">Baramulla</option>
+              <option value="Kupwara">Kupwara</option>
+              <option value="Anantnag">Anantnag</option>
+              <option value="Pulwama">Pulwama</option>
+
+              <option value="Ganderbal">Ganderbal</option>
+            </select>
           </div>
+          <input
+            className="searchComponent"
+            type="search"
+            placeholder="Search Locality or Landmark"
+            style={{}}
+            value={searchOptions}
+            onChange={(e) => (setShow(true), setSearchOptions(e.target.value))}
+          ></input>{" "}
+          {show === true ? (
+            <button
+              className="btnClearCom"
+              style={{
+                width: "5%",
+                position: "absolute",
+                left: "66%",
+                border: "none",
+                padding: "3px",
+                backgroundColor: "transparent",
+              }}
+              onClick={() => setShow(false)}
+            >
+              <ClearIcon className="mt-1" />
+            </button>
+          ) : (
+            ""
+          )}
+          <Link
+            className="searchBtn"
+            to="/ListAd"
+            state={{
+              district: district,
+              locality: searchOptions,
+            }}
+          >
+            <SearchIcon />
+          </Link>{" "}
         </div>
       </div>
+      {/* </div> */}
       {searchOptions
         ? locality
             .filter((item) =>
@@ -142,6 +135,6 @@ export default function SearchBar() {
               );
             })
         : ""}
-    </div>
+    </>
   );
 }

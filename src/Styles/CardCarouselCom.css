@@ -1,0 +1,15 @@
+.detailContainer {
+  color: black;
+}
+.propertyType {
+  font-size: 17px;
+  font-weight: bold;
+}
+.propertyAddress {
+  font-size: 20px;
+  font-weight: bold;
+}
+.monthlyRent {
+  font-size: 18px;
+  font-weight: bold;
+}

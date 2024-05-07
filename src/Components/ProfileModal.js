@@ -7,6 +7,7 @@ import { dontShowProfileUser } from "../Redux/Slices/showProfileModalSlice";
 import UserProfile from "./UserProfile";
 import AddProperty from "./AddProperty";
 import { dontShowProfile } from "../Redux/Slices/profileSlice";
+import ListOfOwnerProperties from "./ListOfOwnerProperties";
 
 export default function ProfileModal() {
   const showProfileModal = useSelector(
@@ -23,6 +24,11 @@ export default function ProfileModal() {
   const showOrNotAddPro = useSelector(
     (state) => state.showOrNotAddPro.showOrNoOwnerAddPro
   );
+
+  const ownerPropertyList = useSelector(
+    (state) => state.showOwnerProperties.showOwnerProperty
+  );
+
   return (
     <div>
       {" "}
@@ -37,9 +43,22 @@ export default function ProfileModal() {
         <div className="d-flex">
           <SidebarProfile />
           <Modal.Body style={{ height: "80vh", overflowX: "auto" }}>
-            {showProfOrNot === true ? <UserProfile /> : ""}
+            {showProfOrNot === true && showOrNotAddPro === false ? (
+              <UserProfile />
+            ) : (
+              ""
+            )}
             {showOrNotAddPro === true && showProfOrNot === false ? (
               <AddProperty />
+            ) : (
+              ""
+            )}
+            {ownerPropertyList === true &&
+            showProfOrNot === false &&
+            showOrNotAddPro === false ? (
+              <div className="d-flex" style={{ justifyContent: "center" }}>
+                <ListOfOwnerProperties />
+              </div>
             ) : (
               ""
             )}
