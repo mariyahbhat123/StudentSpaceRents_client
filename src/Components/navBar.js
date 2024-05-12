@@ -91,7 +91,7 @@ export default function NavBar() {
       >
         <Container className="">
           <Navbar.Brand href="#home" className="d-flex">
-            <div className="me-1 mb-1 d-flex">
+            <div className="iconNavbar me-1 mb-1 d-flex">
               <img
                 className=""
                 src={SSR}
@@ -144,7 +144,7 @@ export default function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Nav className="ms-auto">
+            <Nav className="AvatarSignContainer ms-auto">
               {isLogged === true || ownerIsLogged === true ? (
                 <Button
                   onClick={() =>
@@ -153,6 +153,7 @@ export default function NavBar() {
                       : dispatch(showProfile())
                   }
                   variant="none"
+                  className="AvatarContainer"
                   style={{
                     overflow: "hidden",
                     width: "60px",
@@ -162,7 +163,7 @@ export default function NavBar() {
                   }}
                 >
                   {" "}
-                  <Avatar style={{ width: "" }}></Avatar>
+                  <Avatar className="" style={{ width: "" }}></Avatar>
                 </Button>
               ) : (
                 <Button

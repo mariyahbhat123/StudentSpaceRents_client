@@ -61,6 +61,15 @@ export default function AddProperty() {
     }
   };
 
+  console.log(
+    "breakfast",
+    checkedProperty.breakfast,
+    "dinner",
+    checkedProperty.dinner,
+    "lunch",
+    checkedProperty.lunch
+  );
+
   const [files, setFiles] = useState([]);
   const onImage = (e) => {
     setFiles(e.target.files);
@@ -104,7 +113,7 @@ export default function AddProperty() {
     formData.append("forGender", propertyDetails.for);
     formData.append("monthlyRent", propertyDetails.monthlyRent);
     formData.append(
-      " heatingAndCoolingSystem ",
+      "heatingAndCoolingSystem",
       checkedProperty.heatingAndCooling
     );
     formData.append("storageSpace", checkedProperty.storageSpace);
@@ -112,9 +121,9 @@ export default function AddProperty() {
       "internetAndCableServices",
       checkedProperty.internetAndCableServices
     );
-    formData.append(" Furnished", checkedProperty.furniture);
-    formData.append(" breakfast", checkedProperty.breakfast);
-    formData.append(" lunch", checkedProperty.lunch);
+    formData.append("Furnished", checkedProperty.furniture);
+    formData.append("breakfast", checkedProperty.breakfast);
+    formData.append("lunch", checkedProperty.lunch);
     formData.append("dinner", checkedProperty.dinner);
     formData.append("lat", lat);
     formData.append("lng", lng);
@@ -170,6 +179,7 @@ export default function AddProperty() {
         alert("Enter valid credentials");
       }
       if (json.success) {
+        alert("Property Successfully added");
       }
     } catch (err) {
       console.log(err);

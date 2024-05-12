@@ -25,8 +25,11 @@ import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
 import { adminIsNotLogged } from "../Redux/Slices/adminLog";
 
 export default function LandingPage() {
+  //Scroll 600
   const TOP_OFFSET = 600;
+  //Background setting
   const [navBackground, setNavBackground] = useState(false);
+
   const [propertyData, setPropertyData] = useState([]);
 
   //SHOW PROFILE DROPDOWN
@@ -85,7 +88,7 @@ export default function LandingPage() {
   console.log(showProfile);
 
   const loadData = async () => {
-    let response = await fetch("http://localhost:5000/api/propertyData", {
+    let response = await fetch("http://192.168.29.70:5000/api/propertyData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,10 +99,7 @@ export default function LandingPage() {
   };
 
   useEffect(() => {
-    const timerID = setInterval(() => loadData(), 1000);
-    return () => {
-      clearInterval(timerID);
-    };
+    loadData();
   }, []);
   return (
     <div className="w-100">
@@ -124,19 +124,7 @@ export default function LandingPage() {
           <NavBar />{" "}
         </div>
         {showProfile === true ? (
-          <div
-            style={{
-              position: "fixed",
-              zIndex: "10",
-              top: "10%",
-              left: "85%",
-              backgroundColor: "white",
-              width: "200px",
-              padding: "10px",
-              boxShadow: "1px 1px 1px 1px #ff385c ",
-              border: "1px solid #ff385c",
-            }}
-          >
+          <div className="ProfileLogoutContainer" style={{}}>
             <div>
               <div>
                 <PersonPinIcon className="" style={{ fontSize: "30px" }} />

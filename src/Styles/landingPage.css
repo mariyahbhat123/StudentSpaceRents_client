@@ -14,3 +14,49 @@
   top: 40%;
   z-index: 5;
 }
+.seeAllContainer {
+  text-align: end;
+}
+.seeAll {
+  color: black;
+  font-weight: bold;
+}
+.seeAll:hover {
+  color: #ff385c;
+  text-decoration: underline;
+}
+.ProfileLogoutContainer {
+  position: fixed;
+  z-index: 10;
+  top: 10%;
+  left: 85%;
+  background-color: white;
+  width: 200px;
+  padding: 10px;
+  box-shadow: 1px 1px 1px 1px #ff385c;
+  border: 1px solid #ff385c;
+}
+
+@media screen and (width<=450px) {
+  .searchB {
+    position: absolute;
+    top: 38%;
+    z-index: 5;
+  }
+  .seeAllContainer {
+    text-align: center;
+  }
+  .iconNavbar {
+    margin-left: 16px;
+  }
+  .AvatarSignContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .ProfileLogoutContainer {
+    top: 31%;
+    left: 27%;
+
+    width: 180px;
+  }
+}

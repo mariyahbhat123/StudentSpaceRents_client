@@ -5,7 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 import { useSelector } from "react-redux";
 
 import ModalSchedule from "./ModalForScheduleVisit/ModalSchedule";
-
+import "../Styles/ScheduleVisit.css";
 export default function ScheduleVisit(props) {
   const [show, setShow] = useState(false);
   const [dayDate, setDayDate] = useState({ day: "", date: "" });
@@ -63,16 +63,16 @@ export default function ScheduleVisit(props) {
   let currentdate = d.getDate();
   let currentday = weekday[d.getDay()];
   const tmrwdate = d.getDate() + 1;
-  const tmrwday = weekday[d.getDay() + 1];
+  const tmrwday = weekday[d.getDay() - 6];
   let date3 = d.getDate() + 2;
-  let day3 = weekday[d.getDay() + 2];
+  let day3 = weekday[d.getDay() - 5];
 
   let date4 = d.getDate() + 3;
-  let day4 = weekday[d.getDay() + 3];
+  let day4 = weekday[d.getDay() - 4];
   let date5 = d.getDate() + 4;
-  let day5 = weekday[d.getDay() + 4];
+  let day5 = weekday[d.getDay() - 3];
   let date6 = d.getDate() + 5;
-  let day6 = weekday[d.getDay() + 5];
+  let day6 = weekday[d.getDay() - 2];
   let date7 = d.getDate() + 6;
   let day7 = weekday[d.getDay() - 1];
 
@@ -85,6 +85,8 @@ export default function ScheduleVisit(props) {
   };
 
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
+  const [picked, setPicked] = useState(false);
+  console.log(picked);
   return (
     <div>
       <div>
@@ -103,18 +105,28 @@ export default function ScheduleVisit(props) {
         <div className=" slider-container ">
           <Slider {...settings} className="d-flex ">
             <div
-              className="me-2"
-              onClick={() => setDayDate({ day: currentday, date: currentdate })}
+              className="DayDatePick me-2"
+              onClick={() => {
+                return (
+                  setDayDate({ day: currentday, date: currentdate }),
+                  setPicked(true)
+                );
+              }}
             >
               <CardDetail
+                className="DayDatePick"
                 width="5rem"
                 height="6rem"
                 title={false}
                 item0={currentday}
                 item1={currentdate}
+                picked={picked}
               />
             </div>
-            <div className="me-2">
+            <div
+              className="DayDatePick me-2"
+              onClick={() => setDayDate({ day: tmrwday, date: tmrwdate })}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
@@ -123,7 +135,7 @@ export default function ScheduleVisit(props) {
                 item1={tmrwdate}
               />
             </div>
-            <div className="me-2">
+            <div className="DayDatePick me-2">
               <CardDetail
                 width="5rem"
                 height="6rem"
@@ -132,7 +144,7 @@ export default function ScheduleVisit(props) {
                 item1={date3}
               />
             </div>
-            <div className="me-2">
+            <div className="DayDatePick me-2">
               <CardDetail
                 width="5rem"
                 height="6rem"
@@ -141,7 +153,7 @@ export default function ScheduleVisit(props) {
                 item1={date4}
               />
             </div>
-            <div className="me-2">
+            <div className="DayDatePick me-2">
               <CardDetail
                 width="5rem"
                 height="6rem"
@@ -150,7 +162,7 @@ export default function ScheduleVisit(props) {
                 item1={date5}
               />
             </div>
-            <div className="me-2">
+            <div className="DayDatePick me-2">
               <CardDetail
                 width="5rem"
                 height="6rem"
@@ -159,7 +171,7 @@ export default function ScheduleVisit(props) {
                 item1={date6}
               />
             </div>
-            <div className="me-2">
+            <div className="DayDatePick me-2">
               <CardDetail
                 width="5rem"
                 height="6rem"

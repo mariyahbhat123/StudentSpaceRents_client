@@ -11,3 +11,11 @@
 .carousel-item {
   position: relative;
 }
+.landingCarouselImages {
+  height: 600px;
+}
+@media screen and (width<=450px) {
+  .landingCarouselImages {
+    height: 400px;
+  }
+}

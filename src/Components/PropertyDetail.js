@@ -20,6 +20,12 @@ import PropDetailsMap from "./PropDetailsMap";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "../Styles/PropertyDetail.css";
+import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
+import fan from "../Icons/fan.png";
+import lightBulb from "../Icons/light-bulb.png";
+import Switch from "../Icons/switch.png";
+import kitchen from "../Icons/kitchen.png";
+import faucet from "../Icons/faucet.png";
 
 export default function PropertyDetail(props) {
   let { state } = useLocation();
@@ -34,7 +40,7 @@ export default function PropertyDetail(props) {
 
   const showPropertyDetails = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/propertyData/${propertyID}`,
+      `http://192.168.29.70:5000/api/propertyData/${propertyID}`,
       {
         method: "POST",
 
@@ -321,6 +327,9 @@ export default function PropertyDetail(props) {
                               item2="Fan"
                               width="15rem"
                               height="12rem"
+                              icon0={Switch}
+                              icon1={lightBulb}
+                              icon2={fan}
                             />
                           </div>
                           <div className=" ms-3">
@@ -331,6 +340,9 @@ export default function PropertyDetail(props) {
                               item2="Fan"
                               width="15rem"
                               height="12rem"
+                              icon0={Switch}
+                              icon1={lightBulb}
+                              icon2={fan}
                             />
                           </div>
                           <div className="ms-3">
@@ -341,6 +353,8 @@ export default function PropertyDetail(props) {
                               item2=""
                               width="15rem"
                               height="12rem"
+                              icon0={kitchen}
+                              icon1={faucet}
                             />
                           </div>
                           <div className="ms-3">
@@ -351,6 +365,9 @@ export default function PropertyDetail(props) {
                               item2="Fan"
                               width="15rem"
                               height="12rem"
+                              icon0={Switch}
+                              icon1={lightBulb}
+                              icon2={fan}
                             />
                           </div>
                         </Slider>

@@ -20,7 +20,7 @@ export default function TenantLogin() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/loginUsers", {
+      const response = await fetch("http://192.168.29.70:5000/api/loginUsers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

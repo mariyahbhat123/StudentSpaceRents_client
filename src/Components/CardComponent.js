@@ -9,6 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { CardActions } from "@mui/material";
 import PropertyDetail from "./PropertyDetail";
+// import "../Styles/landingPage.css";
 export default function CardComponent(props) {
   const [favourite, setfavourite] = useState(false);
   const [propertyId, setPropertyId] = useState("");
@@ -19,13 +20,13 @@ export default function CardComponent(props) {
   const propertyData = props.propertyData;
   const title = props.title;
 
-  const fav = () => {
-    if (favourite === true) {
-      setfavourite(false);
-    } else {
-      setfavourite(true);
-    }
-  };
+  // const fav = () => {
+  //   if (favourite === true) {
+  //     setfavourite(false);
+  //   } else {
+  //     setfavourite(true);
+  //   }
+  // };
 
   return (
     <div className="ms-4 mt-5">
@@ -53,7 +54,7 @@ export default function CardComponent(props) {
                       <Carousel.Item className="carousel-item">
                         <Card.Img
                           variant="top"
-                          src={`http://localhost:5000/images/${item.img0}`}
+                          src={`http://192.168.29.70:5000/images/${item.img0}`}
                           alt=""
                           style={{ height: "200px" }}
                         />
@@ -61,7 +62,7 @@ export default function CardComponent(props) {
                       <Carousel.Item className="carousel-item">
                         <Card.Img
                           variant="top"
-                          src={`http://localhost:5000/images/${item.img1}`}
+                          src={`http://192.168.29.70:5000/images/${item.img1}`}
                           alt=""
                           style={{ height: "200px" }}
                         />
@@ -69,7 +70,7 @@ export default function CardComponent(props) {
                       <Carousel.Item className="carousel-item">
                         <Card.Img
                           variant="top"
-                          src={`http://localhost:5000/images/${item.img2}`}
+                          src={`http://192.168.29.70:5000/images/${item.img2}`}
                           alt=""
                           style={{ height: "200px" }}
                         />
@@ -77,7 +78,7 @@ export default function CardComponent(props) {
                       <Carousel.Item className="carousel-item">
                         <Card.Img
                           variant="top"
-                          src={`http://localhost:5000/images/${item.img3}`}
+                          src={`http://192.168.29.70:5000/images/${item.img3}`}
                           alt=""
                           style={{ height: "200px" }}
                         />
@@ -123,22 +124,19 @@ export default function CardComponent(props) {
       </Row>
 
       <div
-        className="mt-4 me-4"
-        style={{
-          textAlign: "end",
-          fontSize: "18px",
-        }}
+        className="seeAllContainer mt-4 me-4"
+        // style={{
+        //   textAlign: "end",
+        //   fontSize: "18px",
+        // }}
       >
         <Link
+          className="seeAll"
           to="/ListAd"
           state={{
             propertyData: propertyData,
             district: propertyData.district,
             locality: propertyData.address,
-          }}
-          style={{
-            color: "black",
-            fontWeight: "bold",
           }}
         >
           See All
