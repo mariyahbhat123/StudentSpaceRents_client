@@ -110,7 +110,7 @@ export default function SidebarProfile() {
     }
   };
   return (
-    <div className="me-3">
+    <div className="">
       <Sidebar collapsed={!show}>
         <Menu>
           <MenuItem

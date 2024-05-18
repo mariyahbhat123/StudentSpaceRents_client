@@ -37,28 +37,42 @@ export default function SearchBar() {
   useEffect(() => {
     handleSearchOptions();
   }, [district]);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth <= 450) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
   return (
     <>
       {/* <div className="d-flex" style={{ justifyContent: "center" }}> */}
       <div className="w-100 d-flex " style={{ justifyContent: "center" }}>
-        <div className="mainContainer d-flex">
-          <div className="optionContainer">
-            <select
-              className="selectDistrict"
-              onChange={(e) => setDistrict(e.target.value)}
-            >
-              <option value="" selected disabled>
-                District
-              </option>
-              <option value="Srinagar">Srinagar</option>
-              <option value="Baramulla">Baramulla</option>
-              <option value="Kupwara">Kupwara</option>
-              <option value="Anantnag">Anantnag</option>
-              <option value="Pulwama">Pulwama</option>
+        <div className="mainContainer">
+          {!isMobile ? (
+            <div className="optionContainer">
+              <select
+                className="selectDistrict"
+                style={{ border: "none" }}
+                onChange={(e) => setDistrict(e.target.value)}
+              >
+                <option value="" selected disabled>
+                  District
+                </option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Baramulla">Baramulla</option>
+                <option value="Kupwara">Kupwara</option>
+                <option value="Anantnag">Anantnag</option>
+                <option value="Pulwama">Pulwama</option>
 
-              <option value="Ganderbal">Ganderbal</option>
-            </select>
-          </div>
+                <option value="Ganderbal">Ganderbal</option>
+              </select>
+            </div>
+          ) : (
+            ""
+          )}
           <input
             className="searchComponent"
             type="search"
@@ -67,7 +81,7 @@ export default function SearchBar() {
             value={searchOptions}
             onChange={(e) => (setShow(true), setSearchOptions(e.target.value))}
           ></input>{" "}
-          {show === true ? (
+          {/* {show === true ? (
             <button
               className="btnClearCom"
               style={{
@@ -83,8 +97,7 @@ export default function SearchBar() {
               <ClearIcon className="mt-1" />
             </button>
           ) : (
-            ""
-          )}
+            "" */}
           <Link
             className="searchBtn"
             to="/ListAd"
@@ -95,6 +108,28 @@ export default function SearchBar() {
           >
             <SearchIcon />
           </Link>{" "}
+          {isMobile ? (
+            <div className="optionContainer">
+              <select
+                className="selectDistrict"
+                style={{ border: "none", backgroundColor: "white" }}
+                onChange={(e) => setDistrict(e.target.value)}
+              >
+                <option value="" selected disabled>
+                  District
+                </option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Baramulla">Baramulla</option>
+                <option value="Kupwara">Kupwara</option>
+                <option value="Anantnag">Anantnag</option>
+                <option value="Pulwama">Pulwama</option>
+
+                <option value="Ganderbal">Ganderbal</option>
+              </select>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       {/* </div> */}

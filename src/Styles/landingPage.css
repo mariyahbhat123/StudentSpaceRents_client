@@ -40,7 +40,7 @@
 @media screen and (width<=450px) {
   .searchB {
     position: absolute;
-    top: 38%;
+    top: 30%;
     z-index: 5;
   }
   .seeAllContainer {
@@ -58,5 +58,9 @@
     left: 27%;
 
     width: 180px;
+  }
+  .footerDistricts {
+    display: flex;
+    justify-content: center;
   }
 }

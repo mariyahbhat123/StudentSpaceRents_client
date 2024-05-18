@@ -88,7 +88,7 @@ export default function LandingPage() {
   console.log(showProfile);
 
   const loadData = async () => {
-    let response = await fetch("http://192.168.29.70:5000/api/propertyData", {
+    let response = await fetch("http://localhost:5000/api/propertyData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +121,13 @@ export default function LandingPage() {
           }
         >
           {" "}
-          <NavBar />{" "}
+          {navBackground === false ? (
+            <>
+              <NavBar color="#ED697F" />
+            </>
+          ) : (
+            <NavBar color="#FED8E4" />
+          )}{" "}
         </div>
         {showProfile === true ? (
           <div className="ProfileLogoutContainer" style={{}}>

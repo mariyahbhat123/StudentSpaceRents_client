@@ -49,6 +49,7 @@ export default function LandlordLogin() {
         dispatch(ownerLoggedIn());
         dispatch(toggleOff());
       } else {
+        alert("Enter Correct credentials");
         dispatch(ownerNotLogged());
       }
     } catch (err) {

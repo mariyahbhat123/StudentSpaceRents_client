@@ -7,6 +7,8 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import HouseHeartFill from "react-bootstrap-icons/dist/icons/house-heart-fill";
+import { Link } from "react-router-dom";
+import SSR from "../Logo/home.png";
 export default function FooterCom() {
   return (
     <div>
@@ -46,83 +48,89 @@ export default function FooterCom() {
             <MDBRow className="mt-3">
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4 d-flex">
-                  <div className="me-1 d-flex ">
-                    <HouseHeartFill />
+                  <div className="me-1 ">
+                    <img src={SSR} alt="" style={{ width: "23px" }} />{" "}
                   </div>
-                  <div>Student Space Rents</div>
+                  <div style={{ marginTop: "6px", color: "#ED697F" }}>
+                    Student Space Rents
+                  </div>{" "}
                 </h6>
                 <p>
-                  Here you can use rows and columns to organize your footer
-                  content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit.
+                  Student Space Rents is here to help you find a comfortable,
+                  affordable, and convenient place to call home.
                 </p>
               </MDBCol>
 
               <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">LEGAL</h6>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <Link to="/termsAndCondition" className="text-reset">
                     Terms and conditions
-                  </a>
+                  </Link>
                 </p>
               </MDBCol>
 
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Districts</h6>
-                <div className="d-flex ">
+                <div className="footerDistricts d-flex ">
                   <div className="me-2">
                     <p>
-                      <a href="#!" className="text-reset">
+                      <Link
+                        to="/ListAd"
+                        className="text-reset"
+                        state={{ district: "Srinagar" }}
+                      >
                         Srinagar
-                      </a>
+                      </Link>
                     </p>
+
                     <p>
-                      <a href="#!" className="text-reset">
-                        Bandipore
-                      </a>
-                    </p>
-                    <p>
-                      <a href="#!" className="text-reset">
-                        Budgam
-                      </a>
-                    </p>
-                    <p>
-                      <a href="#!" className="text-reset">
+                      <Link
+                        to="/ListAd"
+                        className="text-reset"
+                        state={{ district: "Baramulla" }}
+                      >
                         Baramulla
-                      </a>
+                      </Link>
                     </p>
                     <p>
-                      <a href="#!" className="text-reset">
+                      <Link
+                        to="/ListAd"
+                        className="text-reset"
+                        state={{ district: "Kupwara" }}
+                      >
                         Kupwara
-                      </a>
+                      </Link>
                     </p>
                   </div>
                   <div className="ms-3">
                     {" "}
                     <p>
-                      <a href="#!" className="text-reset">
-                        Shopian
-                      </a>
-                    </p>
-                    <p>
-                      <a href="#!" className="text-reset">
+                      <Link
+                        to="/ListAd"
+                        className="text-reset"
+                        state={{ district: "Anantnag" }}
+                      >
                         Anantnag
-                      </a>
+                      </Link>
                     </p>
                     <p>
-                      <a href="#!" className="text-reset">
+                      <Link
+                        to="/ListAd"
+                        className="text-reset"
+                        state={{ district: "Pulwama" }}
+                      >
                         Pulwama
-                      </a>
+                      </Link>
                     </p>
                     <p>
-                      <a href="#!" className="text-reset">
+                      <Link
+                        to="/ListAd"
+                        className="text-reset"
+                        state={{ district: "Ganderbal" }}
+                      >
                         Ganderbal
-                      </a>
-                    </p>
-                    <p>
-                      <a href="#!" className="text-reset">
-                        Kulgam
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>

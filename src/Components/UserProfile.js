@@ -6,14 +6,14 @@ export default function UserProfile() {
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
   const ownerData = useSelector((state) => state.ownerData.ownerD);
   const tenantData = useSelector((state) => state.tenantDataSlice.tenantD);
-  
+
   console.log(tenantData);
 
   console.log(ownerData.name);
   console.log(ownerIsLogged);
 
   return (
-    <div className="d-flex  w-100">
+    <div className="d-flex  w-100 ">
       <div className="container mt-0 m-0 p-0">
         <div className="row d-flex justify-content-left ">
           <div className="col-md-5 w-100">
@@ -109,7 +109,7 @@ export default function UserProfile() {
                   ></i>
                 </div>
 
-                <div class="buttons">
+                {/* <div class="buttons">
                   {" "}
                   <button
                     class="btn  px-4 ms-3 text-white mt-5"
@@ -117,7 +117,7 @@ export default function UserProfile() {
                   >
                     Edit Profile
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

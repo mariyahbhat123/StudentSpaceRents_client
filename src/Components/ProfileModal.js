@@ -44,7 +44,9 @@ export default function ProfileModal() {
           <SidebarProfile />
           <Modal.Body style={{ height: "80vh", overflowX: "auto" }}>
             {showProfOrNot === true && showOrNotAddPro === false ? (
-              <UserProfile />
+              <div className="mt-5">
+                <UserProfile />
+              </div>
             ) : (
               ""
             )}

@@ -9,15 +9,12 @@ export default function WebsiteReviews() {
     <div className="">
       <h2 className="p-5">What tenants and owners say about us</h2>
 
-      <div
-        className="d-flex "
-        style={{ justifyContent: "center", marginLeft: "90px" }}
-      >
+      <div className="w-100 d-flex" style={{ justifyContent: "center" }}>
         {" "}
         <Row xs={1} md={3} className="w-100">
           {Array.from({ length: 3 }).map((_, idx) => (
             <Col key={idx}>
-              <Card className="mt-3" style={{ width: "85%" }}>
+              <Card className="mt-3" style={{ width: "100%" }}>
                 <Card.Header
                   className="d-flex p-4"
                   style={{ justifyContent: "left" }}

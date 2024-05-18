@@ -14,18 +14,30 @@ import Carousel from "react-bootstrap/Carousel";
 
 import Button from "react-bootstrap/esm/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import "../Styles/ListAd.css";
 
 export default function ListAd(props) {
-  const { state } = useLocation();
+  let { state } = useLocation();
   const stateDistrict = state.district;
   const locality = state.locality;
+  console.log(stateDistrict);
 
   // PROPERTY DATA
   const [propertyData, setPropertyData] = useState([]);
   console.log(propertyData);
   const [propertyId, setPropertyId] = useState("");
 
-  const [district, setDistrict] = useState(stateDistrict);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth <= 450) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
+  const [localityAddress, setLocalityAddress] = useState(state.locality);
+  const [district, setDistrict] = useState(state.district);
+  console.log(district);
   const [propertyAddress, setPropertyAddress] = useState(locality);
   const [propertyType, setPropertyType] = useState("");
   const [genderFor, setGenderFor] = useState("");
@@ -102,7 +114,7 @@ export default function ListAd(props) {
         !rent < 2000 &&
         breakfast === false &&
         !district &&
-        !locality
+        !localityAddress
       )
         return propertyData;
 
@@ -116,13 +128,22 @@ export default function ListAd(props) {
             : item.foodIncluded.breakfast === breakfast) &&
           (dinner === false ? true : item.foodIncluded.dinner === dinner) &&
           (!district ? true : item.district === district) &&
-          (!locality ? true : item.address === locality)
+          (!localityAddress ? true : item.address === localityAddress)
         );
       });
     },
-    [propertyData, propertyType, genderFor, rent, dinner, district, locality]
+    [
+      propertyData,
+      propertyType,
+      genderFor,
+      rent,
+      dinner,
+      district,
+      localityAddress,
+    ]
   );
 
+  const [search, setSearch] = useState("");
   return (
     <div className="w-100">
       {/* NAVBAR LIST ADVERTISEMENT */}
@@ -132,32 +153,319 @@ export default function ListAd(props) {
 
       {/* BODY */}
       <div
-        className="d-flex"
-        style={{ flexDirection: "row", height: "90.7vh" }}
+        className="BodyStartContainer"
+        // style={{ flexDirection: "row", height: "90.7vh" }}
       >
         {/* SIDEBAR FILTER LIST ADVERTISEMENT */}
-        <div
-          className=""
-          style={{
-            width: "30%",
-            border: "2px solid black",
-            backgroundColor: "#f5f5f5",
-          }}
-        >
-          <div className="mt-4" style={{ justifyContent: "center" }}>
-            <div className="w-100 ms-2 me-1">
-              <input
-                className="ms-2"
-                type="search"
-                value={locality}
+        {isMobile === false ? (
+          <div
+            className="FilterContainer"
+            // style={{
+            //   width: "30%",
+            //   border: "2px solid black",
+            //   backgroundColor: "#f5f5f5",
+            // }}
+          >
+            <div className="mt-4">
+              <div className="topSearchContainer d-flex w-100 ms-2 me-1">
+                <div
+                  className="searchDiv"
+                  style={{
+                    width: "75%",
+                    padding: "9px",
+                    marginLeft: "20px",
+
+                    borderRadius: "50px",
+                    border: "1px solid #ff385c",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <input
+                    className=" "
+                    type="search"
+                    style={{ border: "none", width: "90%", outline: "none" }}
+                    value={localityAddress}
+                    placeholder="Search Locality"
+                    onChange={(e) => setLocalityAddress(e.target.value)}
+                  />
+                  {/* {localityAddress ? (
+                  <button
+                    className="btnClearCom"
+                    style={{
+                      width: "8%",
+                      // position: "absolute",
+                      //left: "5%",
+                      border: "none",
+
+                      backgroundColor: "transparent",
+                    }}
+                    onClick={() => setLocalityAddress("")}
+                  >
+                    <ClearIcon className="" fontSize="small" style={{}} />
+                  </button> */}
+                </div>
+                <button
+                  variant="none"
+                  style={{
+                    width: "45px",
+                    height: "45px",
+                    backgroundColor: "#ff385c",
+                    padding: "4px",
+                    color: "white",
+                    borderRadius: "50%",
+                    marginLeft: "4px",
+                    border: "1px solid white",
+                  }}
+                  onClick={() => setLocalityAddress(localityAddress)}
+                >
+                  <SearchIcon />
+                </button>{" "}
+              </div>
+              <div
+                className="mt-4"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <div
+                  className="d-flex  "
+                  style={{
+                    width: "40%",
+                    border: "1px solid black",
+                    backgroundColor: "white",
+                    justifyContent: "center",
+                    borderRadius: "50px",
+                    padding: "4px",
+                    border: "1px solid #ff385c",
+                  }}
+                >
+                  {district ? (
+                    <div className="d-flex">
+                      <h6 className="ms-2" style={{ marginTop: "10px" }}>
+                        {district}
+                      </h6>
+                      <div className="ms-2">
+                        <button
+                          className="p-1 mb-2 mt-2 ms-3"
+                          style={{
+                            border: "0",
+
+                            backgroundColor: "white",
+                            height: "22px",
+                          }}
+                          onClick={() => setDistrict("")}
+                        >
+                          <ClearIcon fontSize="20px" className="mb-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <select
+                      style={{
+                        border: "none",
+                        padding: "8px",
+                        outline: "none",
+                      }}
+                      onClick={(e) => setDistrict(e.target.value)}
+                    >
+                      <option value="" selected disabled>
+                        District
+                      </option>
+                      <option value="Srinagar">Srinagar</option>
+                      <option value="Baramulla">Baramulla</option>
+                      <option value="Kupwara">Kupwara</option>
+                      <option value="Anantnag">Anantnag</option>
+                      <option value="Pulwama">Pulwama</option>
+
+                      <option value="Ganderbal">Ganderbal</option>
+                    </select>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* FILTER LISTING ADVERTISEMENT */}
+            <div
+              className="d-flex "
+              style={{ justifyContent: "center", marginTop: "16%" }}
+            >
+              <div
+                className="p-4"
+                style={{
+                  width: "85%",
+                  border: "1px solid #ff385c",
+                  backgroundColor: "white",
+                  borderRadius: "50px",
+                }}
+              >
+                <div
+                  className="d-flex"
+                  style={{ justifyContent: "space-between" }}
+                >
+                  <div style={{ color: "#ff385c" }}>
+                    <h5>Filters</h5>
+                  </div>
+                  <div className="">
+                    {" "}
+                    <button
+                      className="d-flex"
+                      style={{
+                        border: "0",
+                        backgroundColor: "white",
+                        color: "#ff385c",
+                      }}
+                    >
+                      <ReplayIcon className="  mb-1 " />
+
+                      <h5>Reset</h5>
+                    </button>
+                  </div>
+                </div>
+
+                <hr />
+                <div className="w-100">
+                  <div className="">
+                    <h5 className="mb-3">Accomodation Type</h5>
+                    <input
+                      type="checkbox"
+                      className="me-1"
+                      name="propertyType"
+                      value="Pg"
+                      checked={propertyType === "Pg"}
+                      onChange={(e) => handlePropetyType(e)}
+
+                      // setFilters({ propertyType: e.target.value })
+                    />
+                    PG
+                    <input
+                      type="checkbox"
+                      className="ms-3 me-1"
+                      name="propertyType"
+                      value="Apartment"
+                      checked={propertyType === "Apartment"}
+                      onChange={(e) => handlePropetyType(e)}
+                      // setFilters({ propertyType: e.target.value })
+                    />
+                    Apartment
+                    {/* <input type="checkbox" className="ms-3 me-1" />
+                  Room */}
+                  </div>
+                  <div className="mt-3">
+                    <h5 className="mb-3">For</h5>
+                    <input
+                      type="checkbox"
+                      className="me-1"
+                      name="for"
+                      value="Male"
+                      onChange={(e) => handleGender(e)}
+                    />
+                    Male
+                    <input
+                      type="checkbox"
+                      className="ms-3 me-1"
+                      value="Female"
+                      name="for"
+                      onChange={(e) => handleGender(e)}
+                    />
+                    Female
+                  </div>
+
+                  <div className="mt-3">
+                    <RangeSlider handleMonthlyRent={handleMonthlyRent} />
+                  </div>
+
+                  <div className="mt-3">
+                    <h5 className="mb-3">Food Included</h5>
+                    <input
+                      type="checkbox"
+                      className="me-1"
+                      name="breakfast"
+                      value={breakfast}
+                      onChange={(e) => handleBreakfast(e)}
+                    />
+                    BreakFast
+                    <input type="checkbox" className="ms-3 me-1" name="lunch" />
+                    Lunch
+                    <input
+                      type="checkbox"
+                      className="ms-3"
+                      name="dinner"
+                      value={dinner}
+                      onChange={(e) => handleDinner(e)}
+                    />{" "}
+                    Dinner
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="pt-2 pb-2"
+            style={{
+              position: "sticky",
+              zIndex: "10",
+              top: "0",
+              backgroundColor: "white",
+            }}
+          >
+            <div className="d-flex" style={{ justifyContent: "center" }}>
+              <div
+                className="searchDiv"
                 style={{
                   width: "75%",
-                  padding: "8px",
+                  padding: "9px",
+
                   borderRadius: "50px",
                   border: "1px solid #ff385c",
+                  backgroundColor: "white",
                 }}
-                placeholder="Search Locality"
-              />
+              >
+                <input
+                  className=" "
+                  type="search"
+                  style={
+                    !district
+                      ? { border: "none", width: "90%", outline: "none" }
+                      : { marginLeft: "45%", border: "none", outline: "none" }
+                  }
+                  value={localityAddress}
+                  placeholder="Search Locality"
+                  onChange={(e) => setLocalityAddress(e.target.value)}
+                />
+                {district ? (
+                  <div
+                    className="d-flex"
+                    style={{
+                      backgroundColor: "pink",
+                      width: "28%",
+                      border: "1px solid black",
+                      borderRadius: "100px",
+                      zIndex: "10",
+                      position: "absolute",
+                      top: "11px",
+                      left: "7%",
+                    }}
+                  >
+                    <h6 className="ms-3" style={{ marginTop: "10px" }}>
+                      {district}
+                    </h6>
+                    <div className="ms-2">
+                      <button
+                        className="p-1 mb-2 mt-2 "
+                        style={{
+                          border: "0",
+
+                          backgroundColor: "transparent",
+                          height: "22px",
+                        }}
+                        onClick={() => setDistrict("")}
+                      >
+                        <ClearIcon fontSize="20px" className="mb-3" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
               <button
                 variant="none"
                 style={{
@@ -170,183 +478,18 @@ export default function ListAd(props) {
                   marginLeft: "4px",
                   border: "1px solid white",
                 }}
+                onClick={() => setLocalityAddress(localityAddress)}
               >
                 <SearchIcon />
               </button>{" "}
             </div>
-            <div
-              className="mt-4"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <div
-                className="d-flex  "
-                style={{
-                  width: "40%",
-                  border: "1px solid black",
-                  backgroundColor: "white",
-                  justifyContent: "center",
-                  borderRadius: "50px",
-                  padding: "10px",
-                  border: "1px solid #ff385c",
-                }}
-              >
-                {district ? (
-                  <>
-                    <h6 className="ms-2" style={{ marginTop: "10px" }}>
-                      {district}
-                    </h6>
-                    <div className="ms-2">
-                      <button
-                        className="p-1 mb-2 mt-2"
-                        style={{
-                          border: "0",
-
-                          backgroundColor: "white",
-                          height: "22px",
-                        }}
-                        onClick={setDistrict("")}
-                      >
-                        <ClearIcon fontSize="20px" className="mb-3" />
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <select style={{ border: "none" }}>
-                    <option value="" selected disabled>
-                      District
-                    </option>
-                    <option value="Srinagar">Srinagar</option>
-                    <option value="Baramulla">Baramulla</option>
-                    <option value="Kupwara">Kupwara</option>
-                    <option value="Anantnag">Anantnag</option>
-                    <option value="Pulwama">Pulwama</option>
-
-                    <option value="Ganderbal">Ganderbal</option>
-                  </select>
-                )}
-              </div>
-            </div>
           </div>
-          {/* FILTER LISTING ADVERTISEMENT */}
-          <div
-            className="d-flex "
-            style={{ justifyContent: "center", marginTop: "16%" }}
-          >
-            <div
-              className="p-4"
-              style={{
-                width: "85%",
-                border: "1px solid #ff385c",
-                backgroundColor: "white",
-                borderRadius: "50px",
-              }}
-            >
-              <div
-                className="d-flex"
-                style={{ justifyContent: "space-between" }}
-              >
-                <div style={{ color: "#ff385c" }}>
-                  <h5>Filters</h5>
-                </div>
-                <div className="">
-                  {" "}
-                  <button
-                    className="d-flex"
-                    style={{
-                      border: "0",
-                      backgroundColor: "white",
-                      color: "#ff385c",
-                    }}
-                  >
-                    <ReplayIcon className="  mb-1 " />
-
-                    <h5>Reset</h5>
-                  </button>
-                </div>
-              </div>
-
-              <hr />
-              <div className="w-100">
-                <div className="">
-                  <h5 className="mb-3">Accomodation Type</h5>
-                  <input
-                    type="checkbox"
-                    className="me-1"
-                    name="propertyType"
-                    value="Pg"
-                    checked={propertyType === "Pg"}
-                    onChange={(e) => handlePropetyType(e)}
-
-                    // setFilters({ propertyType: e.target.value })
-                  />
-                  PG
-                  <input
-                    type="checkbox"
-                    className="ms-3 me-1"
-                    name="propertyType"
-                    value="Apartment"
-                    checked={propertyType === "Apartment"}
-                    onChange={(e) => handlePropetyType(e)}
-                    // setFilters({ propertyType: e.target.value })
-                  />
-                  Apartment
-                  {/* <input type="checkbox" className="ms-3 me-1" />
-                  Room */}
-                </div>
-                <div className="mt-3">
-                  <h5 className="mb-3">For</h5>
-                  <input
-                    type="checkbox"
-                    className="me-1"
-                    name="for"
-                    value="Male"
-                    onChange={(e) => handleGender(e)}
-                  />
-                  Male
-                  <input
-                    type="checkbox"
-                    className="ms-3 me-1"
-                    value="Female"
-                    name="for"
-                    onChange={(e) => handleGender(e)}
-                  />
-                  Female
-                </div>
-
-                <div className="mt-3">
-                  <RangeSlider handleMonthlyRent={handleMonthlyRent} />
-                </div>
-
-                <div className="mt-3">
-                  <h5 className="mb-3">Food Included</h5>
-                  <input
-                    type="checkbox"
-                    className="me-1"
-                    name="breakfast"
-                    value={breakfast}
-                    onChange={(e) => handleBreakfast(e)}
-                  />
-                  BreakFast
-                  <input type="checkbox" className="ms-3 me-1" name="lunch" />
-                  Lunch
-                  <input
-                    type="checkbox"
-                    className="ms-3"
-                    name="dinner"
-                    value={dinner}
-                    onChange={(e) => handleDinner(e)}
-                  />{" "}
-                  Dinner
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
         {/* LIST OF PROPERTIES */}
-        <div className="" style={{ width: "70%" }}>
+        <div className="propertyListContainer">
           <div style={{ overflowY: "scroll", height: "100%" }}>
-            <div className="mt-5 mb-5">
-              <h3 className="">Properties</h3>{" "}
+            <div className="mb-5">
+              <h3 className="mt-4">Properties</h3>{" "}
               <div className="ms-4 ">
                 <Row xs={1} md={3} className="w-100">
                   {filterPropertyData.map((item, idx) => {
@@ -361,7 +504,7 @@ export default function ListAd(props) {
                           {/* {Array.from({ length: 4 }).map((_, idx) => ( */}
                           <Col key={idx}>
                             <Card
-                              className="mt-5"
+                              className="mt-4"
                               onClick={() => setPropertyId(item._id)}
                             >
                               <Carousel fade className="w-100 " interval={null}>

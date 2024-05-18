@@ -192,15 +192,15 @@ export default function AddProperty() {
     setPropertyImage({ ...propertyImage, [e.target.name]: e.target.files[0] });
   };
   return (
-    <div className="w-100 ms-3">
+    <div className="w-100 p-2">
       <Form
-        className="d-flex justify-content-center"
-        style={{ boxShadow: "10px", border: "1px solid black" }}
+        className="d-flex justify-content-center p-4"
+        style={{ boxShadow: "10px", border: "1px solid #ff385c" }}
         encType="multipart/form-data"
         onSubmit={handleAddProperty}
       >
         <div className="">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mb-4">
             <h5>Add Property</h5>
           </div>
 
@@ -413,98 +413,149 @@ export default function AddProperty() {
               />
             </div>
             <div
-              className="w-50"
+              className="w-50 "
               style={{
                 position: "absolute",
                 zIndex: "10",
-                top: "450px",
+                top: "440px",
+                left: "35%",
               }}
             >
-              <GooglePlaces handlePlaceSelect={handlePlaceSelect} />
+              <GooglePlaces handlePlaceSelect={handlePlaceSelect} p="10" />
             </div>
           </div>
 
-          <div className="d-flex">
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlInput1"
-              style={{ width: "50%" }}
-            >
+          <div className="">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <div
+                className="mt-4 p-2"
                 style={{
                   width: "100%",
                   boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
                   borderRadius: "10px",
                 }}
               >
-                <h6 style={{ textAlign: "center" }}>Food Included</h6>
-                <div className="ms-1">
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="breakfast"
-                    onChange={checkedOnChange}
-                  />
-                  <p>Breakfast</p>
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="lunch"
-                    onChange={checkedOnChange}
-                  />
-                  <p>Lunch</p>
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="dinner"
-                    onChange={checkedOnChange}
-                  />
-                  <p>Dinner</p>
+                <h5 className="mt-2 mb-4" style={{ textAlign: "center" }}>
+                  Food Included
+                </h5>
+                <div
+                  className="ms-1 d-flex"
+                  style={{ justifyContent: "space-evenly" }}
+                >
+                  <div className="d-flex">
+                    <div className="me-2">
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="breakfast"
+                        onChange={checkedOnChange}
+                      />
+                    </div>
+
+                    <p>Breakfast</p>
+                  </div>
+                  <div className="d-flex">
+                    <div className="me-2">
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="lunch"
+                        onChange={checkedOnChange}
+                      />
+                    </div>
+                    <p>Lunch</p>
+                  </div>
+                  <div className="d-flex">
+                    <div className="me-2">
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="dinner"
+                        onChange={checkedOnChange}
+                      />
+                    </div>
+                    <p>Dinner</p>
+                  </div>
                 </div>
               </div>
             </Form.Group>
             <Form.Group
-              className="mb-3 ms-3"
+              className="mb-3  mt-4 "
               controlId="exampleForm.ControlInput1"
-              style={{ width: "50%" }}
             >
               <div
+                className="p-4"
                 style={{
                   width: "100%",
                   boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
                   borderRadius: "10px",
                 }}
               >
-                <h6 style={{ textAlign: "center" }}>Amenities Included</h6>
-                <div className="ms-1">
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="heatingAndCooling"
-                    onChange={checkedOnChange}
-                  />
-                  <p> Heating/Cooling System</p>
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="furniture"
-                    onChange={checkedOnChange}
-                  />
-                  <p>Furnished</p>
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="internetAndCableServices"
-                    onChange={checkedOnChange}
-                  />
-                  <p>Internet/Cable Services</p>
-                  <input
-                    type="checkbox"
-                    value={true}
-                    name="storageSpace"
-                    onChange={checkedOnChange}
-                  />
-                  <p>Storage Space</p>
+                <h5 className="mb-4" style={{ textAlign: "center" }}>
+                  Amenities Included
+                </h5>
+                <div
+                  className=" d-flex"
+                  style={{ justifyContent: "space-evenly" }}
+                >
+                  <div className="d-flex">
+                    <div className="me-2">
+                      {" "}
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="heatingAndCooling"
+                        onChange={checkedOnChange}
+                      />
+                    </div>
+                    <p>
+                      {" "}
+                      Heating/
+                      <br />
+                      Cooling System
+                    </p>
+                  </div>
+                  <div className="d-flex">
+                    <div className="me-2">
+                      {" "}
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="furniture"
+                        onChange={checkedOnChange}
+                      />
+                    </div>
+                    <p>Furnished</p>
+                  </div>
+
+                  <div className="d-flex">
+                    <div className="me-2">
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="internetAndCableServices"
+                        onChange={checkedOnChange}
+                      />
+                    </div>{" "}
+                    <p>
+                      Internet/
+                      <br />
+                      Cable Services
+                    </p>
+                  </div>
+
+                  <div className="d-flex">
+                    <div className="me-2">
+                      {" "}
+                      <input
+                        type="checkbox"
+                        value={true}
+                        name="storageSpace"
+                        onChange={checkedOnChange}
+                      />
+                    </div>{" "}
+                    <p>Storage Space</p>
+                  </div>
                 </div>
               </div>
             </Form.Group>
@@ -521,7 +572,11 @@ export default function AddProperty() {
               name="description"
               placeholder="DESCRIPTION"
               onChange={onChange}
-              style={{ width: "100%", height: "140px" }}
+              style={{
+                width: "100%",
+                height: "140px",
+                border: "1px solid #ff385c",
+              }}
             />
           </Form.Group>
 
@@ -529,7 +584,17 @@ export default function AddProperty() {
             className="mb-3 d-flex justify-content-center"
             controlId="exampleForm.ControlTextarea1"
           >
-            <Button name="submit" onClick={handleAddProperty}>
+            <Button
+              className="p-2"
+              name="submit"
+              variant="none"
+              onClick={handleAddProperty}
+              style={{
+                backgroundColor: "#ff385c",
+                width: "50%",
+                color: "white",
+              }}
+            >
               Submit
             </Button>
           </Form.Group>

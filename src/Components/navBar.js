@@ -11,16 +11,16 @@ import { toggleOff, toggleOn } from "../Redux/Slices/toggleSlice";
 import { Avatar } from "@mui/material";
 import { dontShowProfile, shwProfile } from "../Redux/Slices/isLoggedIn";
 import HouseHeartFill from "react-bootstrap-icons/dist/icons/house-heart-fill";
-import SSR from "../Logo/SSRLOGO.png";
+import SSR from "../Logo/home.png";
 import {
   showProfile,
   dontShowUserProfile,
 } from "../Redux/Slices/showProfileSlice";
 import AdminLogin from "./AdminLogin";
-export default function NavBar() {
+export default function NavBar(props) {
   const [show, setShow] = useState(false);
   // const [adminLog, setAdminLog] = useState(false);
-
+  const color = props.color;
   const dispatch = useDispatch();
   const toggleValue = useSelector((state) => state.toggle.active);
 
@@ -96,10 +96,11 @@ export default function NavBar() {
                 className=""
                 src={SSR}
                 alt=""
-                style={{ width: "26px", height: "25px", marginTop: "2px" }}
+                style={{ width: "26px", height: "23px" }}
               />
-
-              <div className="ms-1">StudentSpaceRents</div>
+              <div className="ms-1" style={{ color: color }}>
+                StudentSpaceRents
+              </div>
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -59,6 +59,7 @@ export default function TenantLogin() {
         dispatch(isLogged());
         console.log("YPPPPP");
       } else {
+        alert("Enter Correct credentials");
         dispatch(isNotLogged());
       }
     } catch (err) {

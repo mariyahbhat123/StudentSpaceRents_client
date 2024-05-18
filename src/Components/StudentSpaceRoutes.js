@@ -9,7 +9,7 @@ import {
 import LandingPage from "../Display/LandingPage";
 import TermsConditionMain from "./TermsAndConditionPage/TermsConditionMain";
 import ModalCom from "../Components/ModalCom";
-import AboutUs from "../Components/AboutUs";
+import AboutUs from "../Display/AboutUs";
 import ListAd from "../Components/ListAd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

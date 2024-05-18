@@ -1,0 +1,23 @@
+.BodyStartContainer {
+  display: flex;
+  flex-direction: row;
+  height: 90.7vh;
+}
+.FilterContainer {
+  width: 30%;
+  border: 2px solid black;
+  background-color: #f5f5f5;
+}
+.propertyListContainer {
+  width: 70%;
+}
+
+@media screen and (width<=450px) {
+  .BodyStartContainer {
+    display: initial;
+    height: 90.7vh;
+  }
+  .propertyListContainer {
+    width: 100%;
+  }
+}

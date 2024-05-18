@@ -128,7 +128,7 @@ export default function CardCarouselCom(props) {
                       <Card.Img
                         variant="top"
                         title="img0"
-                        src={`http://192.168.29.70:5000/images/${item.img0}`}
+                        src={`http://localhost:5000/images/${item.img0}`}
                         style={{ height: "200px" }}
                       />
                     </Carousel.Item>
@@ -137,7 +137,7 @@ export default function CardCarouselCom(props) {
                         variant="top"
                         name="img1"
                         value={item.img1}
-                        src={`http://192.168.29.70:5000/images/${item.img1}`}
+                        src={`http://localhost:5000/images/${item.img1}`}
                         style={{ height: "200px" }}
                       />
                     </Carousel.Item>
@@ -146,7 +146,7 @@ export default function CardCarouselCom(props) {
                         variant="top"
                         name="img2"
                         value={item.img2}
-                        src={`http://192.168.29.70:5000/images/${item.img2}`}
+                        src={`http://localhost:5000/images/${item.img2}`}
                         style={{ height: "200px" }}
                       />
                     </Carousel.Item>
@@ -155,7 +155,7 @@ export default function CardCarouselCom(props) {
                         variant="top"
                         name="img3"
                         value={item.img3}
-                        src={`http://192.168.29.70:5000/images/${item.img3}`}
+                        src={`http://localhost:5000/images/${item.img3}`}
                         style={{ height: "200px" }}
                       />
                     </Carousel.Item>
