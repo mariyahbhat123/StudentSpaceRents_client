@@ -26,6 +26,9 @@ import lightBulb from "../Icons/light-bulb.png";
 import Switch from "../Icons/switch.png";
 import kitchen from "../Icons/kitchen.png";
 import faucet from "../Icons/faucet.png";
+import CarouselComponent from "./CarouselComponent";
+
+import Carousel from "react-bootstrap/Carousel";
 
 export default function PropertyDetail(props) {
   let { state } = useLocation();
@@ -135,6 +138,15 @@ export default function PropertyDetail(props) {
       behavior: "smooth",
     });
   };
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth <= 450) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
   return (
     <div>
       <div className="w-100" style={{ backgroundColor: "#ff385c" }}>
@@ -198,15 +210,56 @@ export default function PropertyDetail(props) {
                     <h6>Available for {item.for}</h6>
                   </div>
                 </div>
-
-                <div className="">
-                  <CarouselGrid
-                    img0={item.img0}
-                    img1={item.img1}
-                    img2={item.img2}
-                    img3={item.img3}
-                  />
-                </div>
+                {!isMobile ? (
+                  <div className="">
+                    <CarouselGrid
+                      img0={item.img0}
+                      img1={item.img1}
+                      img2={item.img2}
+                      img3={item.img3}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className=" "
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Carousel fade className=" " style={{ width: "90%" }}>
+                      <Carousel.Item className="carousel-item">
+                        <img
+                          src={`http://localhost:5000/images/${item.img0}`}
+                          alt=""
+                          className="landingCarouselImages w-100"
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <img
+                          src={`http://localhost:5000/images/${item.img1}`}
+                          alt=""
+                          className="landingCarouselImages w-100"
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <img
+                          src={`http://localhost:5000/images/${item.img2}`}
+                          alt=""
+                          className="landingCarouselImages w-100"
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item className="carousel-item">
+                        <img
+                          src={`http://localhost:5000/images/${item.img3}`}
+                          alt=""
+                          className="landingCarouselImages w-100"
+                        />
+                      </Carousel.Item>
+                    </Carousel>
+                  </div>
+                )}
                 {/* <div className="w-100 mt-2">
                   <div className="d-flex " style={{ marginLeft: "15%" }}>
                     <Button
@@ -449,24 +502,28 @@ export default function PropertyDetail(props) {
                       </div>
                     </div>
                   </div>{" "}
-                  <div
-                    className="scheduleVisitContainer ms-5 p-4"
-                    style={{
-                      width: "30%",
-                      boxShadow: "2px 2px 2px 2px grey",
-                      height: "500px",
-                      position: "sticky",
-                      top: "0px",
-                      backgroundColor: "white",
-                    }}
-                  >
-                    <ScheduleVisit
-                      monthlyRent={item.monthlyRent}
-                      ownerEmail={item.ownerEmail}
-                      ownerName={item.ownerName}
-                      address={item.address}
-                    />
-                  </div>
+                  {!isMobile ? (
+                    <div
+                      className="scheduleVisitContainer ms-5 p-4"
+                      style={{
+                        width: "30%",
+                        boxShadow: "2px 2px 2px 2px grey",
+                        height: "500px",
+                        position: "sticky",
+                        top: "0px",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <ScheduleVisit
+                        monthlyRent={item.monthlyRent}
+                        ownerEmail={item.ownerEmail}
+                        ownerName={item.ownerName}
+                        address={item.address}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </>
             );

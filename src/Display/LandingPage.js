@@ -24,6 +24,12 @@ import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
 import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
 import { adminIsNotLogged } from "../Redux/Slices/adminLog";
 
+//Carousel Component
+import bed from "../CarouselImages/bed.jpg";
+import living1 from "../CarouselImages/living1.jpg";
+import living2 from "../CarouselImages/living2.jpg";
+import kitchen1 from "../CarouselImages/kitchen1.jpg";
+
 export default function LandingPage() {
   //Scroll 600
   const TOP_OFFSET = 600;
@@ -106,7 +112,7 @@ export default function LandingPage() {
       {/**CAROUSEL */}
       <div className="">
         <div className="carouselCom" style={{ position: "relative" }}>
-          <CarouselComponent />
+          <CarouselComponent img0={bed} img1={living1} img2={kitchen1} />
         </div>
 
         {/**NAVBAR*/}
