@@ -7,6 +7,7 @@ export default function PropDetailsMap(props) {
   const callback = (val) => {
     const lat = props.lat;
     const lng = props.lng;
+    const draggable = props.draggable;
     console.log("valueeeeeeee", lat);
   };
 

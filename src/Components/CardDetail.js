@@ -7,11 +7,17 @@ export default function CardDetail(props) {
   const icon0 = props.icon0;
   const icon1 = props.icon1;
   const icon2 = props.icon2;
+  const picked = props.picked;
+  const bckColor = props.backgroundColor;
   return (
     <div>
       <Card
         className="cardDetailIncludes"
-        style={{ width: props.width, height: props.height }}
+        style={{
+          width: props.width,
+          height: props.height,
+          backgroundColor: bckColor,
+        }}
       >
         {props.title === false ? (
           <Card.Body variant="flush" className="mt-2">

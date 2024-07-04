@@ -29,6 +29,7 @@ import faucet from "../Icons/faucet.png";
 import CarouselComponent from "./CarouselComponent";
 
 import Carousel from "react-bootstrap/Carousel";
+import Modal from "react-bootstrap/Modal";
 
 export default function PropertyDetail(props) {
   let { state } = useLocation();
@@ -147,6 +148,11 @@ export default function PropertyDetail(props) {
       setIsMobile(false);
     }
   }, []);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div>
       <div className="w-100" style={{ backgroundColor: "#ff385c" }}>
@@ -172,17 +178,16 @@ export default function PropertyDetail(props) {
                   </div>{" "}
                   <div
                     className="locationContainer
-                  d-flex ms-4"
+                  d-flex "
                   >
                     <LocationOnIcon className="locationIcon me-2" />
                     <h5>{item.address}</h5>
                   </div>
                 </div>
-                <div className="availableManaged d-flex p-2 mt-2">
+                <div className="availableManaged  p-2 mt-2">
                   <div
-                    className="p-1 ms-3"
+                    className="managedContainer "
                     style={{
-                      width: "200px",
                       border: "1px solid #ff385c",
                       borderRadius: "50px",
                     }}
@@ -200,9 +205,8 @@ export default function PropertyDetail(props) {
                     <h6>1 BHK</h6>
                   </div> */}
                   <div
-                    className="p-1 ms-4"
+                    className="availableContainer "
                     style={{
-                      width: "200px",
                       border: "1px solid #ff385c",
                       borderRadius: "50px",
                     }}
@@ -220,44 +224,94 @@ export default function PropertyDetail(props) {
                     />
                   </div>
                 ) : (
-                  <div
-                    className=" "
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Carousel fade className=" " style={{ width: "90%" }}>
-                      <Carousel.Item className="carousel-item">
-                        <img
-                          src={`http://localhost:5000/images/${item.img0}`}
-                          alt=""
-                          className="landingCarouselImages w-100"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item className="carousel-item">
-                        <img
-                          src={`http://localhost:5000/images/${item.img1}`}
-                          alt=""
-                          className="landingCarouselImages w-100"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item className="carousel-item">
-                        <img
-                          src={`http://localhost:5000/images/${item.img2}`}
-                          alt=""
-                          className="landingCarouselImages w-100"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item className="carousel-item">
-                        <img
-                          src={`http://localhost:5000/images/${item.img3}`}
-                          alt=""
-                          className="landingCarouselImages w-100"
-                        />
-                      </Carousel.Item>
-                    </Carousel>
+                  <div>
+                    <div
+                      className=" "
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Carousel fade className="mt-2" style={{ width: "94%" }}>
+                        <Carousel.Item className="carousel-item">
+                          <img
+                            src={`http://localhost:5000/images/${item.img0}`}
+                            alt=""
+                            className="landingCarouselImages w-100"
+                            style={{ height: "200px" }}
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item className="carousel-item">
+                          <img
+                            src={`http://localhost:5000/images/${item.img1}`}
+                            alt=""
+                            className="landingCarouselImages w-100"
+                            style={{ height: "200px" }}
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item className="carousel-item">
+                          <img
+                            src={`http://localhost:5000/images/${item.img2}`}
+                            alt=""
+                            className="landingCarouselImages w-100"
+                            style={{ height: "200px" }}
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item className="carousel-item">
+                          <img
+                            src={`http://localhost:5000/images/${item.img3}`}
+                            alt=""
+                            className="landingCarouselImages w-100"
+                            style={{ height: "200px" }}
+                          />
+                        </Carousel.Item>
+                      </Carousel>
+                    </div>
+                    <div className="mt-2">
+                      <Button
+                        className="p-2"
+                        variant="none"
+                        style={{
+                          borderRadius: "50px",
+                          width: "200px",
+                          backgroundColor: "#ff385c",
+                        }}
+                        onClick={handleShow}
+                      >
+                        Schedule Visit
+                      </Button>
+                      <Modal
+                        className="mt-2"
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                      >
+                        <Modal.Body>
+                          <div
+                            className="scheduleVisitContainer p-4"
+                            style={{
+                              height: "500px",
+                              width: "100%",
+                              backgroundColor: "white",
+                            }}
+                          >
+                            <ScheduleVisit
+                              monthlyRent={item.monthlyRent}
+                              ownerEmail={item.ownerEmail}
+                              ownerName={item.ownerName}
+                              address={item.address}
+                            />
+                          </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </div>
                   </div>
                 )}
                 {/* <div className="w-100 mt-2">
@@ -280,12 +334,12 @@ export default function PropertyDetail(props) {
                 </div> */}
 
                 <div
-                  className="d-flex mt-5"
+                  className="scheduleScrollContainer mt-5"
                   style={{ backgroundColor: "#f5f5f5" }}
                 >
-                  <div className="" style={{ width: "64%" }}>
+                  <div className="scrollToContainer">
                     {" "}
-                    <div className="ms-5">
+                    <div className="containerScrollWrapper">
                       <div
                         className="scrollContainer d-flex p-3"
                         style={{
@@ -327,7 +381,7 @@ export default function PropertyDetail(props) {
                         </Button>
                       </div>
                       <div
-                        className="aboutContainer mt-4 p-5"
+                        className="aboutContainer mt-4 "
                         style={{
                           backgroundColor: "white",
                         }}
@@ -436,12 +490,13 @@ export default function PropertyDetail(props) {
                           <PropDetailsMap
                             lat={item.coordinates.lat}
                             lng={item.coordinates.lng}
+                            draggable={false}
                           />
                         </div>
                       </div>
 
                       <div
-                        className="termsContainer mt-4 p-5"
+                        className="termsContainer mt-4"
                         style={{
                           backgroundColor: "white",
                         }}

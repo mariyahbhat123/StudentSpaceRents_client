@@ -34,6 +34,9 @@ export default function ListOfOwnerProperties() {
   }, []);
   return (
     <div className="">
+      <div className="d-flex justify-content-center mt-2">
+        <h4>ADDED PROPERTIES</h4>
+      </div>
       {ownerPropertyList.map((item) => {
         return (
           <>

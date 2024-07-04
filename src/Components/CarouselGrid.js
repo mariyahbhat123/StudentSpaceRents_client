@@ -15,7 +15,7 @@ function CarouselGrid(props) {
       <div
         className="d-flex"
         style={{
-          border: "1px solid black",
+          border: "1px solid #ff385c",
           width: "90%",
           justifyContent: "center",
         }}

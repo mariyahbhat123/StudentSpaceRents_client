@@ -1,3 +1,6 @@
 .DayDatePick:hover {
   cursor: pointer !important;
 }
+.time:hover {
+  cursor: pointer;
+}

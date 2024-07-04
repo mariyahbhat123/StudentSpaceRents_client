@@ -6,10 +6,21 @@ import { useSelector } from "react-redux";
 
 import ModalSchedule from "./ModalForScheduleVisit/ModalSchedule";
 import "../Styles/ScheduleVisit.css";
+import { backdropClasses } from "@mui/material";
 export default function ScheduleVisit(props) {
   const [show, setShow] = useState(false);
   const [dayDate, setDayDate] = useState({ day: "", date: "" });
   const [time, setTime] = useState("");
+  const [isBackgroundColor, setIsBackgroundColor] = useState({
+    div1: "white",
+    div2: "white",
+    div3: "white",
+    div4: "white",
+    div5: "white",
+    div6: "white",
+    div7: "white",
+  });
+
   console.log(time);
   console.log(dayDate);
   const monthlyRent = props.monthlyRent;
@@ -63,12 +74,12 @@ export default function ScheduleVisit(props) {
   let currentdate = d.getDate();
   let currentday = weekday[d.getDay()];
   const tmrwdate = d.getDate() + 1;
-  const tmrwday = weekday[d.getDay() - 6];
+  const tmrwday = weekday[d.getDay() + 1];
   let date3 = d.getDate() + 2;
-  let day3 = weekday[d.getDay() - 5];
+  let day3 = weekday[d.getDay() + 2];
 
   let date4 = d.getDate() + 3;
-  let day4 = weekday[d.getDay() - 4];
+  let day4 = weekday[d.getDay() + 3];
   let date5 = d.getDate() + 4;
   let day5 = weekday[d.getDay() - 3];
   let date6 = d.getDate() + 5;
@@ -85,8 +96,150 @@ export default function ScheduleVisit(props) {
   };
 
   const isLogged = useSelector((state) => state.isLoggedIn.isLogIn);
-  const [picked, setPicked] = useState(false);
+  const [picked, setPicked] = useState("");
   console.log(picked);
+
+  weekday.map((item) => {
+    console.log(item.length);
+  });
+
+  const selectedDate = () => {
+    if (picked === "div1") {
+      if (isBackgroundColor.div1 === "white") {
+        setIsBackgroundColor({
+          div1: "#ff385c",
+          div2: "white",
+          div3: "white",
+          div4: "white",
+          div5: "white",
+          div6: "white",
+          div7: "white",
+        });
+      } else {
+        setIsBackgroundColor({
+          div1: "white",
+        });
+      }
+    } else if (picked === "div2") {
+      if (isBackgroundColor.div2 === "white") {
+        setIsBackgroundColor({
+          div1: "white",
+          div2: "#ff385c",
+          div3: "white",
+          div4: "white",
+          div5: "white",
+          div6: "white",
+          div7: "white",
+        });
+      } else {
+        setIsBackgroundColor({
+          div2: "white",
+        });
+      }
+    } else if (picked === "div3") {
+      if (isBackgroundColor.div3 === "white") {
+        setIsBackgroundColor({
+          div1: "white",
+          div2: "white",
+          div3: "#ff385c",
+          div4: "white",
+          div5: "white",
+          div6: "white",
+          div7: "white",
+        });
+      } else {
+        setIsBackgroundColor({
+          div3: "white",
+        });
+      }
+    } else if (picked === "div4") {
+      if (isBackgroundColor.div4 === "white") {
+        setIsBackgroundColor({
+          div1: "white",
+          div2: "white",
+          div3: "white",
+          div4: "#ff385c",
+          div5: "white",
+          div6: "white",
+          div7: "white",
+        });
+      } else {
+        setIsBackgroundColor({
+          div4: "white",
+        });
+      }
+    } else if (picked === "div5") {
+      if (isBackgroundColor.div5 === "white") {
+        setIsBackgroundColor({
+          div1: "white",
+          div2: "white",
+          div3: "white",
+          div4: "white",
+          div5: "#ff385c",
+          div6: "white",
+          div7: "white",
+        });
+      } else {
+        setIsBackgroundColor({
+          div5: "white",
+        });
+      }
+    } else if (picked === "div6") {
+      if (isBackgroundColor.div6 === "white") {
+        setIsBackgroundColor({
+          div1: "white",
+          div2: "white",
+          div3: "white",
+          div4: "white",
+          div5: "white",
+          div6: "#ff385c",
+          div7: "white",
+        });
+      } else {
+        setIsBackgroundColor({
+          div6: "white",
+        });
+      }
+    } else if (picked === "div7") {
+      if (isBackgroundColor.div7 === "white") {
+        setIsBackgroundColor({
+          div1: "white",
+          div2: "white",
+          div3: "white",
+          div4: "white",
+          div5: "white",
+          div6: "white",
+          div7: "#ff385c",
+        });
+      } else {
+        setIsBackgroundColor({
+          div7: "white",
+        });
+      }
+    }
+  };
+
+  const [pickedTime, setPickedTime] = useState("");
+  const [timeBackground, setTimeBackground] = useState({
+    divTime1: "white",
+    divTime2: "white",
+  });
+  const selectedTime = () => {
+    if (pickedTime === "1to3") {
+      if (timeBackground.divTime1 === "white") {
+        setTimeBackground({ divTime1: "#ff385c", diveTime2: "white" });
+      } else {
+        setTimeBackground({ divTime1: "white" });
+      }
+    } else if (pickedTime === "4to7") {
+      if (timeBackground.divTime2 === "white") {
+        setTimeBackground({ divTime2: "#ff385c", divTime1: "white" });
+      } else {
+        setTimeBackground({ divTime2: "white" });
+      }
+    }
+  };
+
   return (
     <div>
       <div>
@@ -109,7 +262,8 @@ export default function ScheduleVisit(props) {
               onClick={() => {
                 return (
                   setDayDate({ day: currentday, date: currentdate }),
-                  setPicked(true)
+                  setPicked("div1"),
+                  selectedDate()
                 );
               }}
             >
@@ -121,11 +275,18 @@ export default function ScheduleVisit(props) {
                 item0={currentday}
                 item1={currentdate}
                 picked={picked}
+                backgroundColor={isBackgroundColor.div1}
               />
             </div>
             <div
               className="DayDatePick me-2"
-              onClick={() => setDayDate({ day: tmrwday, date: tmrwdate })}
+              onClick={() => {
+                return (
+                  setDayDate({ day: tmrwday, date: tmrwdate }),
+                  setPicked("div2"),
+                  selectedDate()
+                );
+              }}
             >
               <CardDetail
                 width="5rem"
@@ -133,51 +294,102 @@ export default function ScheduleVisit(props) {
                 title={false}
                 item0={tmrwday}
                 item1={tmrwdate}
+                backgroundColor={isBackgroundColor.div2}
               />
             </div>
-            <div className="DayDatePick me-2">
+            <div
+              className="DayDatePick me-2"
+              onClick={() => {
+                return (
+                  setDayDate({ day: day3, date: date3 }),
+                  setPicked("div3"),
+                  selectedDate()
+                );
+              }}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
                 title={false}
                 item0={day3}
                 item1={date3}
+                backgroundColor={isBackgroundColor.div3}
               />
             </div>
-            <div className="DayDatePick me-2">
+            <div
+              className="DayDatePick me-2"
+              onClick={() => {
+                return (
+                  setDayDate({ day: day4, date: date4 }),
+                  setPicked("div4"),
+                  selectedDate()
+                );
+              }}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
                 title={false}
                 item0={day4}
                 item1={date4}
+                backgroundColor={isBackgroundColor.div4}
               />
             </div>
-            <div className="DayDatePick me-2">
+            <div
+              className="DayDatePick me-2"
+              onClick={() => {
+                return (
+                  setDayDate({ day: day5, date: date5 }),
+                  setPicked("div5"),
+                  selectedDate()
+                );
+              }}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
                 title={false}
                 item0={day5}
                 item1={date5}
+                backgroundColor={isBackgroundColor.div5}
               />
             </div>
-            <div className="DayDatePick me-2">
+            <div
+              className="DayDatePick me-2"
+              onClick={() => {
+                return (
+                  setDayDate({ day: day6, date: date6 }),
+                  setPicked("div6"),
+                  selectedDate()
+                );
+              }}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
                 title={false}
                 item0={day6}
                 item1={date6}
+                backgroundColor={isBackgroundColor.div6}
               />
             </div>
-            <div className="DayDatePick me-2">
+            <div
+              className="DayDatePick me-2"
+              onClick={() => {
+                return (
+                  setDayDate({ day: day7, date: date7 }),
+                  setPicked("div7"),
+                  selectedDate()
+                );
+              }}
+            >
               <CardDetail
                 width="5rem"
                 height="6rem"
                 title={false}
                 item0={day7}
                 item1={date7}
+                backgroundColor={isBackgroundColor.div7}
               />
             </div>
           </Slider>
@@ -187,28 +399,43 @@ export default function ScheduleVisit(props) {
           style={{ justifyContent: "space-between" }}
         >
           <div
-            className=""
+            className="time"
             style={{
               textAlign: "center",
               border: "1px solid grey",
               padding: "4px 0px",
               width: "180px",
               borderRadius: "50px",
+              backgroundColor: timeBackground.divTime1,
             }}
-            onClick={(e) => setTime("01:00 pm - 03:00 pm")}
+            onClick={(e) => {
+              return (
+                setTime("01:00 pm - 03:00 pm"),
+                setPickedTime("1to3"),
+                selectedTime()
+              );
+            }}
           >
             {" "}
             <p className="m-auto">01:00 pm - 03:00 pm</p>
           </div>
           <div
+            className="time"
             style={{
               textAlign: "center",
               border: "1px solid grey",
               padding: "4px 0px",
               width: "180px",
               borderRadius: "50px",
+              backgroundColor: timeBackground.divTime2,
             }}
-            onClick={(e) => setTime("  04:00 - 07:00 pm")}
+            onClick={(e) => {
+              return (
+                setTime("  04:00 - 07:00 pm"),
+                setPickedTime("4to7"),
+                selectedTime()
+              );
+            }}
           >
             {" "}
             <p className="m-auto">04:00 - 07:00 pm</p>

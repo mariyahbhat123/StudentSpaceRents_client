@@ -21,6 +21,7 @@ import PropertyDetail from "./PropertyDetail";
 
 import HowToUseMain from "./HowUse/HowToUseMain";
 import { adminIsLoggedIn } from "../Redux/Slices/adminLog";
+import ScheduleVisit from "./ScheduleVisit";
 
 export default function StudentSpaceRoutes() {
   const [secretData, setSecretData] = useState("");
@@ -114,6 +115,7 @@ export default function StudentSpaceRoutes() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/howToUse" element={<HowToUseMain />} />
           <Route path="/termsAndCondition" element={<TermsConditionMain />} />
+          <Route path="/ScheduleVisit" element={<ScheduleVisit />} />
 
           <Route path="/ListAd" element={<ListAd />} />
           <Route path="/googleMaps" element={<GoogleMaps />} />
