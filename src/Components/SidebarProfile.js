@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Sidebar,
@@ -24,6 +24,10 @@ import AddHomeIcon from "@mui/icons-material/AddHome";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import { dontShowProfile } from "../Redux/Slices/profileSlice";
 import { showProfile } from "../Redux/Slices/profileSlice";
+
+import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
+import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
+import { adminIsNotLogged } from "../Redux/Slices/adminLog";
 import {
   dontShowOwnerAddProperty,
   showOwnerAddProperty,
@@ -32,6 +36,11 @@ import showOwnerListProperties, {
   dontShowOwnerProperty,
   showOwnerProperty,
 } from "../Redux/Slices/showOwnerListProperties";
+import { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
+import {
+  dontShowProfileUser,
+  showProfileUser,
+} from "../Redux/Slices/showProfileModalSlice";
 export default function SidebarProfile() {
   const [anchorElUser, setAnchorElUser] = useState(false);
   const [show, setShow] = useState(false);
@@ -72,12 +81,20 @@ export default function SidebarProfile() {
   const showOrNotAddPro = useSelector(
     (state) => state.showOrNotAddPro.showOrNoOwnerAddPro
   );
-  const handleOpenUserMenu = (e) => {
-    setAnchorElUser(true);
+
+  const [userIconLogout, setUserIconLogout] = useState(false);
+  const handleOpenCloseUserMenu = (e) => {
+    if (anchorElUser === null) {
+      setAnchorElUser(true);
+    } else {
+      setAnchorElUser(null);
+    }
   };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+
+  // };
+
+  useEffect(() => {}, [anchorElUser]);
 
   const dispatch = useDispatch();
   const handleProfile = () => {
@@ -85,8 +102,6 @@ export default function SidebarProfile() {
       dispatch(showProfile());
       dispatch(dontShowOwnerAddProperty());
       dispatch(dontShowOwnerProperty());
-    } else {
-      dispatch(dontShowProfile());
     }
   };
 
@@ -95,8 +110,6 @@ export default function SidebarProfile() {
       dispatch(showOwnerAddProperty());
       dispatch(dontShowProfile());
       dispatch(dontShowOwnerProperty());
-    } else {
-      dispatch(dontShowOwnerAddProperty());
     }
   };
 
@@ -104,14 +117,34 @@ export default function SidebarProfile() {
     if (ownerPropertyList === false) {
       dispatch(showOwnerProperty());
       dispatch(dontShowProfile());
-      dispatch(dontShowProfile());
-    } else {
-      dispatch(dontShowOwnerProperty());
+      dispatch(dontShowOwnerAddProperty());
     }
   };
+
+  const removeToken = () => {
+    //REMOVING USER AUTH TOKEN AND OWNER AUTH TOKEN FROM LOCALSTORAGE ON REMOVETOKEN FUNCTION
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("ownerAuthToken");
+    localStorage.removeItem("adminAuthToken");
+    localStorage.removeItem("tenantData");
+    localStorage.removeItem("ownerData");
+
+    //DISPATCHING ACTION USER IS NOT LOGGED, OWNER IS NOT LOGGED , DONT SHOW USER PROFILE ON REMOVETOKEN FUNCTION
+    dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
+    dispatch(ownerNotLogged());
+    dispatch(adminIsNotLogged());
+    dispatch(dontShowProfileUser());
+  };
+
+  const tenantD = localStorage.getItem("tenantData");
+  const tenantDatas = JSON.parse(tenantD);
+
+  const ownerD = localStorage.getItem("ownerData");
+  const ownerDatas = JSON.parse(ownerD);
+
   return (
     <div className="">
-      <Sidebar collapsed={!show}>
+      <Sidebar collapsed={!show} style={{ height: "80vh" }}>
         <Menu>
           <MenuItem
             icon={<MenuOutlinedIcon />}
@@ -120,17 +153,17 @@ export default function SidebarProfile() {
               toggle();
             }}
           >
-            Admin
+            Student Space
           </MenuItem>
 
           <MenuItem icon={<PersonIcon />} onClick={() => handleProfile()}>
             Profile{" "}
           </MenuItem>
-          {isLogged === true ? (
-            <MenuItem icon={<FavoriteBorderIcon />}> WishList </MenuItem>
+          {/* {isLogged === true ? (
+            // <MenuItem icon={<FavoriteBorderIcon />}> WishList </MenuItem>
           ) : (
             ""
-          )}
+          )} */}
 
           {ownerIsLogged === true ? (
             <>
@@ -163,43 +196,60 @@ export default function SidebarProfile() {
           sx={{ flexGrow: 0 }}
           display={"flex"}
           justifyContent={"center"}
-          marginTop={40}
+          marginTop={isLogged === true ? 50 : 40}
         >
           <Tooltip title="Logout" placement="top">
             <IconButton
-              onClick={
-                anchorElUser == null ? handleOpenUserMenu : handleCloseUserMenu
-              }
+              // onClick={
+              //   anchorElUser === null
+              //     ? setAnchorElUser(true)
+              //     : setAnchorElUser(null)
+              // }
+
+              onClick={handleOpenCloseUserMenu}
               sx={{ p: 1 }}
             >
               <Avatar
                 alt="Remy Sharp"
                 src={
                   ownerIsLogged === true
-                    ? ""
+                    ? ownerDatas.gender === "female"
+                      ? "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
+                      : "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
                     : isLogged === true
-                    ? tenantData.img
+                    ? tenantDatas.gender === "female"
+                      ? "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_female_icon_192701.png"
+                      : "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_male_icon_192702.png"
                     : ""
                 }
-                sx={{ height: "42px", width: "42px" }}
+                sx={
+                  isLogged === true
+                    ? { height: "45px", width: "45px" }
+                    : { height: "42px", width: "40px" }
+                }
               ></Avatar>
             </IconButton>{" "}
           </Tooltip>
         </Box>{" "}
         <Menu>
           {anchorElUser ? (
-            <MenuItem onClick={handleCloseUserMenu}>
+            <MenuItem
+            //onClick={handleOpenCloseUserMenu}
+            >
               {" "}
               <Typography textAlign="center">
                 {!show ? (
                   <Link to="/">
                     <MenuItem
                       icon={<LogoutIcon />}
-                      style={{ padding: "0px" }}
+                      style={{ padding: "0px", color: "black" }}
+                      onClick={removeToken}
                     />
                   </Link>
                 ) : (
-                  <Link to="/">Logout</Link>
+                  <Link to="/" onClick={removeToken} style={{ color: "black" }}>
+                    Logout
+                  </Link>
                 )}
               </Typography>
             </MenuItem>

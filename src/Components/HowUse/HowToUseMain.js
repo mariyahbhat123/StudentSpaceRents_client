@@ -14,7 +14,13 @@ import SofaIllustration from "./Illustration/sofaIllustration.jpg";
 const HowToUseMain = () => {
   return (
     <section className={styles.pageStyle}>
-      <NavBar />
+      <div
+        style={{
+          backgroundColor: "#ff385c",
+        }}
+      >
+        <NavBar color="#FED8E4" />
+      </div>
       <section className={styles.heroContainer}>
         <h1 className={styles.header}>
           4 easy steps to <br /> book your home
@@ -46,9 +52,9 @@ const HowToUseMain = () => {
                   We verify the properties
                 </h6>
                 <p className="pt-4">
-                  We show you real photos and videos of each property. We let
-                  you see inside drawers and cupboards, and show you every
-                  corner of the property.
+                  We show you real photos of each property. We let you see
+                  inside drawers and cupboards, and show you every corner of the
+                  property.
                 </p>
               </div>
               <div className="">
@@ -64,7 +70,6 @@ const HowToUseMain = () => {
           </div>
         </div>
       </article>
-
       <article className={`${styles.slide}`}>
         <div className={styles.container}>
           <div className="mr-4 mx-auto mb-5">
@@ -86,9 +91,9 @@ const HowToUseMain = () => {
               <div className="">
                 <p className="">
                   <strong>First payment:</strong> As an extra security step,
-                  your first payment is made through Spotahome. We will transfer
-                  this money to the landlord 48 hours after you move in, unless
-                  you contact us with a problem.
+                  your first payment is made through StudentSpaceRents. We will
+                  transfer this money to the landlord 48 hours after you move
+                  in, unless you contact us with a problem.
                 </p>
               </div>
               <div className="">
@@ -101,7 +106,6 @@ const HowToUseMain = () => {
           </div>
         </div>
       </article>
-
       <article className={`${styles.slide}`}>
         <div className={styles.container}>
           <div className="mr-4 mx-auto mb-5">
@@ -122,16 +126,15 @@ const HowToUseMain = () => {
                   We are here to help
                 </h6>
                 <p className="pt-4">
-                  Many of our tenants are moving to a new country for the first
-                  time. In Spotahome, we speak 8 European languages and deal
-                  with landlords every day.
+                  Many of our tenants are moving to a new district for the first
+                  time. In StudentSpaceRents, we speak 2 languages and deal with
+                  landlords every day.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </article>
-
       <article id={styles.moveInSlide} className={`${styles.slide}`}>
         <div className={styles.container}>
           <div className="mr-4 mx-auto mb-5">
@@ -141,10 +144,10 @@ const HowToUseMain = () => {
             <h2>4. Move in</h2>
             <p className="pt-3">
               And that’s it; the home is yours! The landlord will now be your
-              main point of contact, but Spotahome will still be here in case
-              you have any issues.And that’s it; the home is yours! The landlord
-              will now be your main point of contact, but Spotahome will still
-              be here in case you have any issues.
+              main point of contact, but StudentSpaceRents will still be here in
+              case you have any issues.And that’s it; the home is yours! The
+              landlord will now be your main point of contact, but
+              StudentSpaceRents will still be here in case you have any issues.
             </p>
             <p className="pt-3">
               All you have to do is collect your keys and sign your contract.

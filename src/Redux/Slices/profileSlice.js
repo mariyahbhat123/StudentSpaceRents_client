@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const showProfileOrNot = {
-  showOrNoProf: false,
+  showOrNoProf: true,
 };
 
 const profileSlice = createSlice({

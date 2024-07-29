@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import NavBar from "./navBar";
 import FooterCom from "./FooterCom";
@@ -30,6 +31,32 @@ import CarouselComponent from "./CarouselComponent";
 
 import Carousel from "react-bootstrap/Carousel";
 import Modal from "react-bootstrap/Modal";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import ProfileModal from "./ProfileModal";
+
+import { dontShowProfile } from "../Redux/Slices/profileSlice";
+import { showProfile } from "../Redux/Slices/profileSlice";
+
+import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
+import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
+import { adminIsNotLogged } from "../Redux/Slices/adminLog";
+import {
+  dontShowOwnerAddProperty,
+  showOwnerAddProperty,
+} from "../Redux/Slices/ownerAddPropertySlice";
+import showOwnerListProperties, {
+  dontShowOwnerProperty,
+  showOwnerProperty,
+} from "../Redux/Slices/showOwnerListProperties";
+import { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
+import {
+  dontShowProfileUser,
+  showProfileUser,
+} from "../Redux/Slices/showProfileModalSlice";
+import ProfileLogoutContainer from "./ProfileLogoutContainer";
 
 export default function PropertyDetail(props) {
   let { state } = useLocation();
@@ -44,7 +71,7 @@ export default function PropertyDetail(props) {
 
   const showPropertyDetails = async () => {
     const response = await fetch(
-      `http://192.168.29.70:5000/api/propertyData/${propertyID}`,
+      `http://localhost:5000/api/propertyData/${propertyID}`,
       {
         method: "POST",
 
@@ -153,11 +180,96 @@ export default function PropertyDetail(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const dispatch = useDispatch();
+
+  //SHOW PROFILE DROPDOWN
+  const showProfile = useSelector(
+    (state) => state.showUsersProfile.showUserProfile
+  );
+
+  //SHOW PROFILE DATA MODAL
+  const showProfileModal = useSelector(
+    (state) => state.showProfileModal.showProMod
+  );
+  const removeToken = () => {
+    //REMOVING USER AUTH TOKEN AND OWNER AUTH TOKEN FROM LOCALSTORAGE ON REMOVETOKEN FUNCTION
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("ownerAuthToken");
+    localStorage.removeItem("adminAuthToken");
+
+    //DISPATCHING ACTION USER IS NOT LOGGED, OWNER IS NOT LOGGED , DONT SHOW USER PROFILE ON REMOVETOKEN FUNCTION
+    dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
+    dispatch(ownerNotLogged());
+    dispatch(adminIsNotLogged());
+    dispatch(dontShowProfileUser());
+  };
+
+  const handleCloseModalUser = () => {
+    dispatch(dontShowProfileUser());
+  };
   return (
     <div>
       <div className="w-100" style={{ backgroundColor: "#ff385c" }}>
-        <NavBar />
+        <NavBar color="#FED8E4" />
       </div>
+      {showProfile === true ? (
+        <div className="" style={{ position: "initial" }}>
+          {/* <div>
+            <div>
+              <PersonPinIcon className="" style={{ fontSize: "30px" }} />
+            </div>
+            <Button
+              className="mt-1"
+              variant="none"
+              style={{ boxShadow: "none", fontWeight: "bold" }}
+              onClick={() => dispatch(showProfileUser())}
+            >
+              Profile
+            </Button>
+            <hr style={{ color: "#ff385c", fontWeight: "bold" }} />
+          </div>
+
+          {/* {isLogged === true &&
+            ownerIsLogged === false &&
+            adminIsLogged === false ? (
+              <div>
+                <FavoriteBorderIcon />
+                <h6 className="mt-2">WishList</h6>
+                <hr />
+              </div>
+            ) : (
+              ""
+            )} */}
+          {/* <div>
+            <div>
+              <LogoutIcon />
+            </div>
+            <Button
+              className="mt-1"
+              variant="none"
+              style={{
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                border: "none",
+                fontWeight: "bold",
+              }}
+              onClick={removeToken}
+            >
+              Logout
+            </Button>
+          </div> */}
+          <ProfileLogoutContainer />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {showProfileModal === true ? (
+        <ProfileModal show={showProfileModal} close={handleCloseModalUser} />
+      ) : (
+        ""
+      )}
 
       {propertyData
         ? propertyData.map((item) => {

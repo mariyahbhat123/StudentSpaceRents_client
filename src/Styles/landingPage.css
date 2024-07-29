@@ -28,10 +28,10 @@
 .ProfileLogoutContainer {
   position: fixed;
   z-index: 10;
-  top: 10%;
+  top: 10.6%;
   left: 85%;
   background-color: white;
-  width: 200px;
+  width: 212px;
   padding: 10px;
   box-shadow: 1px 1px 1px 1px #ff385c;
   border: 1px solid #ff385c;

@@ -13,7 +13,13 @@ export default function LandlordRegistration() {
     number: null,
     password: "",
     confirmPassword: "",
+    img: "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=",
   });
+
+  const [err, setErr] = useState("");
+  console.log(err);
+  const [errMsg, setErrMsg] = useState("");
+  console.log(errMsg);
 
   const onChange = (e) => {
     setOwnerCredentials({
@@ -41,11 +47,19 @@ export default function LandlordRegistration() {
         }),
       });
       const json = await response.json();
-      if (!json) {
-        return alert("Please enter correct credentials");
-      } else if (json.success) {
+      if (json.success) {
+        localStorage.setItem("ownerAuthToken", json.ownerAuthToken);
+        localStorage.setItem("ownerData", JSON.stringify(ownerCredentials));
         dispatch(isLogged());
         dispatch(toggleOff());
+      } else {
+        if (json.error) {
+          setErr(json.error);
+        }
+        if (json.msg) {
+          setErr(json.error);
+          setErrMsg(json.msg);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -69,6 +83,29 @@ export default function LandlordRegistration() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          {err[0].path === "email" ? (
+            <p
+              style={{
+                backgroundColor: "#FFCCCC ",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              Please Enter a valid email address
+            </p>
+          ) : err === "emailExist" ? (
+            <p
+              style={{
+                backgroundColor: "#FFCCCC ",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {errMsg}
+            </p>
+          ) : (
+            ""
+          )}
           <Form.Control
             type="email"
             name="email"
@@ -78,6 +115,29 @@ export default function LandlordRegistration() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          {err[1].path === "number" ? (
+            <p
+              style={{
+                backgroundColor: "#FFCCCC ",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              Please enter Valid Number
+            </p>
+          ) : err === "number" ? (
+            <p
+              style={{
+                backgroundColor: "#FFCCCC ",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {errMsg}
+            </p>
+          ) : (
+            ""
+          )}
           <Form.Control
             type="number"
             name="number"
@@ -97,6 +157,19 @@ export default function LandlordRegistration() {
             onChange={onChange}
           />
         </Form.Group>
+        {err === "password" ? (
+          <p
+            style={{
+              backgroundColor: "#FFCCCC ",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            {errMsg}
+          </p>
+        ) : (
+          ""
+        )}
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Control
             type="password"

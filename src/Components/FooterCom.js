@@ -144,7 +144,7 @@ export default function FooterCom() {
                 </p>
                 <p>
                   <MDBIcon color="secondary" icon="envelope" className="me-3" />
-                  info@example.com
+                  studentSpaceRents@gmail.com
                 </p>
                 <p>
                   <MDBIcon color="secondary" icon="phone" className="me-3" /> +

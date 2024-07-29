@@ -21,6 +21,9 @@ export default function LandlordLogin() {
     });
   };
 
+  const [err, setErr] = useState();
+  console.log(err);
+
   const dispatch = useDispatch();
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -44,13 +47,19 @@ export default function LandlordLogin() {
         const name = ownerDetail.name;
         const email = ownerDetail.email;
         const img = ownerDetail.img;
+        localStorage.setItem("ownerData", JSON.stringify(ownerDetail));
         dispatch(ownerData({ name: name, email: email, img: img }));
 
         dispatch(ownerLoggedIn());
         dispatch(toggleOff());
       } else {
-        alert("Enter Correct credentials");
-        dispatch(ownerNotLogged());
+        if (json.error[0].path) {
+          setErr(json.error[0].path);
+          dispatch(ownerNotLogged());
+        } else {
+          setErr(json.error);
+          dispatch(ownerNotLogged());
+        }
       }
     } catch (err) {
       console.log(err);
@@ -62,7 +71,25 @@ export default function LandlordLogin() {
         <h2 className="userLog-Reg" style={{ textAlign: "center" }}>
           Owner Login
         </h2>
+
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          {err ? (
+            err === "email" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Please Enter a valid email address
+              </p>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
           <Form.Control
             type="email"
             name="email"
@@ -74,6 +101,23 @@ export default function LandlordLogin() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          {err ? (
+            err === "password" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Please Enter a valid password
+              </p>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
           <Form.Control
             type="password"
             name="password"

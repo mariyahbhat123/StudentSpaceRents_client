@@ -17,6 +17,8 @@ import {
   dontShowUserProfile,
 } from "../Redux/Slices/showProfileSlice";
 import AdminLogin from "./AdminLogin";
+import Dropdown from "react-bootstrap/Dropdown";
+
 export default function NavBar(props) {
   const [show, setShow] = useState(false);
   // const [adminLog, setAdminLog] = useState(false);
@@ -80,9 +82,15 @@ export default function NavBar(props) {
     }
   };
 
+  const tenantD = localStorage.getItem("tenantData");
+  const tenantDatas = JSON.parse(tenantD);
+
+  const ownerD = localStorage.getItem("ownerData");
+  const ownerDatas = JSON.parse(ownerD);
+
   console.log(toggleValue);
   return (
-    <div style={{ position: "sticky" }}>
+    <div style={{ position: "sticky", zIndex: 999 }}>
       <Navbar
         collapseOnSelect
         expand="lg"
@@ -121,31 +129,20 @@ export default function NavBar(props) {
                 About us
               </Link>
               <NavDropdown
-                title="Dropdown"
-                id="collapsible-nav-dropdown"
+                title="More Details"
                 className="ml-2"
+                id="basic-nav-dropdown"
               >
-                <Link to="/termsAndCondition">
-                  <NavDropdown.Item href="#action/3.1">
-                    Terms & Conditions
-                  </NavDropdown.Item>
-                </Link>
-                <Link to="/howToUse">
-                  {" "}
-                  <NavDropdown.Item href="#action/3.2">
-                    How To Use
-                  </NavDropdown.Item>
-                </Link>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
+                <NavDropdown.Item href="#action/3.1">
+                  <Link to="/termsAndCondition">Terms & Conditions </Link>
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+                <hr />{" "}
+                <NavDropdown.Item href="#action/3.2">
+                  <Link to="/howToUse"> How To Use</Link>
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Nav className="AvatarSignContainer ms-auto">
+            <Nav className="AvatarSignContainer ms-auto me-4">
               {isLogged === true || ownerIsLogged === true ? (
                 <Button
                   onClick={() =>
@@ -164,7 +161,37 @@ export default function NavBar(props) {
                   }}
                 >
                   {" "}
-                  <Avatar className="" style={{ width: "" }}></Avatar>
+                  <Avatar
+                    className=""
+                    sx={{ width: 45, height: 45 }}
+                    src={
+                      ownerIsLogged === true
+                        ? ownerDatas.gender === "female"
+                          ? "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
+                          : "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
+                        : isLogged === true
+                        ? tenantDatas.gender === "female"
+                          ? "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_female_icon_192701.png"
+                          : "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_male_icon_192702.png"
+                        : ""
+                    }
+                  >
+                    {/* <img
+                      src={
+                        ownerIsLogged === true
+                          ? ownerDatas.gender === "female"
+                            ? "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_female_icon_192701.png"
+                            : "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_male_icon_192702.png"
+                          : isLogged === true
+                          ? tenantDatas.gender === "female"
+                            ? "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_female_icon_192701.png"
+                            : "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_male_icon_192702.png"
+                          : ""
+                      }
+                      width="90"
+                      class="rounded-circle  "
+                    /> */}
+                  </Avatar>
                 </Button>
               ) : (
                 <Button

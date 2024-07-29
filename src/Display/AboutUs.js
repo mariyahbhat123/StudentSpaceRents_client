@@ -5,13 +5,62 @@ import FooterCom from "../Components/FooterCom";
 import home from "../AboutUsicons/home (2).png";
 import listing from "../AboutUsicons/work-order.png";
 import brokers from "../AboutUsicons/avoid-crowds.png";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Button from "react-bootstrap/esm/Button";
+import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
+import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
+import { adminIsNotLogged } from "../Redux/Slices/adminLog";
+import { isNotLogged } from "../Redux/Slices/isLoggedIn";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AboutUs() {
+  const removeToken = () => {
+    //REMOVING USER AUTH TOKEN AND OWNER AUTH TOKEN FROM LOCALSTORAGE ON REMOVETOKEN FUNCTION
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("ownerAuthToken");
+    localStorage.removeItem("adminAuthToken");
+
+    //DISPATCHING ACTION USER IS NOT LOGGED, OWNER IS NOT LOGGED , DONT SHOW USER PROFILE ON REMOVETOKEN FUNCTION
+    dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
+    dispatch(ownerNotLogged());
+    dispatch(adminIsNotLogged());
+  };
+
+  const dispatch = useDispatch();
+
+  const showProfile = useSelector(
+    (state) => state.showUsersProfile.showUserProfile
+  );
   return (
     <div>
       <div>
         <NavBar />
       </div>
+
+      {showProfile === true ? (
+        <div className="ProfileLogoutContainer" style={{}}>
+          <div>
+            <div>
+              <LogoutIcon />
+            </div>
+            <Button
+              className="mt-1"
+              variant="none"
+              onClick={() => removeToken()}
+              style={{
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                border: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
       <div>
         <img src={k} alt="" style={{ width: "100%", height: "35rem" }} />
       </div>

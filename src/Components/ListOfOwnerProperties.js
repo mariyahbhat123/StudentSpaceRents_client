@@ -7,13 +7,14 @@ import Button from "react-bootstrap/Button";
 
 export default function ListOfOwnerProperties() {
   const [ownerPropertyList, setOwnerPropertyList] = useState([]);
-  const ownerData = useSelector((state) => state.ownerData.ownerD);
-  console.log(ownerData.email);
-  const ownerEmail = ownerData.email;
+  const ownerData = localStorage.getItem("ownerData");
+
+  const ownerEmail = JSON.parse(ownerData);
+  console.log(ownerEmail);
   const handleOwnerProperties = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/ownerPropertyList/${ownerEmail}`,
+        `http://localhost:5000/api/ownerPropertyList/${ownerEmail.email}`,
         {
           method: "POST",
           headers: {

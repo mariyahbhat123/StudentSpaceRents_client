@@ -3,16 +3,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import emailjs from "@emailjs/browser";
-function ModalSchedule(props) {
+function ModalSchedule({ close, ...props }) {
   const show = props.show;
-  const close = props.close;
   const ownerEmail = props.ownerEmail;
   const ownerName = props.ownerName;
   const address = props.address;
   const day = props.day;
   const date = props.date;
   const time = props.time;
-
   //   const handleClose = () => setShow(false);
 
   const nameRef = useRef();
@@ -24,6 +22,10 @@ function ModalSchedule(props) {
 
   const emailTemplate = process.env.REACT_APP_EMAIL_TEMPLATE;
   const emailPublicKey = process.env.REACT_APP_EMAIL_PUBLIC_KEY;
+
+  const tenantData = localStorage.getItem("tenantData");
+  const tenantD = JSON.parse(tenantData);
+  console.log(tenantD);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ function ModalSchedule(props) {
         (result) => {
           console.log(result.text);
           console.log("message sent!");
+          close();
         },
         (error) => {
           console.log(error.text);
@@ -56,7 +59,9 @@ function ModalSchedule(props) {
 I hope this email finds you well.
  I am reaching out on behalf of a user who is interested in scheduling a visit to view the property located at ${address}.
   They recently came across the listing on our website and expressed keen interest in exploring it further.
-  They will visit your property on ${date} ${day} in between ${time}. You can contact the user on this email.Hope you have a good day.
+  They will visit your property on ${date} ${day} in between ${time}. You can contact the user on this email ${
+      tenantD ? tenantD.email : ""
+    }.Hope you have a good day.
  
   Best regards,
 
@@ -64,7 +69,7 @@ Student Space Rents`,
   };
   return (
     <>
-      <Modal show={show}>
+      <Modal show={show} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>Student Space Rents</Modal.Title>
         </Modal.Header>
@@ -108,7 +113,12 @@ Student Space Rents`,
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={sendEmail}>
+          <Button
+            variant="none"
+            type="submit"
+            onClick={sendEmail}
+            style={{ backgroundColor: "#ff385c" }}
+          >
             Send Email
           </Button>
         </Modal.Footer>

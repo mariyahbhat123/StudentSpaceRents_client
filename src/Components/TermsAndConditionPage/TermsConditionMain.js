@@ -1,12 +1,18 @@
 import React from "react";
 import styles from "../../Styles/termsAndCondition/termsPage.module.css";
 import NavBar from "../navBar";
+import FooterCom from "../FooterCom";
 
 const TermsConditionMain = () => {
   return (
     <>
-      <div>
-        <NavBar />
+      <div
+        className="w-100"
+        style={{
+          backgroundColor: "#ff385c",
+        }}
+      >
+        <NavBar color="#FED8E4" />
       </div>
       <section className={styles.imgContainer}>
         <h1>Terms and Condition</h1>
@@ -155,6 +161,9 @@ const TermsConditionMain = () => {
           .
         </p>
       </section>
+      <footer>
+        <FooterCom />
+      </footer>
     </>
   );
 };

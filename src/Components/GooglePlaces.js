@@ -1,11 +1,14 @@
+import { Data } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
-export default function GooglePlaces({ handlePlaceSelect }) {
-  const [value, setValue] = useState(null);
-  const googleApi = process.env.REACT_APP_GOOGLE_API_KEY;
-  console.log(value);
-  const onSelect = (data) => {
+export default function GooglePlaces(props) {
+  const handlePlaceSelect = props.handlePlaceSelect;
+
+  const [value, setValue] = useState("");
+
+  console.log("VALUEEE", value);
+  const handleOnSelect = (data) => {
     geocodeByAddress(data.label)
       .then((results) => getLatLng(results[0]))
       .then((data) => {
@@ -13,19 +16,22 @@ export default function GooglePlaces({ handlePlaceSelect }) {
       });
   };
 
+  // useEffect(() => {
+  //   if (value) {
+  //     onSelect();
+  //   }
+  // }, [value]);
+  console.log("API", process.env.REACT_APP_GOOGLE_API_KEY);
+
   console.log(JSON.parse(localStorage.getItem("lat")));
   console.log(JSON.parse(localStorage.getItem("lng")));
   return (
     <div>
       <GooglePlacesAutocomplete
-        apiKey={googleApi}
+        onLoadFailed={(err) => console.error("ERRROR", err)}
         selectProps={{
           value,
-          onChange: (data) => {
-            console.log("Raninngggg", data);
-            setValue(data);
-            onSelect(data);
-          },
+          onChange: (data) => handleOnSelect(data),
         }}
       />
     </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
-import CheckboxAddProperty from "./CheckboxAddProperty";
+// import CheckboxAddProperty from "./CheckboxAddProperty";
 import GoogleMaps from "./GoogleMaps";
 import GooglePlaces from "./GooglePlaces";
 
@@ -42,7 +42,7 @@ export default function AddProperty() {
     lunch: false,
     dinner: false,
   });
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
+  const [center, setCenter] = useState({ lat: 33.2778, lng: 75.3412 });
 
   const onChange = (e) => {
     setPropertyDetails({ ...propertyDetails, [e.target.name]: e.target.value });
@@ -186,7 +186,9 @@ export default function AddProperty() {
     }
   };
 
-  const ownerData = useSelector((state) => state.ownerData.ownerD);
+  const ownerD = localStorage.getItem("ownerData");
+  const ownerData = JSON.parse(ownerD);
+  console.log(ownerData);
 
   const handleImages = (e) => {
     setPropertyImage({ ...propertyImage, [e.target.name]: e.target.files[0] });
@@ -268,8 +270,8 @@ export default function AddProperty() {
                 className=""
                 type="text"
                 name="ownerName"
-                value={ownerDetails.name}
-                placeholder={ownerDetails.name}
+                value={ownerData.name}
+                placeholder={ownerData.name}
                 disabled
                 style={{ width: "100%" }}
                 autoFocus
@@ -283,8 +285,8 @@ export default function AddProperty() {
               <Form.Control
                 type="text"
                 name="ownerEmail"
-                placeholder={ownerDetails.email}
-                value={ownerDetails.email}
+                placeholder={ownerData.email}
+                value={ownerData.email}
                 autoFocus
                 style={{ width: "100%" }}
               />

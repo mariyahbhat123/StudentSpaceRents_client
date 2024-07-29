@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { json } from "react-router-dom";
 
 export default function UserProfile() {
   const ownerIsLogged = useSelector((state) => state.ownerLogOrNot.ownerIsLog);
@@ -11,6 +12,12 @@ export default function UserProfile() {
 
   console.log(ownerData.name);
   console.log(ownerIsLogged);
+
+  const tenantD = localStorage.getItem("tenantData");
+  const tenantDatas = JSON.parse(tenantD);
+
+  const ownerD = localStorage.getItem("ownerData");
+  const ownerDatas = JSON.parse(ownerD);
 
   return (
     <div className="d-flex  w-100 ">
@@ -38,9 +45,13 @@ export default function UserProfile() {
                   <img
                     src={
                       ownerIsLogged === true
-                        ? ownerData.img
+                        ? ownerDatas.gender === "female"
+                          ? "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
+                          : "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
                         : isLogged === true
-                        ? tenantData.img
+                        ? tenantDatas.gender === "female"
+                          ? "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_female_icon_192701.png"
+                          : "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_male_icon_192702.png"
                         : ""
                     }
                     width="90"
@@ -55,9 +66,9 @@ export default function UserProfile() {
                 <h4>Name</h4>
                 <h5 class="mt-3 mb-0">
                   {ownerIsLogged === true
-                    ? ownerData.name
+                    ? ownerDatas.name
                     : isLogged === true
-                    ? tenantData.name
+                    ? tenantDatas.name
                     : ""}
                 </h5>
                 <span></span>
@@ -68,9 +79,9 @@ export default function UserProfile() {
                     <h5>
                       {" "}
                       {ownerIsLogged === true
-                        ? ownerData.email
+                        ? ownerDatas.email
                         : isLogged === true
-                        ? tenantData.email
+                        ? tenantDatas.email
                         : ""}
                     </h5>
                   </p>

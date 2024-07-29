@@ -15,12 +15,16 @@ export default function TenantLogin() {
     password: "",
   });
 
+  const [err, setErr] = useState();
+  console.log(err);
+  const [errPass, setErrPass] = useState("");
+
   const dispatch = useDispatch();
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://192.168.29.70:5000/api/loginUsers", {
+      const response = await fetch("http://localhost:5000/api/loginUsers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +47,7 @@ export default function TenantLogin() {
         const email = tenantDetail.email;
         const gender = tenantDetail.gender;
         const img = tenantDetail.img;
-
+        localStorage.setItem("tenantData", JSON.stringify(tenantDetail));
         dispatch(
           tenantUserData({
             name: name,
@@ -59,7 +63,8 @@ export default function TenantLogin() {
         dispatch(isLogged());
         console.log("YPPPPP");
       } else {
-        alert("Enter Correct credentials");
+        setErr(json.error);
+
         dispatch(isNotLogged());
       }
     } catch (err) {
@@ -84,6 +89,23 @@ export default function TenantLogin() {
           Tenant Login
         </h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          {err ? (
+            err === "email" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Please Enter a valid email address
+              </p>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
           <Form.Control
             type="email"
             name="email"
@@ -95,6 +117,23 @@ export default function TenantLogin() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          {err ? (
+            err === "password" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Please Enter a valid password
+              </p>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
           <Form.Control
             type="password"
             name="password"

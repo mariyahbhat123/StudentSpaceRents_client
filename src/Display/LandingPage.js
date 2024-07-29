@@ -23,12 +23,15 @@ import ProfileModal from "../Components/ProfileModal";
 import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
 import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
 import { adminIsNotLogged } from "../Redux/Slices/adminLog";
+import { showProfile } from "../Redux/Slices/profileSlice";
 
 //Carousel Component
 import bed from "../CarouselImages/bed.jpg";
 import living1 from "../CarouselImages/living1.jpg";
 import living2 from "../CarouselImages/living2.jpg";
 import kitchen1 from "../CarouselImages/kitchen1.jpg";
+
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function LandingPage() {
   //Scroll 600
@@ -39,10 +42,9 @@ export default function LandingPage() {
   const [propertyData, setPropertyData] = useState([]);
 
   //SHOW PROFILE DROPDOWN
-  const showProfile = useSelector(
+  const showProfileM = useSelector(
     (state) => state.showUsersProfile.showUserProfile
   );
-  console.log(showProfile);
 
   //SHOW PROFILE DATA MODAL
   const showProfileModal = useSelector(
@@ -84,14 +86,14 @@ export default function LandingPage() {
     localStorage.removeItem("authToken");
     localStorage.removeItem("ownerAuthToken");
     localStorage.removeItem("adminAuthToken");
+    localStorage.removeItem("tenantData");
+    localStorage.removeItem("ownerData");
 
     //DISPATCHING ACTION USER IS NOT LOGGED, OWNER IS NOT LOGGED , DONT SHOW USER PROFILE ON REMOVETOKEN FUNCTION
     dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
     dispatch(ownerNotLogged());
     dispatch(adminIsNotLogged());
   };
-
-  console.log(showProfile);
 
   const loadData = async () => {
     let response = await fetch("http://localhost:5000/api/propertyData", {
@@ -135,20 +137,22 @@ export default function LandingPage() {
             <NavBar color="#FED8E4" />
           )}{" "}
         </div>
-        {showProfile === true ? (
+        {showProfileM === true ? (
           <div className="ProfileLogoutContainer" style={{}}>
             <div>
               <div>
                 <PersonPinIcon className="" style={{ fontSize: "30px" }} />
+                <Button
+                  className="mt-1"
+                  variant="none"
+                  onClick={() => {
+                    return dispatch(showProfileUser());
+                  }}
+                  style={{ boxShadow: "none", fontWeight: "bold" }}
+                >
+                  Profile
+                </Button>{" "}
               </div>
-              <Button
-                className="mt-1"
-                variant="none"
-                onClick={() => dispatch(showProfileUser())}
-                style={{ boxShadow: "none", fontWeight: "bold" }}
-              >
-                Profile
-              </Button>
               <hr style={{ color: "#ff385c", fontWeight: "bold" }} />
             </div>
 
@@ -166,20 +170,43 @@ export default function LandingPage() {
             <div>
               <div>
                 <LogoutIcon />
+
+                <Button
+                  className="mt-1"
+                  variant="none"
+                  onClick={() => removeToken()}
+                  style={{
+                    boxShadow: "none",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Logout
+                </Button>
               </div>
-              <Button
-                className="mt-1"
-                variant="none"
-                onClick={() => removeToken()}
-                style={{
-                  boxShadow: "none",
-                  backgroundColor: "transparent",
-                  border: "none",
-                  fontWeight: "bold",
-                }}
-              >
-                Logout
-              </Button>
+              <hr style={{ color: "#ff385c", fontWeight: "bold" }} />
+            </div>
+            <div className="d-flex" style={{ justifyContent: "center" }}>
+              <div>
+                {" "}
+                <CloseIcon className="" />
+                <Button
+                  className=""
+                  variant="none"
+                  onClick={() =>
+                    showProfileM == true ? dispatch(dontShowUserProfile()) : ""
+                  }
+                  style={{
+                    boxShadow: "none",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    fontWeight: "bold",
+                  }}
+                >
+                  close
+                </Button>
+              </div>
             </div>
           </div>
         ) : (
@@ -205,9 +232,23 @@ export default function LandingPage() {
         <CardComponent md={4} propertyData={propertyData} title="Properties" />
       </div>
       <hr />
-      <div className="w-100 mt-5" style={{ backgroundColor: "#f7f7f7" }}>
-        <WebsiteReviews />
-      </div>
+      <div>
+        <h2 className="p-5">What tenants and owners say about us</h2>
+        <div
+          className="w-100"
+          style={{
+            backgroundColor: "#f7f7f7",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <WebsiteReviews name="Seerat" />
+          <WebsiteReviews name="Sehrish" />
+          <WebsiteReviews name="Baseema" />
+        </div>
+        <p className=" mt-4">More Testimonials?</p>
+        <hr className="mt-5 pb-4" style={{ color: "black" }} />
+      </div>{" "}
       <div>
         <FooterCom />
       </div>

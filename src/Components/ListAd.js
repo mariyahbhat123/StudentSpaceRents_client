@@ -16,6 +16,14 @@ import Button from "react-bootstrap/esm/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "../Styles/ListAd.css";
 
+import { dontShowUserProfile } from "../Redux/Slices/showProfileSlice";
+import { ownerNotLogged } from "../Redux/Slices/ownerIsLogged";
+import { adminIsNotLogged } from "../Redux/Slices/adminLog";
+import { isNotLogged } from "../Redux/Slices/isLoggedIn";
+import { useDispatch, useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ProfileLogoutContainer from "./ProfileLogoutContainer";
+
 export default function ListAd(props) {
   let { state } = useLocation();
   const stateDistrict = state.district;
@@ -50,7 +58,7 @@ export default function ListAd(props) {
 
   // FETCHING PROPERTY DETAILS
   const loadData = async () => {
-    let response = await fetch(`http://192.168.29.70:5000/api/propertyData`, {
+    let response = await fetch(`http://localhost:5000/api/propertyData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,68 +96,110 @@ export default function ListAd(props) {
   };
   console.log(genderFor);
 
-  const [breakfast, setBreakfast] = useState(false);
+  const [foodIncluded, setFoodIncluded] = useState({
+    breakfast: null,
+    lunch: null,
+    dinner: null,
+  });
+
+  console.log(foodIncluded);
   const [dinner, setDinner] = useState(false);
-  const handleBreakfast = (e) => {
-    if (e.target.value === breakfast) {
-      setBreakfast(false);
-      return;
+  const handleFoodIncluded = (e) => {
+    if (e.target.checked) {
+      setFoodIncluded({ ...foodIncluded, [e.target.name]: true });
+    } else {
+      setFoodIncluded({ ...foodIncluded, [e.target.name]: false });
     }
-    setBreakfast(e.target.value);
-  };
-  const handleDinner = (e) => {
-    if (e.target.value === dinner) {
-      setDinner(false);
-      return;
-    }
-    setDinner(true);
   };
 
-  console.log(dinner);
-  const filterPropertyData = useMemo(
-    (item) => {
-      if (
-        !propertyType &&
-        !genderFor &&
-        !rent < 2000 &&
-        breakfast === false &&
-        !district &&
-        !localityAddress
-      )
-        return propertyData;
+  const filterPropertyData = useMemo(() => {
+    if (
+      !propertyType &&
+      !genderFor &&
+      !rent < 2000 &&
+      !foodIncluded &&
+      !district &&
+      !localityAddress
+    )
+      return propertyData;
 
-      return propertyData.filter((item) => {
-        return (
-          (!propertyType ? true : item.propertyType === propertyType) &&
-          (!genderFor ? true : item.for === genderFor) &&
-          (rent <= 2000 ? true : item.monthlyRent >= rent) &&
-          (breakfast === false
-            ? true
-            : item.foodIncluded.breakfast === breakfast) &&
-          (dinner === false ? true : item.foodIncluded.dinner === dinner) &&
-          (!district ? true : item.district === district) &&
-          (!localityAddress ? true : item.address === localityAddress)
-        );
-      });
-    },
-    [
-      propertyData,
-      propertyType,
-      genderFor,
-      rent,
-      dinner,
-      district,
-      localityAddress,
-    ]
-  );
+    return propertyData.filter((item) => {
+      return (
+        (!propertyType ? true : item.propertyType === propertyType) &&
+        (!genderFor ? true : item.for === genderFor) &&
+        (rent <= 2000 ? true : item.monthlyRent >= rent) &&
+        (!foodIncluded.breakfast || !foodIncluded.lunch || !foodIncluded.dinner
+          ? true
+          : item.foodIncluded === foodIncluded) &&
+        // (dinner === false ? true : item.foodIncluded.dinner === dinner) &&
+        (!district ? true : item.district === district) &&
+        (!localityAddress
+          ? true
+          : item.address.toLowerCase().includes(localityAddress.toLowerCase()))
+      );
+    });
+  }, [
+    propertyData,
+    propertyType,
+    genderFor,
+    rent,
+    dinner,
+    district,
+    localityAddress,
+  ]);
 
+  console.log(localityAddress);
   const [search, setSearch] = useState("");
+
+  const removeToken = () => {
+    //REMOVING USER AUTH TOKEN AND OWNER AUTH TOKEN FROM LOCALSTORAGE ON REMOVETOKEN FUNCTION
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("ownerAuthToken");
+    localStorage.removeItem("adminAuthToken");
+
+    //DISPATCHING ACTION USER IS NOT LOGGED, OWNER IS NOT LOGGED , DONT SHOW USER PROFILE ON REMOVETOKEN FUNCTION
+    dispatch(isNotLogged(), dispatch(dontShowUserProfile()));
+    dispatch(ownerNotLogged());
+    dispatch(adminIsNotLogged());
+  };
+
+  const dispatch = useDispatch();
+
+  const showProfile = useSelector(
+    (state) => state.showUsersProfile.showUserProfile
+  );
   return (
     <div className="w-100">
       {/* NAVBAR LIST ADVERTISEMENT */}
       <div style={{ backgroundColor: "#ff385c" }}>
-        <NavBar />
+        <NavBar color="#FED8E4" />
       </div>
+
+      {showProfile === true ? (
+        <div className="">
+          {/* <div>
+            <div>
+              <LogoutIcon />
+            </div>
+            <Button
+              className="mt-1"
+              variant="none"
+              onClick={() => removeToken()}
+              style={{
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                border: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Logout
+            </Button>
+          </div> */}
+          <ProfileLogoutContainer />
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* BODY */}
       <div
@@ -377,18 +427,21 @@ export default function ListAd(props) {
                       type="checkbox"
                       className="me-1"
                       name="breakfast"
-                      value={breakfast}
-                      onChange={(e) => handleBreakfast(e)}
+                      onChange={(e) => handleFoodIncluded(e)}
                     />
                     BreakFast
-                    <input type="checkbox" className="ms-3 me-1" name="lunch" />
+                    <input
+                      type="checkbox"
+                      className="ms-3 me-1"
+                      name="lunch"
+                      onChange={(e) => handleFoodIncluded(e)}
+                    />
                     Lunch
                     <input
                       type="checkbox"
                       className="ms-3"
                       name="dinner"
-                      value={dinner}
-                      onChange={(e) => handleDinner(e)}
+                      onChange={(e) => handleFoodIncluded(e)}
                     />{" "}
                     Dinner
                   </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardDetail from "./CardDetail";
 import Slider from "react-slick";
 import Button from "react-bootstrap/esm/Button";
@@ -106,7 +106,7 @@ export default function ScheduleVisit(props) {
   const selectedDate = () => {
     if (picked === "div1") {
       if (isBackgroundColor.div1 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "#ff385c",
           div2: "white",
           div3: "white",
@@ -116,13 +116,13 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
         });
       }
     } else if (picked === "div2") {
       if (isBackgroundColor.div2 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
           div2: "#ff385c",
           div3: "white",
@@ -132,13 +132,13 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div2: "white",
         });
       }
     } else if (picked === "div3") {
       if (isBackgroundColor.div3 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
           div2: "white",
           div3: "#ff385c",
@@ -148,13 +148,13 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div3: "white",
         });
       }
     } else if (picked === "div4") {
       if (isBackgroundColor.div4 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
           div2: "white",
           div3: "white",
@@ -164,13 +164,13 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div4: "white",
         });
       }
     } else if (picked === "div5") {
       if (isBackgroundColor.div5 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
           div2: "white",
           div3: "white",
@@ -180,13 +180,13 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div5: "white",
         });
       }
     } else if (picked === "div6") {
       if (isBackgroundColor.div6 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
           div2: "white",
           div3: "white",
@@ -196,13 +196,13 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div6: "white",
         });
       }
     } else if (picked === "div7") {
       if (isBackgroundColor.div7 === "white") {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div1: "white",
           div2: "white",
           div3: "white",
@@ -212,7 +212,7 @@ export default function ScheduleVisit(props) {
           div7: "#ff385c",
         });
       } else {
-        setIsBackgroundColor({
+        return setIsBackgroundColor({
           div7: "white",
         });
       }
@@ -227,19 +227,26 @@ export default function ScheduleVisit(props) {
   const selectedTime = () => {
     if (pickedTime === "1to3") {
       if (timeBackground.divTime1 === "white") {
-        setTimeBackground({ divTime1: "#ff385c", diveTime2: "white" });
+        return setTimeBackground({ divTime1: "#ff385c", diveTime2: "white" });
       } else {
-        setTimeBackground({ divTime1: "white" });
+        return setTimeBackground({ divTime1: "white" });
       }
     } else if (pickedTime === "4to7") {
       if (timeBackground.divTime2 === "white") {
-        setTimeBackground({ divTime2: "#ff385c", divTime1: "white" });
+        return setTimeBackground({ divTime2: "#ff385c", divTime1: "white" });
       } else {
-        setTimeBackground({ divTime2: "white" });
+        return setTimeBackground({ divTime2: "white" });
       }
     }
   };
 
+  useEffect(() => {
+    selectedDate();
+  }, [picked]);
+
+  useEffect(() => {
+    selectedTime();
+  }, [pickedTime]);
   return (
     <div>
       <div>
@@ -262,8 +269,7 @@ export default function ScheduleVisit(props) {
               onClick={() => {
                 return (
                   setDayDate({ day: currentday, date: currentdate }),
-                  setPicked("div1"),
-                  selectedDate()
+                  setPicked("div1")
                 );
               }}
             >
@@ -283,8 +289,7 @@ export default function ScheduleVisit(props) {
               onClick={() => {
                 return (
                   setDayDate({ day: tmrwday, date: tmrwdate }),
-                  setPicked("div2"),
-                  selectedDate()
+                  setPicked("div2")
                 );
               }}
             >
@@ -301,9 +306,7 @@ export default function ScheduleVisit(props) {
               className="DayDatePick me-2"
               onClick={() => {
                 return (
-                  setDayDate({ day: day3, date: date3 }),
-                  setPicked("div3"),
-                  selectedDate()
+                  setDayDate({ day: day3, date: date3 }), setPicked("div3")
                 );
               }}
             >
@@ -320,9 +323,7 @@ export default function ScheduleVisit(props) {
               className="DayDatePick me-2"
               onClick={() => {
                 return (
-                  setDayDate({ day: day4, date: date4 }),
-                  setPicked("div4"),
-                  selectedDate()
+                  setDayDate({ day: day4, date: date4 }), setPicked("div4")
                 );
               }}
             >
@@ -339,9 +340,7 @@ export default function ScheduleVisit(props) {
               className="DayDatePick me-2"
               onClick={() => {
                 return (
-                  setDayDate({ day: day5, date: date5 }),
-                  setPicked("div5"),
-                  selectedDate()
+                  setDayDate({ day: day5, date: date5 }), setPicked("div5")
                 );
               }}
             >
@@ -358,9 +357,7 @@ export default function ScheduleVisit(props) {
               className="DayDatePick me-2"
               onClick={() => {
                 return (
-                  setDayDate({ day: day6, date: date6 }),
-                  setPicked("div6"),
-                  selectedDate()
+                  setDayDate({ day: day6, date: date6 }), setPicked("div6")
                 );
               }}
             >
@@ -377,9 +374,7 @@ export default function ScheduleVisit(props) {
               className="DayDatePick me-2"
               onClick={() => {
                 return (
-                  setDayDate({ day: day7, date: date7 }),
-                  setPicked("div7"),
-                  selectedDate()
+                  setDayDate({ day: day7, date: date7 }), setPicked("div7")
                 );
               }}
             >
@@ -409,11 +404,7 @@ export default function ScheduleVisit(props) {
               backgroundColor: timeBackground.divTime1,
             }}
             onClick={(e) => {
-              return (
-                setTime("01:00 pm - 03:00 pm"),
-                setPickedTime("1to3"),
-                selectedTime()
-              );
+              return setTime("01:00 pm - 03:00 pm"), setPickedTime("1to3");
             }}
           >
             {" "}
@@ -430,11 +421,7 @@ export default function ScheduleVisit(props) {
               backgroundColor: timeBackground.divTime2,
             }}
             onClick={(e) => {
-              return (
-                setTime("  04:00 - 07:00 pm"),
-                setPickedTime("4to7"),
-                selectedTime()
-              );
+              return setTime("  04:00 - 07:00 pm"), setPickedTime("4to7");
             }}
           >
             {" "}
@@ -452,7 +439,11 @@ export default function ScheduleVisit(props) {
               fontWeight: "bold",
             }}
             onClick={() =>
-              isLogged === true ? setShow(true) : alert("Please Login First")
+              isLogged === true
+                ? picked != "" && pickedTime != ""
+                  ? setShow(true)
+                  : alert("Please pick Date and Time")
+                : alert("Please Login First")
             }
           >
             Schedule Visit

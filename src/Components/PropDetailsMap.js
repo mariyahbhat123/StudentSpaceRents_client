@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GoogleMaps from "./GoogleMaps";
+import { useJsApiLoader } from "@react-google-maps/api";
 
 export default function PropDetailsMap(props) {
   const [center, setCenter] = useState({ lat: 33.2778, lng: 75.3412 });

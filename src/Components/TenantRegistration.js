@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
 import { isLogged } from "../Redux/Slices/isLoggedIn";
 import "../Styles/LogReg.css";
-
+import { tenantUserData } from "../Redux/Slices/userDataSlice";
 export default function TenantRegistration() {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -16,8 +16,11 @@ export default function TenantRegistration() {
     password: "",
     gender: "",
     confirmPassword: "",
+    img: "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=",
   });
 
+  const [err, setErr] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const closeReg = useSelector((state) => state.toggle.active);
   console.log(closeReg);
   const dispatch = useDispatch();
@@ -39,12 +42,27 @@ export default function TenantRegistration() {
       });
 
       const json = await response.json();
-      if (!json) {
-        alert("Enter valid credentials");
-      }
+
       if (json.success) {
+        localStorage.setItem("authToken", json.token);
+        localStorage.setItem("tenantData", JSON.stringify(credentials));
+        dispatch(
+          tenantUserData({
+            name: credentials.name,
+            email: credentials.email,
+            gender: credentials.gender,
+            img: credentials.img,
+          })
+        );
         dispatch(toggleOff());
         dispatch(isLogged());
+      } else {
+        if (json.error[0].path) {
+          setErr(json.error[0].path);
+        } else if (json.error) {
+          setErr(json.error);
+          setErrMsg(json.msg);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -72,6 +90,29 @@ export default function TenantRegistration() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          {err === "email" ? (
+            <p
+              style={{
+                backgroundColor: "#FFCCCC ",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              Please Enter a valid email address
+            </p>
+          ) : err === "emailExist" ? (
+            <p
+              style={{
+                backgroundColor: "#FFCCCC ",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {errMsg}
+            </p>
+          ) : (
+            ""
+          )}
           <Form.Control
             type="email"
             name="email"
@@ -103,11 +144,24 @@ export default function TenantRegistration() {
             className="userInput"
           />
         </Form.Group>
+        {err == "password" ? (
+          <p
+            style={{
+              backgroundColor: "#FFCCCC ",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            {errMsg}
+          </p>
+        ) : (
+          ""
+        )}
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Control
             type="password"
             name="confirmPassword"
-            placeholder="Comfirm Password"
+            placeholder="Confirm Password"
             value={credentials.confirmPassword}
             onChange={onChange}
             className="userInput"
