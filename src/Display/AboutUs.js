@@ -33,8 +33,8 @@ export default function AboutUs() {
   );
   return (
     <div>
-      <div>
-        <NavBar />
+      <div style={{ backgroundColor: "#ff385c" }}>
+        <NavBar color="#FED8E4" />
       </div>
 
       {showProfile === true ? (

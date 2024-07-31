@@ -57,6 +57,7 @@ import {
   showProfileUser,
 } from "../Redux/Slices/showProfileModalSlice";
 import ProfileLogoutContainer from "./ProfileLogoutContainer";
+import Loading from "./Loading/Loading";
 
 export default function PropertyDetail(props) {
   let { state } = useLocation();
@@ -208,6 +209,7 @@ export default function PropertyDetail(props) {
   const handleCloseModalUser = () => {
     dispatch(dontShowProfileUser());
   };
+
   return (
     <div>
       <div className="w-100" style={{ backgroundColor: "#ff385c" }}>

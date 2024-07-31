@@ -10,7 +10,7 @@ import FooterCom from "../Components/FooterCom";
 import WebsiteReviews from "../Components/WebsiteReviews";
 
 import { useSelector, useDispatch } from "react-redux";
-import { isLogged, isNotLogged } from "../Redux/Slices/isLoggedIn";
+import { isNotLogged } from "../Redux/Slices/isLoggedIn";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -141,15 +141,23 @@ export default function LandingPage() {
           <div className="ProfileLogoutContainer" style={{}}>
             <div>
               <div>
-                <PersonPinIcon className="" style={{ fontSize: "30px" }} />
                 <Button
-                  className="mt-1"
+                  className="sideShowClick mt-1"
                   variant="none"
                   onClick={() => {
                     return dispatch(showProfileUser());
                   }}
-                  style={{ boxShadow: "none", fontWeight: "bold" }}
+                  style={{
+                    boxShadow: "none",
+                    fontWeight: "bold",
+                    backgroundColor: "transparent",
+                    border: "none",
+                  }}
                 >
+                  <PersonPinIcon
+                    className="me-3"
+                    style={{ fontSize: "30px" }}
+                  />
                   Profile
                 </Button>{" "}
               </div>
@@ -169,10 +177,9 @@ export default function LandingPage() {
             )} */}
             <div>
               <div>
-                <LogoutIcon />
-
+                {" "}
                 <Button
-                  className="mt-1"
+                  className="sideShowClick mt-1"
                   variant="none"
                   onClick={() => removeToken()}
                   style={{
@@ -182,6 +189,7 @@ export default function LandingPage() {
                     fontWeight: "bold",
                   }}
                 >
+                  <LogoutIcon className="me-3" />
                   Logout
                 </Button>
               </div>
@@ -190,9 +198,8 @@ export default function LandingPage() {
             <div className="d-flex" style={{ justifyContent: "center" }}>
               <div>
                 {" "}
-                <CloseIcon className="" />
                 <Button
-                  className=""
+                  className="sideShowClick"
                   variant="none"
                   onClick={() =>
                     showProfileM == true ? dispatch(dontShowUserProfile()) : ""
@@ -204,6 +211,8 @@ export default function LandingPage() {
                     fontWeight: "bold",
                   }}
                 >
+                  {" "}
+                  <CloseIcon className="me-3" />
                   close
                 </Button>
               </div>
@@ -229,7 +238,7 @@ export default function LandingPage() {
       </div>
       <hr />
       <div className="pb-5 ">
-        <CardComponent md={4} propertyData={propertyData} title="Properties" />
+        <CardComponent md={4} propertyData={propertyData} title="PROPERTIES" />
       </div>
       <hr />
       <div>

@@ -112,7 +112,7 @@ export default function CardCarouselCom(props) {
   return (
     <div className="slider-container mt-4 ">
       {" "}
-      <h2 className="p-4">Recently Included</h2>{" "}
+      <h3 className="p-4">RECENTLY INCLUDED</h3>{" "}
       <Slider {...settings}>
         {propertyData
           .slice(2, 9)

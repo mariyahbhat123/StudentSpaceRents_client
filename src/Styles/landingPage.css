@@ -37,6 +37,13 @@
   border: 1px solid #ff385c;
 }
 
+.sideShowClick:focus,
+.sideShowClick:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 @media screen and (width<=450px) {
   .searchB {
     position: absolute;

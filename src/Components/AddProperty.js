@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 // import CheckboxAddProperty from "./CheckboxAddProperty";
 import GoogleMaps from "./GoogleMaps";
 import GooglePlaces from "./GooglePlaces";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function AddProperty() {
   const [propertyDetails, setPropertyDetails] = useState({
@@ -43,6 +44,7 @@ export default function AddProperty() {
     dinner: false,
   });
   const [center, setCenter] = useState({ lat: 33.2778, lng: 75.3412 });
+  const [propertySuccess, setPropertySuccess] = useState("");
 
   const onChange = (e) => {
     setPropertyDetails({ ...propertyDetails, [e.target.name]: e.target.value });
@@ -91,6 +93,38 @@ export default function AddProperty() {
     console.log("valueeeeeeee", lat);
   };
 
+  const handleSuccess = () => {
+    if (propertySuccess != "") {
+      setPropertyDetails({
+        landmark: "",
+        address: "",
+
+        district: "",
+        for: "",
+
+        coordinates: {
+          lat: 0,
+          lng: 0,
+        },
+        description: "",
+        propertyType: "",
+        monthlyRent: 0,
+      });
+
+      setPropertyImage({ img0: "", img1: "", img2: "", img3: "" });
+      setCheckedProperty({
+        storageSpace: false,
+        heatingAndCooling: false,
+        furniture: false,
+        internetAndCableServices: false,
+
+        breakfast: false,
+        lunch: false,
+        dinner: false,
+      });
+    }
+    return;
+  };
   const ownerDetails = useSelector((state) => state.ownerData.ownerD);
 
   const img0 = propertyImage.img0;
@@ -180,6 +214,7 @@ export default function AddProperty() {
       }
       if (json.success) {
         alert("Property Successfully added");
+        setPropertySuccess("Property Successfully added");
       }
     } catch (err) {
       console.log(err);
@@ -192,6 +227,16 @@ export default function AddProperty() {
 
   const handleImages = (e) => {
     setPropertyImage({ ...propertyImage, [e.target.name]: e.target.files[0] });
+  };
+
+  useEffect(() => {
+    handleSuccess();
+  }, [propertySuccess]);
+
+  const handleShowHideSuccess = () => {
+    if (propertySuccess != "") {
+      setPropertySuccess("");
+    }
   };
   return (
     <div className="w-100 p-2">
@@ -206,6 +251,43 @@ export default function AddProperty() {
             <h5>Add Property</h5>
           </div>
 
+          <div>
+            {propertySuccess !== "" ? (
+              <div
+                style={{
+                  backgroundColor: "#5bb85d ",
+                  fontWeight: "bold",
+                  paddingLeft: "13px",
+                  paddingRight: "7px",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  height: "33px",
+                  paddingTop: "16px",
+                  marginBottom: "15px",
+                }}
+              >
+                <p className="">{propertySuccess}</p>
+
+                <button
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "none",
+                    height: "29px",
+                    display: "flex",
+                  }}
+                  onClick={() => {
+                    handleShowHideSuccess();
+                  }}
+                >
+                  <CloseIcon fontSize="23" style={{ color: "red" }} />
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
           <div className="d-flex ">
             <Form.Group
               className="mb-3  "
@@ -288,6 +370,7 @@ export default function AddProperty() {
                 placeholder={ownerData.email}
                 value={ownerData.email}
                 autoFocus
+                disabled
                 style={{ width: "100%" }}
               />
             </Form.Group>
@@ -302,6 +385,7 @@ export default function AddProperty() {
                 aria-label="Default select example"
                 style={{ width: "100%" }}
                 name="district"
+                value={propertyDetails.district}
                 onChange={onChange}
               >
                 <option selected disabled>
@@ -328,6 +412,7 @@ export default function AddProperty() {
                 aria-label="Default select example"
                 style={{ width: "100%" }}
                 name="propertyType"
+                value={propertyDetails.propertyType}
                 onChange={onChange}
               >
                 <option disabled> PROPERTY TYPE</option>
@@ -397,7 +482,6 @@ export default function AddProperty() {
                 type="text"
                 name="landmark"
                 placeholder="LANDMARK IF ANY"
-                autoFocus
                 style={{ width: "100%" }}
                 onChange={onChange}
               />

@@ -19,11 +19,7 @@ export default function GoogleMaps(props) {
     lng: 75.3412,
   });
   props.callback(markedCenter);
-  const [isDraggable, setIsDraggable] = useState({
-    draggable: true,
-  });
-  props.callback(isDraggable);
-  console.log(isDraggable);
+
   console.log(markedCenter);
 
   const googleMapsRef = useRef(null);

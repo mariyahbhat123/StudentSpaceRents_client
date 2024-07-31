@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import CardDetail from "./CardDetail";
 import Slider from "react-slick";
 import Button from "react-bootstrap/esm/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ModalSchedule from "./ModalForScheduleVisit/ModalSchedule";
 import "../Styles/ScheduleVisit.css";
 import { backdropClasses } from "@mui/material";
+import { toggleOn } from "../Redux/Slices/toggleSlice";
+import Loading from "./Loading/Loading";
 export default function ScheduleVisit(props) {
   const [show, setShow] = useState(false);
   const [dayDate, setDayDate] = useState({ day: "", date: "" });
@@ -73,18 +75,18 @@ export default function ScheduleVisit(props) {
 
   let currentdate = d.getDate();
   let currentday = weekday[d.getDay()];
-  const tmrwdate = d.getDate() + 1;
+  const tmrwdate = d.getDate() - 30;
   const tmrwday = weekday[d.getDay() + 1];
-  let date3 = d.getDate() + 2;
+  let date3 = d.getDate() - 29;
   let day3 = weekday[d.getDay() + 2];
 
-  let date4 = d.getDate() + 3;
+  let date4 = d.getDate() - 28;
   let day4 = weekday[d.getDay() + 3];
-  let date5 = d.getDate() + 4;
+  let date5 = d.getDate() - 27;
   let day5 = weekday[d.getDay() - 3];
-  let date6 = d.getDate() + 5;
+  let date6 = d.getDate() - 26;
   let day6 = weekday[d.getDay() - 2];
-  let date7 = d.getDate() + 6;
+  let date7 = d.getDate() - 25;
   let day7 = weekday[d.getDay() - 1];
 
   const handleShow = () => {
@@ -216,6 +218,16 @@ export default function ScheduleVisit(props) {
           div7: "white",
         });
       }
+    } else if (picked === "") {
+      return setIsBackgroundColor({
+        div1: "white",
+        div2: "white",
+        div3: "white",
+        div4: "white",
+        div5: "white",
+        div6: "white",
+        div7: "white",
+      });
     }
   };
 
@@ -237,7 +249,13 @@ export default function ScheduleVisit(props) {
       } else {
         return setTimeBackground({ divTime2: "white" });
       }
+    } else if (pickedTime === "") {
+      return setTimeBackground({ divTime1: "white", divTime2: "white" });
     }
+  };
+
+  const handlePickedDate = () => {
+    setPicked("");
   };
 
   useEffect(() => {
@@ -247,6 +265,12 @@ export default function ScheduleVisit(props) {
   useEffect(() => {
     selectedTime();
   }, [pickedTime]);
+
+  const handlePicked = () => {
+    return setPicked(""), setPickedTime("");
+  };
+  const dispatch = useDispatch();
+
   return (
     <div>
       <div>
@@ -438,12 +462,29 @@ export default function ScheduleVisit(props) {
               color: "white",
               fontWeight: "bold",
             }}
+            onClick={() => {
+              return setPicked(""), setPickedTime("");
+            }}
+          >
+            Remove selected Date & Time
+          </Button>
+        </div>
+        <div>
+          <Button
+            variant="none"
+            style={{
+              borderRadius: "50px",
+              width: "80%",
+              backgroundColor: "#ff385c",
+              color: "white",
+              fontWeight: "bold",
+            }}
             onClick={() =>
               isLogged === true
                 ? picked != "" && pickedTime != ""
                   ? setShow(true)
                   : alert("Please pick Date and Time")
-                : alert("Please Login First")
+                : dispatch(toggleOn())
             }
           >
             Schedule Visit
@@ -459,6 +500,7 @@ export default function ScheduleVisit(props) {
         day={dayDate.day}
         date={dayDate.date}
         time={time}
+        handlePicked={handlePicked}
       />
     </div>
   );
