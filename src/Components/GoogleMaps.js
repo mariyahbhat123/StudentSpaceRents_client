@@ -23,16 +23,6 @@ export default function GoogleMaps(props) {
   console.log(markedCenter);
 
   const googleMapsRef = useRef(null);
-  // const reactGoogleApi = process.env.REACT_APP_GOOGLE_API_KEY;
-  // console.log(reactGoogleApi);
-
-  console.log("APII", process.env.REACT_APP_GOOGLE_API_KEY);
-
-  // const greatPlaceStyle = {
-  //   position: "absolute",
-  //   transform: "translate(-50%, -50%)",
-  // };
-  // console.log(googleMapsRef);
 
   const { isLoaded } = useJsApiLoader({
     id: "react-map-script",

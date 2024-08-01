@@ -21,7 +21,6 @@ export default function GooglePlaces(props) {
   //     onSelect();
   //   }
   // }, [value]);
-  console.log("API", process.env.REACT_APP_GOOGLE_API_KEY);
 
   console.log(JSON.parse(localStorage.getItem("lat")));
   console.log(JSON.parse(localStorage.getItem("lng")));

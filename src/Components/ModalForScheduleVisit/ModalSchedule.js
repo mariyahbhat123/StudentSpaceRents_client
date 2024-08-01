@@ -20,7 +20,6 @@ function ModalSchedule({ close, ...props }) {
   const msgRef = useRef();
 
   const emailService = process.env.REACT_APP_EMAIL_SERVICE;
-  console.log(emailService);
 
   const emailTemplate = process.env.REACT_APP_EMAIL_TEMPLATE;
   const emailPublicKey = process.env.REACT_APP_EMAIL_PUBLIC_KEY;
@@ -127,7 +126,7 @@ Student Space Rents`,
                       ref={emailRef}
                       placeholder="name@example.com"
                       autoFocus
-                      value={"mariyahbhat123@gmail.com"}
+                      value={""} //GIVE YOUR VALID EMAIL ADDRESS AS VALUE
                       name="email_to"
                     ></Form.Control>
                   </Form.Group>
