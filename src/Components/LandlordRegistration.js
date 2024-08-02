@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { isLogged } from "../Redux/Slices/isLoggedIn";
 import { toggleOff } from "../Redux/Slices/toggleSlice";
 import "../Styles/LogReg.css";
+import { ownerLoggedIn } from "../Redux/Slices/ownerIsLogged";
 
 export default function LandlordRegistration() {
   const [ownerCredentials, setOwnerCredentials] = useState({
@@ -50,7 +51,7 @@ export default function LandlordRegistration() {
       if (json.success) {
         localStorage.setItem("ownerAuthToken", json.ownerAuthToken);
         localStorage.setItem("ownerData", JSON.stringify(ownerCredentials));
-        dispatch(isLogged());
+        dispatch(ownerLoggedIn());
         dispatch(toggleOff());
       } else {
         if (json.error) {
@@ -83,26 +84,30 @@ export default function LandlordRegistration() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          {err[0].path === "email" ? (
-            <p
-              style={{
-                backgroundColor: "#FFCCCC ",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Please Enter a valid email address
-            </p>
-          ) : err === "emailExist" ? (
-            <p
-              style={{
-                backgroundColor: "#FFCCCC ",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              {errMsg}
-            </p>
+          {err[0] ? (
+            err[0].path === "email" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Please Enter a valid email address
+              </p>
+            ) : err === "emailExist" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                {errMsg}
+              </p>
+            ) : (
+              ""
+            )
           ) : (
             ""
           )}
@@ -115,29 +120,34 @@ export default function LandlordRegistration() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          {err[1].path === "number" ? (
-            <p
-              style={{
-                backgroundColor: "#FFCCCC ",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Please enter Valid Number
-            </p>
-          ) : err === "number" ? (
-            <p
-              style={{
-                backgroundColor: "#FFCCCC ",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              {errMsg}
-            </p>
+          {err[1] ? (
+            err[1].path === "number" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Please enter Valid Number
+              </p>
+            ) : err === "number" ? (
+              <p
+                style={{
+                  backgroundColor: "#FFCCCC ",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                {errMsg}
+              </p>
+            ) : (
+              ""
+            )
           ) : (
             ""
           )}
+
           <Form.Control
             type="number"
             name="number"

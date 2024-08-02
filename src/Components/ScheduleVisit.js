@@ -75,18 +75,18 @@ export default function ScheduleVisit(props) {
 
   let currentdate = d.getDate();
   let currentday = weekday[d.getDay()];
-  const tmrwdate = d.getDate() - 30;
+  const tmrwdate = d.getDate() + 1;
   const tmrwday = weekday[d.getDay() + 1];
-  let date3 = d.getDate() - 29;
-  let day3 = weekday[d.getDay() + 2];
+  let date3 = d.getDate() + 2;
+  let day3 = weekday[d.getDay() - 5];
 
-  let date4 = d.getDate() - 28;
-  let day4 = weekday[d.getDay() + 3];
-  let date5 = d.getDate() - 27;
+  let date4 = d.getDate() + 3;
+  let day4 = weekday[d.getDay() - 4];
+  let date5 = d.getDate() + 4;
   let day5 = weekday[d.getDay() - 3];
-  let date6 = d.getDate() - 26;
+  let date6 = d.getDate() + 5;
   let day6 = weekday[d.getDay() - 2];
-  let date7 = d.getDate() - 25;
+  let date7 = d.getDate() + 6;
   let day7 = weekday[d.getDay() - 1];
 
   const handleShow = () => {

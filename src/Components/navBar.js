@@ -166,9 +166,9 @@ export default function NavBar(props) {
                     sx={{ width: 45, height: 45 }}
                     src={
                       ownerIsLogged === true
-                        ? ownerDatas.gender === "female"
+                        ? ownerDatas
                           ? "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
-                          : "https://cdn.icon-icons.com/icons2/3653/PNG/512/profile_account_user_icon_228272.png"
+                          : ""
                         : isLogged === true
                         ? tenantDatas.gender === "female"
                           ? "https://cdn.icon-icons.com/icons2/3150/PNG/512/user_profile_female_icon_192701.png"
