@@ -18,6 +18,8 @@
     "bootstrap": "^5.3.3",
     "braces": "^3.0.3",
     "cross-spawn": "^7.0.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
     "follow-redirects": "^1.15.9",
     "google-map-react": "^2.2.1",
     "google-maps-react-markers": "^2.0.8",
@@ -45,6 +47,7 @@
     "serve-static": "^1.16.2",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4",
+    "webpack": "^5.96.1",
     "webpack-dev-middleware": "^7.4.2",
     "ws": "^8.18.0"
   },
