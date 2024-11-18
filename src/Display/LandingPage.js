@@ -39,6 +39,8 @@ export default function LandingPage() {
   //Background setting
   const [navBackground, setNavBackground] = useState(false);
 
+  const [md, setMd] = useState(4);
+
   const [propertyData, setPropertyData] = useState([]);
 
   //SHOW PROFILE DROPDOWN
@@ -109,6 +111,12 @@ export default function LandingPage() {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (window.screen.width <= 768) {
+      setMd(2);
+    }
+  }, [md]);
   return (
     <div className="w-100">
       {/**CAROUSEL */}
@@ -233,22 +241,20 @@ export default function LandingPage() {
           <SearchBar />
         </div>
       </div>
-      <div className="w-100 pb-5">
+      <div className="cardCarouselComContainer pb-5">
         <CardCarouselCom propertyData={propertyData} />
       </div>
       <hr />
-      <div className="pb-5 ">
-        <CardComponent md={4} propertyData={propertyData} title="PROPERTIES" />
+      <div className="cardComponent pb-5 ">
+        <CardComponent md={md} propertyData={propertyData} title="PROPERTIES" />
       </div>
       <hr />
-      <div>
+      <div className="reviewParentComponent">
         <h2 className="p-5">What tenants and owners say about us</h2>
         <div
-          className="w-100"
+          className="reviewComponent "
           style={{
             backgroundColor: "#f7f7f7",
-            display: "flex",
-            flexDirection: "row",
           }}
         >
           <WebsiteReviews name="Seerat" />
@@ -258,7 +264,7 @@ export default function LandingPage() {
         <p className=" mt-4">More Testimonials?</p>
         <hr className="mt-5 pb-4" style={{ color: "black" }} />
       </div>{" "}
-      <div>
+      <div className="footerComponent">
         <FooterCom />
       </div>
     </div>

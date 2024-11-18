@@ -43,11 +43,16 @@ export default function FooterCom() {
           </div>
         </section>
 
-        <section className="">
+        <section className="footerContainer">
           <MDBContainer className="text-center text-md-start mt-5">
             <MDBRow className="mt-3">
-              <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4 d-flex">
+              <MDBCol
+                md="3"
+                lg="4"
+                xl="3"
+                className="logoParentContainerFooter mx-auto mb-4"
+              >
+                <h6 className="logoContainerFooter text-uppercase fw-bold mb-4 d-flex">
                   <div className="me-1 ">
                     <img src={SSR} alt="" style={{ width: "23px" }} />{" "}
                   </div>

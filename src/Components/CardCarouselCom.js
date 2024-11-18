@@ -49,6 +49,19 @@ export default function CardCarouselCom(props) {
         },
       },
       {
+        breakpoint: 768,
+        settings: {
+          className: "center",
+          centerPadding: "60px",
+          initialSlide: 0,
+          infinite: false,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          swipeToSlide: true,
+        },
+      },
+      {
         breakpoint: 600,
         settings: {
           className: "center",
@@ -61,6 +74,7 @@ export default function CardCarouselCom(props) {
           swipeToSlide: true,
         },
       },
+
       {
         breakpoint: 480,
         settings: {

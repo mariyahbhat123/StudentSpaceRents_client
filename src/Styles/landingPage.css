@@ -9,10 +9,20 @@
   width: 100%;
   overflow: hidden;
 }
+
+.cardCarouselComContainer {
+  width: 100%;
+}
 .searchB {
   position: absolute;
   top: 40%;
   z-index: 5;
+}
+
+.reviewComponent {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 .seeAllContainer {
   text-align: end;
@@ -45,10 +55,31 @@
 }
 
 @media screen and (width<=450px) {
+  .logoContainerFooter {
+    display: flex;
+    justify-content: center;
+  }
+  .carouselCom {
+    width: 141.5%;
+  }
   .searchB {
     position: absolute;
+    left: 20%;
     top: 30%;
     z-index: 5;
+  }
+
+  .cardCarouselComContainer {
+    width: 141.5%;
+  }
+  .cardComponent {
+    width: 141.5%;
+  }
+  .reviewParentComponent {
+    width: 141.5%;
+  }
+  .reviewComponent {
+    display: initial;
   }
   .seeAllContainer {
     text-align: center;
@@ -70,4 +101,19 @@
     display: flex;
     justify-content: center;
   }
+  .footerComponent {
+    width: 141.5%;
+  }
+}
+
+@media screen and (width=768px) {
+  .reviewComponent {
+    display: initial;
+  }
+  .footerContainer {
+    font-size: 13px;
+  }
+}
+.optionContainer {
+  border: 2px solid #ff385c;
 }

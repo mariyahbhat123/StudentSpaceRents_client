@@ -1,6 +1,6 @@
 .color-overlay {
   position: absolute;
-  position: absolute;
+
   top: 0px;
   left: 0px;
   width: 100%;
@@ -14,7 +14,7 @@
 .landingCarouselImages {
   height: 600px;
 }
-@media screen and (width<=450px) {
+@media only screen and (width<=450px) {
   .landingCarouselImages {
     height: 400px;
   }
