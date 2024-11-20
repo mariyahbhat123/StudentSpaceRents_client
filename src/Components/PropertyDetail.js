@@ -172,6 +172,8 @@ export default function PropertyDetail(props) {
   useEffect(() => {
     if (window.innerWidth <= 450) {
       setIsMobile(true);
+    } else if (window.innerWidth === 768) {
+      setIsMobile(true);
     } else {
       setIsMobile(false);
     }
@@ -420,7 +422,11 @@ export default function PropertyDetail(props) {
                           </div>
                         </Modal.Body>
                         <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose}>
+                          <Button
+                            bsPrefix="modalCloseBtn"
+                            variant="secondary"
+                            onClick={handleClose}
+                          >
                             Close
                           </Button>
                         </Modal.Footer>

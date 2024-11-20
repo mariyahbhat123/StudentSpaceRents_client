@@ -115,6 +115,8 @@ export default function LandingPage() {
   useEffect(() => {
     if (window.screen.width <= 768) {
       setMd(2);
+    } else if (window.screen.width === 1024) {
+      setMd(3);
     }
   }, [md]);
   return (

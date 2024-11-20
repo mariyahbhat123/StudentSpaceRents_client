@@ -273,7 +273,7 @@ export default function ScheduleVisit(props) {
 
   return (
     <div>
-      <div>
+      <div className="rentPerMonthContainer">
         <div>
           <h4>{monthlyRent.toLocaleString()}</h4>
         </div>
@@ -413,18 +413,10 @@ export default function ScheduleVisit(props) {
             </div>
           </Slider>
         </div>
-        <div
-          className="d-flex mt-5"
-          style={{ justifyContent: "space-between" }}
-        >
+        <div className="timeParentContainer  mt-5">
           <div
             className="time"
             style={{
-              textAlign: "center",
-              border: "1px solid grey",
-              padding: "4px 0px",
-              width: "180px",
-              borderRadius: "50px",
               backgroundColor: timeBackground.divTime1,
             }}
             onClick={(e) => {
@@ -437,11 +429,6 @@ export default function ScheduleVisit(props) {
           <div
             className="time"
             style={{
-              textAlign: "center",
-              border: "1px solid grey",
-              padding: "4px 0px",
-              width: "180px",
-              borderRadius: "50px",
               backgroundColor: timeBackground.divTime2,
             }}
             onClick={(e) => {
@@ -454,14 +441,8 @@ export default function ScheduleVisit(props) {
         </div>
         <div className="mt-4">
           <Button
+            bsPrefix="btnScheduleVisit"
             variant="none"
-            style={{
-              borderRadius: "50px",
-              width: "80%",
-              backgroundColor: "#ff385c",
-              color: "white",
-              fontWeight: "bold",
-            }}
             onClick={() => {
               return setPicked(""), setPickedTime("");
             }}
@@ -471,14 +452,8 @@ export default function ScheduleVisit(props) {
         </div>
         <div>
           <Button
+            bsPrefix="btnScheduleVisit"
             variant="none"
-            style={{
-              borderRadius: "50px",
-              width: "80%",
-              backgroundColor: "#ff385c",
-              color: "white",
-              fontWeight: "bold",
-            }}
             onClick={() =>
               isLogged === true
                 ? picked != "" && pickedTime != ""

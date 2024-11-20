@@ -104,6 +104,14 @@
   margin-left: 17px;
   padding: 3px;
 }
+.modalCloseBtn {
+  background-color: #ff385c;
+  border: 1px solid #ff385c;
+  padding: 1%;
+  color: white;
+  padding-left: 2%;
+  padding-right: 2%;
+}
 @media screen and (width<=450px) {
   .scheduleScrollContainer {
     display: flex;
@@ -150,5 +158,60 @@
   }
   .locationContainer {
     margin-left: 0%;
+  }
+  .scheduleVisitContainer {
+    margin-top: 17%;
+  }
+}
+
+@media screen and (width: 768px) {
+  .scheduleScrollContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .scrollToContainer {
+    width: 95%;
+  }
+  .containerScrollWrapper {
+    margin-left: 0%;
+  }
+  .detailsText {
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 4px;
+  }
+  .moreDetailsBtn {
+    box-shadow: none;
+    font-weight: bold;
+    border: none;
+    background-color: white;
+    font-size: 15px;
+  }
+  .aboutContainer {
+    padding: 6%;
+  }
+  .termsContainer {
+    padding: 6%;
+  }
+  .availableManaged {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 0%;
+  }
+  .managedContainer {
+    margin-left: 0%;
+    width: 180px;
+    padding: 1%;
+  }
+  .availableContainer {
+    width: 180px;
+    margin-left: 0%;
+    padding: 1%;
+  }
+  .locationContainer {
+    margin-left: 0%;
+  }
+  .scheduleVisitContainer {
+    margin-top: 17%;
   }
 }

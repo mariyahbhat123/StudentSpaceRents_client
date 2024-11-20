@@ -129,3 +129,8 @@
     padding: 3px;
   }
 }
+@media screen and (width: 1024px) {
+  .optionContainer {
+    border: 2px solid #ff385c;
+  }
+}

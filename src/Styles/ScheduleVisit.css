@@ -4,3 +4,35 @@
 .time:hover {
   cursor: pointer;
 }
+.time {
+  text-align: center;
+  border: 1px solid grey;
+  padding: 4px 0px;
+  width: 180px;
+  border-radius: 50px;
+}
+.timeParentContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.btnScheduleVisit {
+  border-radius: 50px;
+  width: 80%;
+  background-color: #ff385c;
+  color: white;
+  font-weight: bold;
+  padding: 2%;
+  border: 1px solid #ff385c;
+  margin-top: 2%;
+}
+@media screen and (width<=427px) {
+  .rentPerMonthContainer {
+    text-align: center;
+  }
+  .time {
+    margin-right: 2%;
+  }
+  .btnScheduleVisit {
+    margin-left: 10%;
+  }
+}
