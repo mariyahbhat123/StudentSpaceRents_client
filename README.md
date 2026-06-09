@@ -49,12 +49,19 @@ Student Space Rents is a student-focused accommodation platform that helps stude
 
 ```text
 src/
-├── components/
-├── pages/
-├── services/
-├── assets/
-├── routes/
-└── utils/
+├── AboutUsicons/
+├── CarouselImages/
+├── Components/
+├── Display/
+├── Icons/
+├── Logo/
+├── Redux/
+├── Styles/
+├── data/
+├── App.js
+├── App.css
+├── index.js
+└── index.css
 ```
 
 ##  Getting Started
