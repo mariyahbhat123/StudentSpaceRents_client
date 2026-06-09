@@ -23,7 +23,7 @@ Student Space Rents is a student-focused accommodation platform that helps stude
 * Remove rented properties
 * View booking requests
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
