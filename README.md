@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Student Space Rents
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Student Space Rents is a web-based accommodation platform designed to help students find affordable and convenient rental spaces near colleges and universities. The platform connects students with landlords through a simple and user-friendly interface, making the housing search process faster, safer, and more efficient.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### For Students
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Browse available accommodations
+* Search and filter properties by location, price, and amenities
+* View detailed property information
+* Book accommodations or schedule property visits
+* Leave reviews and ratings
+* Manage bookings through a personal account
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### For Property Owners
 
-### `npm test`
+* Register and manage owner accounts
+* List properties with images and amenities
+* Update or remove property listings
+* Manage booking requests
+* Reach a targeted student audience
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technology Stack
 
-### `npm run build`
+### Frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* React.js
+* HTML5
+* CSS3
+* JavaScript
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Node.js
+* Express.js
 
-### `npm run eject`
+### Database
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* MongoDB
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Architecture
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* MERN Stack (MongoDB, Express.js, React.js, Node.js)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Project Modules
 
-## Learn More
+### Frontend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Home Page
+* User Authentication
+* Property Listings
+* Search & Filters
+* Booking & Reservations
+* Reviews & Ratings
+* Map Integration
+* Responsive Design
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Backend
 
-### Code Splitting
+* Authentication & Authorization
+* Database Management
+* Property Management
+* Booking Management
+* Error Handling & Logging
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Problem Statement
 
-### Analyzing the Bundle Size
+Students often face difficulties finding suitable accommodation near educational institutions. Traditional housing search methods can be time-consuming, unreliable, and lack transparency. Student Space Rents addresses these challenges by providing a centralized platform where students can discover verified rental spaces and communicate with property owners efficiently.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Future Enhancements
 
-### Making a Progressive Web App
+* Real-time messaging between students and landlords
+* Rental management dashboard
+* Advanced recommendation system
+* Online payment integration
+* Mobile application support
+* Expansion to additional cities and universities
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Installation
 
-### Advanced Configuration
+### Clone Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+git clone <repository-url>
+cd student-space-rents
+```
 
-### Deployment
+### Install Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm install
+```
 
-### `npm run build` fails to minify
+### Start Development Server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm run dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+## Authors
+
+* Mariyah Bhat
+
+## License
+
+This project is developed for academic and educational purposes.
