@@ -1,36 +1,36 @@
-# Student Space Rents
+#  Student Space Rents
 
-## Overview
+Student Space Rents is a student-focused accommodation platform that helps students discover, compare, and book rental spaces near colleges and universities. The platform bridges the gap between students searching for housing and landlords looking to advertise available properties.
 
-Student Space Rents is a web-based accommodation platform designed to help students find affordable and convenient rental spaces near colleges and universities. The platform connects students with landlords through a simple and user-friendly interface, making the housing search process faster, safer, and more efficient.
+##  Features
 
-## Features
+###  Student Features
 
-### For Students
-
+* User Registration & Login
 * Browse available accommodations
 * Search and filter properties by location, price, and amenities
 * View detailed property information
 * Book accommodations or schedule property visits
-* Leave reviews and ratings
-* Manage bookings through a personal account
+* Leave ratings and reviews
+* Responsive design for desktop and mobile devices
 
-### For Property Owners
+###  Landlord Features
 
-* Register and manage owner accounts
-* List properties with images and amenities
-* Update or remove property listings
-* Manage booking requests
-* Reach a targeted student audience
+* Secure owner registration and authentication
+* Add new property listings
+* Upload property details and amenities
+* Manage and update listings
+* Remove rented properties
+* View booking requests
 
-## Technology Stack
+## 🛠️ Tech Stack
 
 ### Frontend
 
 * React.js
+* JavaScript
 * HTML5
 * CSS3
-* JavaScript
 
 ### Backend
 
@@ -41,75 +41,77 @@ Student Space Rents is a web-based accommodation platform designed to help stude
 
 * MongoDB
 
-### Architecture
+### Authentication
 
-* MERN Stack (MongoDB, Express.js, React.js, Node.js)
+* JWT (JSON Web Tokens)
 
-## Project Modules
+##  Project Structure
 
-### Frontend
-
-* Home Page
-* User Authentication
-* Property Listings
-* Search & Filters
-* Booking & Reservations
-* Reviews & Ratings
-* Map Integration
-* Responsive Design
-
-### Backend
-
-* Authentication & Authorization
-* Database Management
-* Property Management
-* Booking Management
-* Error Handling & Logging
-
-## Problem Statement
-
-Students often face difficulties finding suitable accommodation near educational institutions. Traditional housing search methods can be time-consuming, unreliable, and lack transparency. Student Space Rents addresses these challenges by providing a centralized platform where students can discover verified rental spaces and communicate with property owners efficiently.
-
-## Future Enhancements
-
-* Real-time messaging between students and landlords
-* Rental management dashboard
-* Advanced recommendation system
-* Online payment integration
-* Mobile application support
-* Expansion to additional cities and universities
-
-## Installation
-
-### Clone Repository
-
-```bash
-git clone <repository-url>
-cd student-space-rents
+```text
+src/
+├── components/
+├── pages/
+├── services/
+├── assets/
+├── routes/
+└── utils/
 ```
 
-### Install Dependencies
+##  Getting Started
+
+### Prerequisites
+
+* Node.js (v16+ recommended)
+* npm
+* MongoDB
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/mariyahbhat123/StudentSpaceRents_client.git
+cd StudentSpaceRents_client
+```
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Start Development Server
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-### Build for Production
+Build for production:
 
 ```bash
 npm run build
 ```
 
-## Authors
+##  Core Modules
+
+* Authentication & Authorization
+* Accommodation Listings
+* Property Management
+* Search & Filtering
+* Booking & Reservation System
+* Reviews & Ratings
+* Responsive UI
+* Map Integration
+  
+
+##  Problem Statement
+
+Finding suitable student accommodation is often time-consuming and stressful. Student Space Rents simplifies the process by providing a centralized platform where students can easily find verified rental spaces and communicate with property owners.
+
+##  Authors
 
 * Mariyah Bhat
 
-## License
+##  License
 
-This project is developed for academic and educational purposes.
+This project is developed for educational and learning purposes.
