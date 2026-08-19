@@ -33,7 +33,7 @@ export default function ScheduleVisit(props) {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 4,
     variableWidth: true,
 
@@ -44,9 +44,9 @@ export default function ScheduleVisit(props) {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: false,
-          variableWidth: true,
+          slidesToScroll: 4,
+          infinite: true,
+
           dots: true,
         },
       },
@@ -54,7 +54,7 @@ export default function ScheduleVisit(props) {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 4,
+          slidesToScroll: 1,
           initialSlide: 1,
           variableWidth: true,
         },
@@ -63,7 +63,7 @@ export default function ScheduleVisit(props) {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 4,
+          slidesToScroll: 1,
           variableWidth: true,
         },
       },
@@ -286,7 +286,7 @@ export default function ScheduleVisit(props) {
         <div>
           <p>Pick your visit date & time</p>
         </div>
-        <div className=" slider-container ">
+        <div className="slider-container">
           <Slider {...settings} className="d-flex ">
             <div
               className="DayDatePick me-2"
@@ -413,6 +413,7 @@ export default function ScheduleVisit(props) {
             </div>
           </Slider>
         </div>
+
         <div className="timeParentContainer  mt-5">
           <div
             className="time"

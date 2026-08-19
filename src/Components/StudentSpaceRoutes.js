@@ -109,7 +109,7 @@ export default function StudentSpaceRoutes() {
   console.log(secretData);
   return (
     <div>
-      {" "}
+     
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>

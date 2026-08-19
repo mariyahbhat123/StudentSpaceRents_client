@@ -678,17 +678,7 @@ export default function PropertyDetail(props) {
                     </div>
                   </div>{" "}
                   {!isMobile ? (
-                    <div
-                      className="scheduleVisitContainer ms-5 p-4"
-                      style={{
-                        width: "30%",
-                        boxShadow: "2px 2px 2px 2px grey",
-                        height: "500px",
-                        position: "sticky",
-                        top: "0px",
-                        backgroundColor: "white",
-                      }}
-                    >
+                    <div className="scheduleVisitContainer  p-4" style={{}}>
                       <ScheduleVisit
                         monthlyRent={item.monthlyRent}
                         ownerEmail={item.ownerEmail}
